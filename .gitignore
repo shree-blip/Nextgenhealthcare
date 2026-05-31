@@ -8,3 +8,4 @@ build/
 .vercel/
 uploads/
 *.log
+tsconfig.tsbuildinfo

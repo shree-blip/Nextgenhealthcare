@@ -4,7 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "prebuild": "node scripts/build-sitemap.mjs",
     "build": "prisma generate && next build",
+    "build:sitemap": "node scripts/build-sitemap.mjs",
     "start": "next start",
     "lint": "next lint",
     "db:generate": "prisma generate",
