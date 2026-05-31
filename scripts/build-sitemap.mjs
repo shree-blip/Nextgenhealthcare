@@ -128,7 +128,7 @@ const safeExtract = (label, fn) => {
 };
 
 const caseStudyIds = safeExtract('case studies', () => {
-  const text = readText('src/pages/CaseStudies/caseStudies.data.ts');
+  const text = readText('src/spa-pages/CaseStudies/caseStudies.data.ts');
   // top-level `  id: 'slug-style',` (two-space indent inside object literal)
   return extractMatches(text, /^\s+id:\s*['"]([a-z0-9-]+)['"]/gm);
 });
@@ -139,7 +139,7 @@ const blogSlugs = safeExtract('blog', () => {
 });
 
 const newsSlugs = safeExtract('news', () => {
-  const text = readText('src/pages/HealthcareNews/news.data.ts');
+  const text = readText('src/spa-pages/HealthcareNews/news.data.ts');
   return extractMatches(text, /^\s+slug:\s*['"]([a-z0-9-]+)['"]/gm);
 });
 
@@ -154,7 +154,7 @@ const valueSlugs = safeExtract('about value', () => {
 });
 
 const ourWorkEntries = safeExtract('our-work detail', () => {
-  const text = readText('src/pages/OurWork/details.data.ts');
+  const text = readText('src/spa-pages/OurWork/details.data.ts');
   const kinds = extractMatches(text, /^\s+kind:\s*['"](engagement|industry|capability)['"]/gm);
   const slugs = extractMatches(text, /^\s+slug:\s*['"]([a-z0-9-]+)['"]/gm);
   // Each DetailEntry has exactly one kind and one slug, in the same order.

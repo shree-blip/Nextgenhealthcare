@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { MessageCircle, X, Send, Bot, User, Loader2, Sparkles, ArrowLeft, ExternalLink } from 'lucide-react';
-import { useSitePreferences } from '../pages/Dashboard/components/SitePreferencesProvider';
+import { useSitePreferences } from '../spa-pages/Dashboard/components/SitePreferencesProvider';
 
 interface Source {
   url: string;
