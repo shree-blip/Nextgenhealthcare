@@ -2,6 +2,9 @@ import { NextRequest, NextResponse } from 'next/server';
 import { requireAdmin } from '@server/auth';
 import { generateAndSave } from '@server/ai-blog';
 
+// AI blog generation + SEO scoring can exceed Vercel's default 10s limit.
+export const maxDuration = 60;
+
 export async function POST(req: NextRequest) {
   const guard = await requireAdmin();
   if (guard instanceof NextResponse) return guard;

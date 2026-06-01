@@ -7,6 +7,9 @@ import {
   keywordSearch,
 } from '@server/knowledge-retrieval';
 
+// Gemini generation can take well over Vercel's default 10s function limit.
+export const maxDuration = 60;
+
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY || '';
 
 function buildSystemPrompt(retrievedContext: string, language: 'en' | 'es' = 'en'): string {

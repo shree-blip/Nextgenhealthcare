@@ -7,7 +7,7 @@ export async function GET() {
   if (guard instanceof NextResponse) return guard;
 
   try {
-    const posts = await prisma.post.findMany({ orderBy: { publishedAt: 'desc' } });
+    const posts = await prisma.post.findMany({ orderBy: { publishedAt: 'desc' }, take: 200 });
     return NextResponse.json({ posts });
   } catch (err) {
     console.error('GET /api/admin/posts error:', err);
