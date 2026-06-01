@@ -22,17 +22,33 @@ interface DbPost {
 
 type LoadState = 'loading' | 'ready' | 'error';
 
-// In-memory + sessionStorage cache so the blog page renders instantly on
-// repeat visits. The fresh /api/posts response fires in the background and
-// updates state when it arrives (SWR pattern).
-const POSTS_CACHE_KEY = 'blog-feed:v1';
+// Instant-paint strategy (in priority order):
+//   1. window.__SEED__.posts — injected by the Next.js server component on
+//      first visit, so the page paints with content already in the HTML.
+//   2. localStorage cache — survives across tabs/sessions, so repeat visitors
+//      see content instantly even without the SSR seed.
+//   3. In-memory cache — survives client-side navigation within one tab.
+// Whichever fires first paints; /api/posts then revalidates in the background.
+const POSTS_CACHE_KEY = 'blog-feed:v2';
 let memoryCache: DbPost[] | null = null;
+
+function readSeedPosts(): DbPost[] | null {
+  if (typeof window === 'undefined') return null;
+  const seed = (window as unknown as { __SEED__?: { posts?: unknown } }).__SEED__;
+  if (seed && Array.isArray(seed.posts)) return seed.posts as DbPost[];
+  return null;
+}
 
 function readCachedPosts(): DbPost[] | null {
   if (memoryCache) return memoryCache;
+  const seed = readSeedPosts();
+  if (seed) {
+    memoryCache = seed;
+    return seed;
+  }
   if (typeof window === 'undefined') return null;
   try {
-    const raw = window.sessionStorage.getItem(POSTS_CACHE_KEY);
+    const raw = window.localStorage.getItem(POSTS_CACHE_KEY);
     if (!raw) return null;
     const parsed = JSON.parse(raw) as DbPost[];
     if (!Array.isArray(parsed)) return null;
@@ -46,7 +62,7 @@ function readCachedPosts(): DbPost[] | null {
 function writeCachedPosts(posts: DbPost[]) {
   memoryCache = posts;
   try {
-    window.sessionStorage.setItem(POSTS_CACHE_KEY, JSON.stringify(posts));
+    window.localStorage.setItem(POSTS_CACHE_KEY, JSON.stringify(posts));
   } catch {
     /* storage may be full / disabled — silently skip */
   }

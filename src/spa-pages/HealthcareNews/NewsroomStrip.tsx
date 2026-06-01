@@ -21,14 +21,28 @@ interface DbNews {
   publishedAt: string | null;
 }
 
-const CACHE_KEY = 'healthcare-news:newsroom:v1';
+// Instant-paint strategy mirrors BlogFeed: SSR seed → localStorage → in-memory.
+// /api/news still runs in the background to pick up newly-published articles.
+const CACHE_KEY = 'healthcare-news:newsroom:v2';
 let memoryCache: DbNews[] | null = null;
+
+function readSeedNews(): DbNews[] | null {
+  if (typeof window === 'undefined') return null;
+  const seed = (window as unknown as { __SEED__?: { news?: unknown } }).__SEED__;
+  if (seed && Array.isArray(seed.news)) return seed.news as DbNews[];
+  return null;
+}
 
 function readCached(): DbNews[] | null {
   if (memoryCache) return memoryCache;
+  const seed = readSeedNews();
+  if (seed) {
+    memoryCache = seed;
+    return seed;
+  }
   if (typeof window === 'undefined') return null;
   try {
-    const raw = window.sessionStorage.getItem(CACHE_KEY);
+    const raw = window.localStorage.getItem(CACHE_KEY);
     if (!raw) return null;
     const parsed = JSON.parse(raw);
     if (!Array.isArray(parsed)) return null;
@@ -42,7 +56,7 @@ function readCached(): DbNews[] | null {
 function writeCached(items: DbNews[]) {
   memoryCache = items;
   try {
-    window.sessionStorage.setItem(CACHE_KEY, JSON.stringify(items));
+    window.localStorage.setItem(CACHE_KEY, JSON.stringify(items));
   } catch {
     /* ignore */
   }

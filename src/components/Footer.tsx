@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import logoSrc from '../assets/the-nextgen-logo.png';
+import logoSrc from '../assets/nextgen-photoroom.png';
 import { SITE } from '../content/site';
 import {
   useFooterCompany,

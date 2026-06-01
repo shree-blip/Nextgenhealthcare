@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { revalidateTag } from 'next/cache';
 import { prisma } from '@server/prisma';
 import { requireAdmin } from '@server/auth';
 import { sanitizeText } from '@server/sanitize';
@@ -66,6 +67,8 @@ export async function POST(req: NextRequest) {
         publishedAt: body.publishedAt ? new Date(body.publishedAt) : null,
       },
     });
+    // Bust the SSR seed cache so the new post shows up on next pageview.
+    revalidateTag('posts');
     return NextResponse.json(post, { status: 201 });
   } catch (err) {
     console.error('POST /api/posts error:', err);

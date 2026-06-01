@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { AnimatedBackground } from '@/lib/motion';
-import logoSrc from '../../assets/the-nextgen-logo.png';
+import logoSrc from '../../assets/nextgen-photoroom.png';
 import { ArrowIcon } from '@/components/icons';
 import { useOrbitPills, useCapabilities } from '@/content/services/hero';
 

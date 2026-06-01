@@ -1,3 +1,4 @@
+import { revalidateTag } from 'next/cache';
 import { prisma } from './prisma';
 
 // Shared Gemini-backed news generator. Mirrors ai-blog.ts but produces shorter
@@ -200,6 +201,7 @@ export async function generateAndSaveNews(opts: {
       publishedAt: opts.autoPublish ? new Date() : null,
     },
   });
+  revalidateTag('news');
 
   return {
     success: true as const,

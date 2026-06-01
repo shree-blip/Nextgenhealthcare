@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from 'motion/react';
 import { useEffect, useState, useRef } from 'react';
-import logoSrc from '../../../assets/the-nextgen-logo.png';
+import logoSrc from '../../../assets/nextgen-photoroom.png';
 
 interface LoadingScreenProps {
   durationMs?: number;

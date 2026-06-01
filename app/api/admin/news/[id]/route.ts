@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { revalidateTag } from 'next/cache';
 import { prisma } from '@server/prisma';
 import { requireAdmin } from '@server/auth';
 
@@ -69,6 +70,7 @@ async function applyUpdate(req: NextRequest, params: Promise<{ id: string }>) {
       data.publishedAt = body.publishedAt ? new Date(String(body.publishedAt)) : null;
 
     const article = await prisma.newsArticle.update({ where: { id }, data });
+    revalidateTag('news');
     return NextResponse.json(article);
   } catch (err) {
     console.error('Update /api/admin/news/:id error:', err);
@@ -92,6 +94,7 @@ export async function DELETE(_req: NextRequest, { params }: { params: Promise<{ 
 
   try {
     await prisma.newsArticle.delete({ where: { id } });
+    revalidateTag('news');
     return NextResponse.json({ success: true });
   } catch (err) {
     console.error('DELETE /api/admin/news/:id error:', err);

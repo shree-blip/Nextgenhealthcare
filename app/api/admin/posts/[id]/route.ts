@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { revalidateTag } from 'next/cache';
 import { prisma } from '@server/prisma';
 import { requireAdmin } from '@server/auth';
 import { sanitizeText } from '@server/sanitize';
@@ -48,6 +49,7 @@ async function updatePost(req: NextRequest, ctx: Ctx) {
       data.publishedAt = body.publishedAt ? new Date(body.publishedAt) : null;
 
     const post = await prisma.post.update({ where: { id }, data });
+    revalidateTag('posts');
     return NextResponse.json(post);
   } catch (err) {
     console.error('Update /api/admin/posts/:id error:', err);
@@ -67,6 +69,7 @@ export async function DELETE(_req: NextRequest, ctx: Ctx) {
     const id = Number(rawId);
     if (!Number.isFinite(id)) return NextResponse.json({ error: 'Invalid id' }, { status: 400 });
     await prisma.post.delete({ where: { id } });
+    revalidateTag('posts');
     return NextResponse.json({ message: 'Post deleted successfully' });
   } catch (err) {
     console.error('DELETE /api/admin/posts/:id error:', err);

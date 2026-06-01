@@ -1,3 +1,4 @@
+import { revalidateTag } from 'next/cache';
 import { prisma } from './prisma';
 
 // Shared Gemini-backed blog generator. Both /api/ai/generate-blog and
@@ -187,6 +188,7 @@ export async function generateAndSave(opts: {
       publishedAt: opts.autoPublish ? new Date() : null,
     },
   });
+  revalidateTag('posts');
 
   return {
     success: true as const,

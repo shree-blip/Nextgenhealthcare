@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { revalidateTag } from 'next/cache';
 import { prisma } from '@server/prisma';
 import { requireAdmin } from '@server/auth';
 
@@ -86,6 +87,7 @@ export async function POST(req: NextRequest) {
         publishedAt: body.publishedAt ? new Date(String(body.publishedAt)) : null,
       },
     });
+    revalidateTag('news');
     return NextResponse.json(article, { status: 201 });
   } catch (err) {
     console.error('POST /api/admin/news error:', err);

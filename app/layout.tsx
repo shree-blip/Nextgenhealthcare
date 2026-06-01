@@ -13,7 +13,10 @@ export const metadata: Metadata = {
   description: SITE_DESCRIPTION,
   robots: 'index,follow',
   alternates: { canonical: '/' },
-  icons: { icon: '/favicon.svg' },
+  icons: {
+    icon: '/favicon.png',
+    apple: '/favicon.png',
+  },
   openGraph: {
     type: 'website',
     locale: 'en_US',

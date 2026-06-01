@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import erImg from '@/assets/nextgen-image/Erofwhiterockimg.jpg';
 import patientImg from '@/assets/nextgen-image/Patientgrowthimg.png';
-import logo from '@/assets/the-nextgen-logo.png';
+import logo from '@/assets/nextgen-photoroom.png';
 
 const ArrowUp = () => (
   <svg

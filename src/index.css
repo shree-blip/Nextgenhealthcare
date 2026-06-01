@@ -72,8 +72,9 @@
   }
 
   /* Nav height — used by every banner below to pull itself up under the
-     transparent sticky navbar so the bar reads as part of the banner. */
-  :root { --nav-h: 88px; }
+     transparent sticky navbar so the bar reads as part of the banner.
+     Keep this in sync with the `h-20 sm:h-[104px]` on the <nav> in Navbar.tsx. */
+  :root { --nav-h: 104px; }
 
   /* ============ HERO — full-bleed cinematic video ============ */
   .hero-section {
@@ -2966,7 +2967,7 @@
     backdrop-filter: blur(18px) saturate(180%);
     -webkit-backdrop-filter: blur(18px) saturate(180%);
     border: none;
-    box-shadow: 0 8px 24px -18px rgba(10, 20, 38, 0.18);
+    box-shadow: none;
   }
 
   /* Center menu — floating glass pill, gold rim */
@@ -2974,7 +2975,7 @@
     position: relative;
     width: fit-content;
     margin: 0 auto;
-    padding: 4px 8px;
+    padding: 6px 14px;
     border-radius: 999px;
     background: rgba(255, 255, 255, 0.10);
     backdrop-filter: blur(18px) saturate(180%);

@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import logoSrc from '../assets/the-nextgen-logo.png';
+import logoSrc from '../assets/nextgen-photoroom.png';
 import { SITE } from '../content/site';
 import { useNavPrimary, useNavResources } from '../content/navigation';
 import { ChevronDownIcon } from './icons';
@@ -109,7 +109,7 @@ const Navbar = () => {
       <header className={`nav-wrap${scrolled ? ' is-scrolled' : ''}`}>
         <div className="container-shell">
           <nav
-            className="grid grid-cols-[auto_1fr_auto] items-center gap-3 sm:gap-8 h-16 sm:h-[78px]"
+            className="grid grid-cols-[auto_1fr_auto] items-center gap-4 sm:gap-14 h-20 sm:h-[104px]"
             aria-label={t('navigation:aria.primary')}
           >
             {/* Logo */}
@@ -127,7 +127,7 @@ const Navbar = () => {
             </Link>
 
             {/* Center menu (hidden below 1024px) */}
-            <div className="hidden lg:flex justify-center gap-1.5" role="menubar">
+            <div className="hidden lg:flex items-center justify-center gap-1.5" role="menubar">
               {NAV_PRIMARY.map((link) => (
                 <Link key={link.to} to={link.to} className="nav-link" role="menuitem">
                   {link.label}
