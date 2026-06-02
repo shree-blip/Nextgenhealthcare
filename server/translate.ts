@@ -102,7 +102,7 @@ async function callGemini(prompt: string, opts: { json?: boolean } = {}): Promis
     },
   });
 
-  const delays = [800, 2000, 4500];
+  const delays = [600, 1500];
   let lastErr: unknown;
   for (let attempt = 0; attempt <= delays.length; attempt++) {
     try {
@@ -202,60 +202,79 @@ function chunkText(text: string, maxChars = 3500): string[] {
 }
 
 /**
- * Translate a long text field (an article body) into `lang`. Cached separately
- * from the short fields under `tr:<type>:<id>:<lang>:content`, chunked across
- * multiple Gemini calls so large bodies don't overflow the output limit and
- * fall back to English. Returns the original text on any failure.
+ * Translate a long text field (an article body) into `lang`.
+ *
+ * The body is split into paragraph-sized chunks and EACH chunk is cached
+ * independently, content-addressed by its md5 (`trc:<lang>:<hash>`). This makes
+ * the operation resilient to Gemini's frequent 503 "overloaded" responses:
+ *   - progress is never lost — already-translated chunks are reused on the next
+ *     request, so a flaky first load that only does part of the body completes
+ *     over a couple of page views;
+ *   - the work is time-bounded (well under the 60s function cap) so the request
+ *     never times out — any chunk not finished in time is returned in English
+ *     this round and translated on a later request;
+ *   - identical paragraphs across articles are translated once.
+ * Never throws — worst case it returns (partial) English.
  */
 export async function translateLongText(
-  entityType: 'post' | 'news',
-  id: number,
+  _entityType: 'post' | 'news',
+  _id: number,
   lang: TargetLang,
   text: string | null | undefined,
 ): Promise<string> {
   const source = text || '';
   if (!GEMINI_API_KEY || !source.trim()) return source;
 
-  const hash = md5(source);
-  const cacheKey = `tr:${entityType}:${id}:${lang}:content`;
+  const chunks = chunkText(source);
+  const keys = chunks.map((c) => `trc:${lang}:${md5(c)}`);
 
+  // Pre-load all already-cached chunk translations in one query.
+  const cacheByKey = new Map<string, string>();
   try {
-    const row = await prisma.googleApiCache.findUnique({ where: { cacheKey } });
-    const cached = row?.responseData as unknown as { sourceHash?: string; text?: string } | null;
-    if (cached && cached.sourceHash === hash && typeof cached.text === 'string') {
-      return cached.text;
+    const rows = await prisma.googleApiCache.findMany({
+      where: { cacheKey: { in: Array.from(new Set(keys)) } },
+    });
+    for (const r of rows) {
+      const d = r.responseData as unknown as { text?: string } | null;
+      if (d && typeof d.text === 'string') cacheByKey.set(r.cacheKey, d.text);
     }
   } catch (err) {
-    console.error('[translate] long-text cache read failed:', err);
+    console.error('[translate] chunk cache read failed:', err);
   }
 
-  try {
-    const chunks = chunkText(source);
-    const translated: string[] = [];
-    for (const c of chunks) {
-      translated.push(await geminiTranslatePlain(c, lang));
+  const deadline = Date.now() + 22000; // leave generous headroom under the 60s cap
+  const expiresAt = new Date('2099-01-01T00:00:00Z');
+  const out: string[] = [];
+
+  for (let i = 0; i < chunks.length; i++) {
+    const key = keys[i];
+    const cached = cacheByKey.get(key);
+    if (cached != null) {
+      out.push(cached);
+      continue;
     }
-    const out = translated.join('');
-    const expiresAt = new Date('2099-01-01T00:00:00Z');
-    await prisma.googleApiCache
-      .upsert({
-        where: { cacheKey },
-        create: {
-          cacheKey,
-          responseData: { sourceHash: hash, text: out } as unknown as object,
-          expiresAt,
-        },
-        update: {
-          responseData: { sourceHash: hash, text: out } as unknown as object,
-          expiresAt,
-        },
-      })
-      .catch((err) => console.error('[translate] long-text cache write failed:', err));
-    return out;
-  } catch (err) {
-    console.error('[translate] long-text translation failed, serving English:', err);
-    return source;
+    if (Date.now() > deadline) {
+      out.push(chunks[i]); // out of time — English this round, fills in next load
+      continue;
+    }
+    try {
+      const translated = await geminiTranslatePlain(chunks[i], lang);
+      out.push(translated);
+      cacheByKey.set(key, translated);
+      await prisma.googleApiCache
+        .upsert({
+          where: { cacheKey: key },
+          create: { cacheKey: key, responseData: { text: translated } as unknown as object, expiresAt },
+          update: { responseData: { text: translated } as unknown as object, expiresAt },
+        })
+        .catch((err) => console.error('[translate] chunk cache write failed:', err));
+    } catch (err) {
+      console.error('[translate] chunk translation failed, English for this chunk:', err);
+      out.push(chunks[i]);
+    }
   }
+
+  return out.join('');
 }
 
 /**
