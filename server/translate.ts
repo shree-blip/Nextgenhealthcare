@@ -86,6 +86,52 @@ async function writeCache(
   }
 }
 
+const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
+
+/** POST a prompt to Gemini and return the concatenated text. Retries on the
+ *  transient "overloaded"/rate-limit statuses (429/500/503) with backoff —
+ *  Gemini returns 503 fairly often on larger requests, which otherwise made
+ *  long article bodies silently fall back to English. */
+async function callGemini(prompt: string, opts: { json?: boolean } = {}): Promise<string> {
+  const body = JSON.stringify({
+    contents: [{ role: 'user', parts: [{ text: prompt }] }],
+    generationConfig: {
+      temperature: 0.2,
+      maxOutputTokens: 8192,
+      ...(opts.json ? { responseMimeType: 'application/json' } : {}),
+    },
+  });
+
+  const delays = [800, 2000, 4500];
+  let lastErr: unknown;
+  for (let attempt = 0; attempt <= delays.length; attempt++) {
+    try {
+      const res = await fetch(GEMINI_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        cache: 'no-store',
+        body,
+      });
+      if (res.ok) {
+        const data = (await res.json()) as {
+          candidates?: { content?: { parts?: { text?: string }[] } }[];
+        };
+        return (data.candidates?.[0]?.content?.parts || []).map((p) => p.text || '').join('');
+      }
+      // Retry transient overload / rate-limit statuses; fail fast on the rest.
+      if (![429, 500, 503].includes(res.status) || attempt === delays.length) {
+        throw new Error(`Gemini HTTP ${res.status}`);
+      }
+      lastErr = new Error(`Gemini HTTP ${res.status}`);
+    } catch (err) {
+      lastErr = err;
+      if (attempt === delays.length) break;
+    }
+    await sleep(delays[attempt]);
+  }
+  throw lastErr instanceof Error ? lastErr : new Error('Gemini request failed');
+}
+
 /** Translate an array of field-maps in ONE Gemini call. Returns the same-length
  *  array of translated field-maps, or throws on failure. */
 async function geminiTranslateBatch(items: Fields[], lang: TargetLang): Promise<Fields[]> {
@@ -103,27 +149,7 @@ Rules:
 INPUT:
 ${JSON.stringify(items)}`;
 
-  const res = await fetch(GEMINI_URL, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    cache: 'no-store',
-    body: JSON.stringify({
-      contents: [{ role: 'user', parts: [{ text: prompt }] }],
-      generationConfig: {
-        temperature: 0.2,
-        maxOutputTokens: 8192,
-        responseMimeType: 'application/json',
-      },
-    }),
-  });
-  if (!res.ok) throw new Error(`Gemini translate HTTP ${res.status}`);
-  const data = (await res.json()) as {
-    candidates?: { content?: { parts?: { text?: string }[] } }[];
-  };
-  const text = (data.candidates?.[0]?.content?.parts || [])
-    .map((p) => p.text || '')
-    .join('')
-    .trim();
+  const text = (await callGemini(prompt, { json: true })).trim();
   const cleaned = text
     .replace(/^```(?:json)?\s*/i, '')
     .replace(/```\s*$/i, '')
@@ -147,20 +173,7 @@ Rules:
 CONTENT:
 ${text}`;
 
-  const res = await fetch(GEMINI_URL, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    cache: 'no-store',
-    body: JSON.stringify({
-      contents: [{ role: 'user', parts: [{ text: prompt }] }],
-      generationConfig: { temperature: 0.2, maxOutputTokens: 8192 },
-    }),
-  });
-  if (!res.ok) throw new Error(`Gemini translate HTTP ${res.status}`);
-  const data = (await res.json()) as {
-    candidates?: { content?: { parts?: { text?: string }[] } }[];
-  };
-  const out = (data.candidates?.[0]?.content?.parts || []).map((p) => p.text || '').join('');
+  const out = await callGemini(prompt);
   if (!out.trim()) throw new Error('Gemini returned empty translation');
   return out;
 }
@@ -168,7 +181,7 @@ ${text}`;
 // Split long text into chunks that stay comfortably under the model's output
 // limit, preferring paragraph boundaries so HTML/markdown blocks aren't cut
 // mid-tag. ~5000 chars ≈ well under 8192 output tokens.
-function chunkText(text: string, maxChars = 5000): string[] {
+function chunkText(text: string, maxChars = 3500): string[] {
   if (text.length <= maxChars) return [text];
   const pieces = text.split(/(\n\n+)/); // keep the separators
   const chunks: string[] = [];
