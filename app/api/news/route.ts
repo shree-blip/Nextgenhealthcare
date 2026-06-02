@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { prisma } from '@server/prisma';
-import { normalizeTargetLang, translateRecords } from '@server/translate';
+import { normalizeTargetLang, translateRecords, translateLongText } from '@server/translate';
 
 /**
  * Public news endpoints.
@@ -26,22 +26,21 @@ export async function GET(req: Request) {
       if (!article || !article.publishedAt) {
         return NextResponse.json({ error: 'Not found' }, { status: 404 });
       }
-      const out = lang
-        ? (
-            await translateRecords(
-              'news',
-              lang,
-              [article],
-              (a) => ({
-                ...(a.title ? { title: a.title } : {}),
-                ...(a.excerpt ? { excerpt: a.excerpt } : {}),
-                ...(a.content ? { content: a.content } : {}),
-                ...(a.coverImageAlt ? { coverImageAlt: a.coverImageAlt } : {}),
-              }),
-              (a, t) => ({ ...a, ...t }),
-            )
-          )[0]
-        : article;
+      let out: typeof article = article;
+      if (lang) {
+        const [withShort] = await translateRecords(
+          'news',
+          lang,
+          [article],
+          (a) => ({
+            ...(a.title ? { title: a.title } : {}),
+            ...(a.excerpt ? { excerpt: a.excerpt } : {}),
+          }),
+          (a, t) => ({ ...a, ...t }),
+        );
+        const content = await translateLongText('news', article.id, lang, article.content);
+        out = { ...withShort, content };
+      }
       const res = NextResponse.json(out);
       res.headers.set('Cache-Control', 'public, max-age=60, stale-while-revalidate=600');
       return res;

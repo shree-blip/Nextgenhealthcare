@@ -3,7 +3,7 @@ import { revalidateTag } from 'next/cache';
 import { prisma } from '@server/prisma';
 import { requireAdmin } from '@server/auth';
 import { sanitizeText } from '@server/sanitize';
-import { normalizeTargetLang, translateRecords } from '@server/translate';
+import { normalizeTargetLang, translateRecords, translateLongText } from '@server/translate';
 
 // Translating long article bodies can exceed Vercel's default 10s function limit.
 export const maxDuration = 60;
@@ -18,22 +18,24 @@ export async function GET(req: NextRequest) {
         include: { author: true, categories: true, tags: true },
       });
       if (!post) return NextResponse.json({ error: 'Not found' }, { status: 404 });
-      const out = lang
-        ? (
-            await translateRecords(
-              'post',
-              lang,
-              [post],
-              (p) => ({
-                ...(p.title ? { title: p.title } : {}),
-                ...(p.excerpt ? { excerpt: p.excerpt } : {}),
-                ...(p.content ? { content: p.content } : {}),
-                ...(p.coverImageAlt ? { coverImageAlt: p.coverImageAlt } : {}),
-              }),
-              (p, t) => ({ ...p, ...t }),
-            )
-          )[0]
-        : post;
+      let out: typeof post = post;
+      if (lang) {
+        // Short fields share the same cache key as the list (title + excerpt);
+        // the long body is translated separately so it can't overflow the
+        // model's output limit and silently fall back to English.
+        const [withShort] = await translateRecords(
+          'post',
+          lang,
+          [post],
+          (p) => ({
+            ...(p.title ? { title: p.title } : {}),
+            ...(p.excerpt ? { excerpt: p.excerpt } : {}),
+          }),
+          (p, t) => ({ ...p, ...t }),
+        );
+        const content = await translateLongText('post', post.id, lang, post.content);
+        out = { ...withShort, content };
+      }
       return NextResponse.json(out, {
         headers: { 'Cache-Control': 'public, max-age=60, stale-while-revalidate=600' },
       });

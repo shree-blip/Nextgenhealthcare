@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import bannerImg from '../../assets/nextgen-image/Blogbannerpageimg.png';
 
 /**
@@ -7,6 +8,7 @@ import bannerImg from '../../assets/nextgen-image/Blogbannerpageimg.png';
  */
 
 const BlogBanner = () => {
+  const { t } = useTranslation('blog');
   return (
     <section
       aria-label="The NextGen Brief"
@@ -64,7 +66,7 @@ const BlogBanner = () => {
             background: 'rgba(255, 255, 255, 0.08)',
           }}
         >
-          The NextGen Brief
+          {t('banner.eyebrow')}
         </span>
         <h1
           style={{
@@ -77,7 +79,7 @@ const BlogBanner = () => {
             textShadow: '0 2px 18px rgba(0, 0, 0, 0.35)',
           }}
         >
-          Healthcare marketing, decoded.
+          {t('banner.title')}
         </h1>
         <p
           style={{
@@ -89,8 +91,7 @@ const BlogBanner = () => {
             textShadow: '0 1px 10px rgba(0, 0, 0, 0.35)',
           }}
         >
-          Field-tested patient acquisition tactics, HIPAA updates, and clinic growth
-          stories — published as our team learns what's working.
+          {t('banner.lede')}
         </p>
       </div>
     </section>

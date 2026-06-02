@@ -135,6 +135,116 @@ ${JSON.stringify(items)}`;
   return parsed;
 }
 
+/** Translate one piece of plain/HTML text via Gemini (no JSON wrapper, so it
+ *  can't be derailed by parse errors). Brand/technical names are preserved. */
+async function geminiTranslatePlain(text: string, lang: TargetLang): Promise<string> {
+  const prompt = `Translate the following healthcare-marketing article content into ${LANG_NAME[lang]}.
+Rules:
+- Preserve ALL HTML tags, markdown, and line breaks exactly as they appear.
+- Do NOT translate brand or technical names: "TheNextGen", "Google", "Meta", "HIPAA", "SEO", "GA4".
+- Output ONLY the translated text — no preamble, no explanation, no code fences.
+
+CONTENT:
+${text}`;
+
+  const res = await fetch(GEMINI_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    cache: 'no-store',
+    body: JSON.stringify({
+      contents: [{ role: 'user', parts: [{ text: prompt }] }],
+      generationConfig: { temperature: 0.2, maxOutputTokens: 8192 },
+    }),
+  });
+  if (!res.ok) throw new Error(`Gemini translate HTTP ${res.status}`);
+  const data = (await res.json()) as {
+    candidates?: { content?: { parts?: { text?: string }[] } }[];
+  };
+  const out = (data.candidates?.[0]?.content?.parts || []).map((p) => p.text || '').join('');
+  if (!out.trim()) throw new Error('Gemini returned empty translation');
+  return out;
+}
+
+// Split long text into chunks that stay comfortably under the model's output
+// limit, preferring paragraph boundaries so HTML/markdown blocks aren't cut
+// mid-tag. ~5000 chars ≈ well under 8192 output tokens.
+function chunkText(text: string, maxChars = 5000): string[] {
+  if (text.length <= maxChars) return [text];
+  const pieces = text.split(/(\n\n+)/); // keep the separators
+  const chunks: string[] = [];
+  let cur = '';
+  for (const piece of pieces) {
+    if (cur && (cur + piece).length > maxChars) {
+      chunks.push(cur);
+      cur = '';
+    }
+    cur += piece;
+    while (cur.length > maxChars) {
+      chunks.push(cur.slice(0, maxChars));
+      cur = cur.slice(maxChars);
+    }
+  }
+  if (cur) chunks.push(cur);
+  return chunks;
+}
+
+/**
+ * Translate a long text field (an article body) into `lang`. Cached separately
+ * from the short fields under `tr:<type>:<id>:<lang>:content`, chunked across
+ * multiple Gemini calls so large bodies don't overflow the output limit and
+ * fall back to English. Returns the original text on any failure.
+ */
+export async function translateLongText(
+  entityType: 'post' | 'news',
+  id: number,
+  lang: TargetLang,
+  text: string | null | undefined,
+): Promise<string> {
+  const source = text || '';
+  if (!GEMINI_API_KEY || !source.trim()) return source;
+
+  const hash = md5(source);
+  const cacheKey = `tr:${entityType}:${id}:${lang}:content`;
+
+  try {
+    const row = await prisma.googleApiCache.findUnique({ where: { cacheKey } });
+    const cached = row?.responseData as unknown as { sourceHash?: string; text?: string } | null;
+    if (cached && cached.sourceHash === hash && typeof cached.text === 'string') {
+      return cached.text;
+    }
+  } catch (err) {
+    console.error('[translate] long-text cache read failed:', err);
+  }
+
+  try {
+    const chunks = chunkText(source);
+    const translated: string[] = [];
+    for (const c of chunks) {
+      translated.push(await geminiTranslatePlain(c, lang));
+    }
+    const out = translated.join('');
+    const expiresAt = new Date('2099-01-01T00:00:00Z');
+    await prisma.googleApiCache
+      .upsert({
+        where: { cacheKey },
+        create: {
+          cacheKey,
+          responseData: { sourceHash: hash, text: out } as unknown as object,
+          expiresAt,
+        },
+        update: {
+          responseData: { sourceHash: hash, text: out } as unknown as object,
+          expiresAt,
+        },
+      })
+      .catch((err) => console.error('[translate] long-text cache write failed:', err));
+    return out;
+  } catch (err) {
+    console.error('[translate] long-text translation failed, serving English:', err);
+    return source;
+  }
+}
+
 /**
  * Translate a list of records into `lang`, using the cache and a single batched
  * Gemini call for any cache misses. `pick` extracts the (non-empty) fields to
