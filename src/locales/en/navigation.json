@@ -1,6 +1,7 @@
 {
   "primary": {
     "services": "Services",
+    "allServices": "All Services",
     "industries": "Industries",
     "about": "About",
     "contactUs": "Contact Us"

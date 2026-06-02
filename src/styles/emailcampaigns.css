@@ -750,6 +750,13 @@
   border-radius: 18px;
   overflow: hidden;
 }
+/* Mobile: a 4-column comparison table can't shrink to phone width without
+   becoming unreadable, and overflow:hidden was clipping the last column.
+   Let the card scroll horizontally (contained, not page-level). */
+@media (max-width: 768px) {
+  .em-compare-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .em-compare-table { min-width: 560px; }
+}
 .em-compare-table { width: 100%; border-collapse: collapse; }
 .em-compare-table th, .em-compare-table td {
   padding: 18px 22px;

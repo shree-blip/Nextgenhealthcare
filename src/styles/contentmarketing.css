@@ -1082,6 +1082,14 @@
   .cm-cta-stat { flex: 1 1 calc(50% - 7px); }
 }
 @media (max-width: 720px) {
+  /* The "article anatomy" card contains a single-line schema snippet
+     (.cm-anatomy-schema, white-space:nowrap). On a flex/grid column its
+     min-content width is huge, so on narrow phones it stretched the whole
+     card past the viewport. Let the track + card shrink and keep the
+     snippet scrolling inside its own box. */
+  .cm-anatomy-grid { grid-template-columns: minmax(0, 1fr); }
+  .cm-anatomy-preview, .cm-anatomy-page, .cm-anatomy-item { min-width: 0; }
+  .cm-anatomy-schema { max-width: 100%; }
   .cm-types-grid { grid-template-columns: 1fr; }
   .cm-data-grid { grid-template-columns: 1fr; }
   .cm-data-signals-grid { grid-template-columns: repeat(2, 1fr); }
@@ -1091,6 +1099,13 @@
   .cm-glossary-grid { grid-template-columns: repeat(2, 1fr); }
   .cm-learn-grid { grid-template-columns: 1fr; }
   .cm-sub-grid { grid-template-columns: 1fr; }
+  /* 4-column comparison table can't fit four sentences readably on a
+     phone. The wrapper was overflow:hidden, which clipped the rightmost
+     "Recommended" column off-screen. Switch to a contained horizontal
+     scroll (not page-level) with a readable min-width so every column
+     stays legible and reachable by swipe. */
+  .cm-compare-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .cm-compare-table { min-width: 560px; }
   .cm-compare-table th, .cm-compare-table td {
     padding: 14px 12px;
     font-size: 12.5px;

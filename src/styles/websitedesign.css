@@ -283,6 +283,14 @@
   .wd-hero-card.c2 { bottom: 2%; right: 0; }
   .wd-hero-tag.t1 { display: none; }
 }
+@media (max-width: 640px) {
+  /* On phones the browser mockup's min-height (with its aspect-ratio)
+     resolved to ~480px wide, which expanded the single-column grid track
+     and pushed the hero copy under the hero's overflow:hidden clip. Let
+     the track shrink and the mock follow the column width. */
+  .wd-hero-grid { grid-template-columns: minmax(0, 1fr); }
+  .wd-hero-mock { aspect-ratio: 5 / 4; min-height: 0; }
+}
 
 /* ---------- TRUST BAR ---------- */
 .wd-trust {

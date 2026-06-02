@@ -300,6 +300,13 @@
   .ma-hero-grid { grid-template-columns: 1fr; gap: 48px; }
   .ma-hero-mock { aspect-ratio: 16 / 12; min-height: 360px; }
 }
+@media (max-width: 640px) {
+  /* Phone: the mock's min-height (with aspect-ratio) resolved to ~480px
+     wide, expanding the single-column grid track and clipping the hero
+     copy under the hero's overflow:hidden. Let the track + mock shrink. */
+  .ma-hero-grid { grid-template-columns: minmax(0, 1fr); }
+  .ma-hero-mock { aspect-ratio: 5 / 4; min-height: 0; }
+}
 
 /* ---------- TRUST BAR ---------- */
 .ma-trust {

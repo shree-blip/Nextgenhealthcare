@@ -3,7 +3,8 @@ import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import logoSrc from '../assets/nextgen-photoroom.png';
 import { SITE } from '../content/site';
-import { useNavPrimary, useNavResources } from '../content/navigation';
+import { useNavPrimary, useNavResources, useFooterServices } from '../content/navigation';
+import { ROUTES } from '../lib/routes';
 import { ChevronDownIcon } from './icons';
 import { SUPPORTED_LANGUAGES, LANGUAGE_LABELS, type SupportedLanguage } from '../i18n';
 import { useAuth } from '../lib/AuthContext';
@@ -12,6 +13,7 @@ const Navbar = () => {
   const { t, i18n } = useTranslation(['navigation', 'common']);
   const NAV_PRIMARY = useNavPrimary();
   const NAV_RESOURCES = useNavResources();
+  const NAV_SERVICES = useFooterServices();
 
   const { user } = useAuth();
   const accountHref = user
@@ -23,6 +25,11 @@ const Navbar = () => {
   const [resourcesOpen, setResourcesOpen] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  // Mobile drawer sub-panels: Services and Resources are collapsible
+  // accordions (closed by default so the drawer stays short on small
+  // screens). Language lives in the top-bar circle, not the drawer.
+  const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
+  const [mobileResourcesOpen, setMobileResourcesOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const resourcesRef = useRef<HTMLDivElement>(null);
   const langRef = useRef<HTMLDivElement>(null);
@@ -40,6 +47,24 @@ const Navbar = () => {
     }
     setLangOpen(false);
   };
+
+  // Shared option rows for the language dropdown — reused by the desktop pill
+  // panel and the small-screen circle panel.
+  const langOptionRows = () =>
+    SUPPORTED_LANGUAGES.map((lng) => (
+      <button
+        key={lng}
+        type="button"
+        className="nav-dropdown-item w-full text-left"
+        role="option"
+        aria-selected={lng === currentLang}
+        onClick={() => changeLanguage(lng)}
+      >
+        <span className="nav-dropdown-label">
+          {LANGUAGE_LABELS[lng].short} — {LANGUAGE_LABELS[lng].long}
+        </span>
+      </button>
+    ));
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 4);
@@ -88,6 +113,15 @@ const Navbar = () => {
   useEffect(() => {
     setMobileOpen(false);
   }, [location.pathname]);
+
+  // Collapse the drawer's sub-panels whenever the drawer itself closes, so
+  // it always reopens in its compact default state.
+  useEffect(() => {
+    if (!mobileOpen) {
+      setMobileServicesOpen(false);
+      setMobileResourcesOpen(false);
+    }
+  }, [mobileOpen]);
 
   // Lock body scroll while mobile menu is open + close on Escape
   useEffect(() => {
@@ -198,37 +232,70 @@ const Navbar = () => {
                   <ChevronDownIcon size={11} className="text-muted" />
                 </button>
 
-                {langOpen && (
-                  <div
-                    className="nav-dropdown-panel hidden sm:block"
-                    role="listbox"
-                    style={{
-                      right: 0,
-                      left: 'auto',
-                      minWidth: '160px',
-                    }}
+                {/* Compact circular language button for small screens (where
+                    the pill above is hidden) — sits beside the hamburger and
+                    opens the same dropdown. */}
+                <button
+                  type="button"
+                  className="nav-icon-btn sm:hidden"
+                  aria-label={t('common:language.changeLanguage')}
+                  aria-haspopup="listbox"
+                  aria-expanded={langOpen}
+                  onClick={() => setLangOpen((o) => !o)}
+                >
+                  <svg
+                    className="text-line"
+                    width={18}
+                    height={18}
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth={1.7}
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    aria-hidden="true"
                   >
-                    {SUPPORTED_LANGUAGES.map((lng) => (
-                      <button
-                        key={lng}
-                        type="button"
-                        className="nav-dropdown-item w-full text-left"
-                        role="option"
-                        aria-selected={lng === currentLang}
-                        onClick={() => changeLanguage(lng)}
-                      >
-                        <span className="nav-dropdown-label">
-                          {LANGUAGE_LABELS[lng].short} — {LANGUAGE_LABELS[lng].long}
-                        </span>
-                      </button>
-                    ))}
-                  </div>
+                    <circle cx="12" cy="12" r="10" />
+                    <line x1="2" y1="12" x2="22" y2="12" />
+                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+                  </svg>
+                </button>
+
+                {langOpen && (
+                  <>
+                    {/* Desktop / tablet panel (anchored under the pill) */}
+                    <div
+                      className="nav-dropdown-panel hidden sm:block"
+                      role="listbox"
+                      style={{
+                        right: 0,
+                        left: 'auto',
+                        minWidth: '160px',
+                      }}
+                    >
+                      {langOptionRows()}
+                    </div>
+                    {/* Small-screen panel — right-anchored with no centering
+                        transform so it stays inside the viewport at 320px. */}
+                    <div
+                      className="nav-dropdown-panel sm:hidden"
+                      role="listbox"
+                      style={{
+                        right: 0,
+                        left: 'auto',
+                        transform: 'none',
+                        minWidth: '170px',
+                      }}
+                    >
+                      {langOptionRows()}
+                    </div>
+                  </>
                 )}
               </div>
 
               <Link
                 to={accountHref}
-                className="nav-icon-btn hidden sm:grid"
+                className="nav-icon-btn grid"
                 aria-label={t('navigation:aria.accountAriaLabel')}
               >
                 <svg
@@ -320,7 +387,57 @@ const Navbar = () => {
           />
           <div className="container-shell py-6 flex flex-col gap-7 relative">
             <ul className="flex flex-col list-none m-0 p-0">
-              {NAV_PRIMARY.map((link) => (
+              {NAV_PRIMARY.map((link) =>
+                link.to === ROUTES.services.index ? (
+                  // Services — collapsible dropdown listing its sub-services,
+                  // so the full service catalogue is reachable from the drawer.
+                  <li key={link.to}>
+                    <button
+                      type="button"
+                      className="w-full flex items-center justify-between py-4 text-heading text-[18px] font-bold tracking-[-0.015em] border-b border-line-faint hover:text-cta transition-colors"
+                      aria-expanded={mobileServicesOpen}
+                      aria-controls="mobile-services-panel"
+                      onClick={() => setMobileServicesOpen((o) => !o)}
+                    >
+                      {link.label}
+                      <ChevronDownIcon
+                        size={18}
+                        strokeWidth={2}
+                        className={`transition-transform duration-200${
+                          mobileServicesOpen ? ' rotate-180' : ''
+                        }`}
+                      />
+                    </button>
+                    {mobileServicesOpen && (
+                      <ul
+                        id="mobile-services-panel"
+                        className="flex flex-col list-none m-0 p-0 pl-3 border-l-2 border-line-soft ml-1 mt-1"
+                      >
+                        {/* Direct link to the Services overview page itself —
+                            the header above only toggles this panel, so this
+                            gives the /services landing page its own entry. */}
+                        <li>
+                          <Link
+                            to={ROUTES.services.index}
+                            className="block py-3 border-b border-line-faint text-cta text-[15px] font-bold tracking-[-0.01em] hover:opacity-80 transition-opacity"
+                          >
+                            {t('navigation:primary.allServices')}
+                          </Link>
+                        </li>
+                        {NAV_SERVICES.map((s) => (
+                          <li key={s.to}>
+                            <Link
+                              to={s.to}
+                              className="block py-3 border-b border-line-faint last:border-b-0 text-heading text-[15px] font-semibold tracking-[-0.01em] hover:text-cta transition-colors"
+                            >
+                              {s.label}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </li>
+                ) : (
                 <li key={link.to}>
                   <Link
                     to={link.to}
@@ -343,48 +460,49 @@ const Navbar = () => {
                     </svg>
                   </Link>
                 </li>
-              ))}
+                )
+              )}
             </ul>
 
-            <div>
-              <div className="text-[11px] uppercase tracking-[0.22em] font-bold text-muted mb-2">
+            {/* Resources — collapsible dropdown so its sub-items stay tucked
+                away until tapped, keeping the drawer short on small screens. */}
+            <div className="-mt-7">
+              <button
+                type="button"
+                className="w-full flex items-center justify-between py-4 text-heading text-[18px] font-bold tracking-[-0.015em] border-b border-line-faint hover:text-cta transition-colors"
+                aria-expanded={mobileResourcesOpen}
+                aria-controls="mobile-resources-panel"
+                onClick={() => setMobileResourcesOpen((o) => !o)}
+              >
                 {t('navigation:resources.label')}
-              </div>
-              <ul className="flex flex-col list-none m-0 p-0">
-                {NAV_RESOURCES.map((r) => (
-                  <li key={r.to}>
-                    <Link
-                      to={r.to}
-                      className="flex flex-col gap-0.5 py-3 border-b border-line-faint hover:bg-bg-soft transition-colors"
-                    >
-                      <span className="text-heading text-[15px] font-semibold tracking-[-0.01em]">
-                        {r.label}
-                      </span>
-                      <span className="text-muted text-[12.5px]">{r.desc}</span>
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Mobile language switcher */}
-            <div>
-              <div className="text-[11px] uppercase tracking-[0.22em] font-bold text-muted mb-2">
-                {t('common:language.selectLanguage')}
-              </div>
-              <div className="flex gap-2">
-                {SUPPORTED_LANGUAGES.map((lng) => (
-                  <button
-                    key={lng}
-                    type="button"
-                    onClick={() => changeLanguage(lng)}
-                    className={`nav-pill${lng === currentLang ? ' is-active' : ''}`}
-                    aria-pressed={lng === currentLang}
-                  >
-                    {LANGUAGE_LABELS[lng].short} — {LANGUAGE_LABELS[lng].long}
-                  </button>
-                ))}
-              </div>
+                <ChevronDownIcon
+                  size={18}
+                  strokeWidth={2}
+                  className={`transition-transform duration-200${
+                    mobileResourcesOpen ? ' rotate-180' : ''
+                  }`}
+                />
+              </button>
+              {mobileResourcesOpen && (
+                <ul
+                  id="mobile-resources-panel"
+                  className="flex flex-col list-none m-0 p-0 pl-3 border-l-2 border-line-soft ml-1 mt-1"
+                >
+                  {NAV_RESOURCES.map((r) => (
+                    <li key={r.to}>
+                      <Link
+                        to={r.to}
+                        className="flex flex-col gap-0.5 py-3 border-b border-line-faint last:border-b-0 hover:bg-bg-soft transition-colors"
+                      >
+                        <span className="text-heading text-[15px] font-semibold tracking-[-0.01em]">
+                          {r.label}
+                        </span>
+                        <span className="text-muted text-[12.5px]">{r.desc}</span>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              )}
             </div>
           </div>
         </div>

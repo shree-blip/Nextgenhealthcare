@@ -559,12 +559,16 @@
           .ph2-gantt-track { grid-template-columns: 110px 1fr; }
         }
         @media (max-width: 820px) {
-          .ph2-hero { grid-template-columns: 1fr; }
+          /* minmax(0,1fr) lets the column shrink below its content's
+             min width; without it a long heading word stretched the hero
+             grid a few px past the phone viewport. */
+          .ph2-hero { grid-template-columns: minmax(0, 1fr); }
           .ph2-rail { border-right: none; border-bottom: 1px solid rgba(45,55,72,0.18); min-height: auto; padding: 0 0 24px; }
           .ph2-rail-vert { position: static; writing-mode: horizontal-tb; transform: none; }
           .ph2-rail-num { position: static; margin-top: 12px; font-size: 64px; }
-          .ph2-hero-content { grid-template-columns: 1fr; }
-          .ph2-h1, .ph2-lede, .ph2-stat { grid-column: 1; }
+          .ph2-hero-content { grid-template-columns: minmax(0, 1fr); }
+          .ph2-h1, .ph2-lede, .ph2-stat { grid-column: 1; min-width: 0; }
+          .ph2-h1 { overflow-wrap: break-word; }
           .ph2-modules { grid-template-columns: 1fr; }
           .ph2-strip-wrap { grid-template-columns: 1fr; }
           .ph2-strip-lbl, .ph2-strip-q, .ph2-strip-next { grid-column: 1; justify-self: start; text-align: left; }
