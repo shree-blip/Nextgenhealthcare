@@ -39,6 +39,7 @@ import {
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useAuth } from '../../lib/AuthContext';
 import AnalyticsForm from './components/AnalyticsForm';
 import ClientAnalyticsView from './components/ClientAnalyticsView';
 import GoogleAnalyticsView from './components/GoogleAnalyticsView';
@@ -687,6 +688,7 @@ function StaffManagementSection({
 }
 function AdminDashboardContent() {
   const navigate = useNavigate();
+  const { logout: doLogout } = useAuth();
   const [searchParams] = useSearchParams();
   const ADMIN_SECTIONS = [
     'Global Stats',
@@ -1169,8 +1171,11 @@ function AdminDashboardContent() {
   }, [section, user]);
 
   const handleLogout = async () => {
-    await fetch('/api/auth/logout', { method: 'POST' });
-    navigate('/login');
+    // Clear the auth-context user (and the cookie) BEFORE navigating. Doing a
+    // raw fetch left the context's `user` set, so RedirectIfAuthed on /login
+    // bounced straight back to /dashboard/admin — an endless refresh loop.
+    await doLogout();
+    navigate('/login', { replace: true });
   };
 
   const handleAssign = async () => {
