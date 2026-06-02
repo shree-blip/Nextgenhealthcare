@@ -146,7 +146,9 @@
   .hero-grid {
     display: grid;
     grid-template-columns: 0.95fr 1fr;
-    gap: clamp(72px, 10vw, 180px);
+    grid-template-rows: auto auto;
+    column-gap: clamp(72px, 10vw, 180px);
+    row-gap: 0;
     align-items: center;
     /* Force grid children to allow shrinking — without min-width: 0 on the
        items, long bold words like "Healthcare." would expand the column. */
@@ -154,8 +156,22 @@
   }
   .hero-grid > * { min-width: 0; }
   .hero-content { max-width: 56ch; }
+  /* Explicit placement keeps the desktop layout identical after the CTA row
+     was lifted out of .hero-content: copy top-left, CTAs bottom-left, and the
+     orbit spanning the full right column. The .hero-orbit-label sits with the
+     orbit (mobile only — hidden on desktop). */
+  .hero-content      { grid-column: 1; grid-row: 1; }
+  .hero-cta-row      { grid-column: 1; grid-row: 2; }
+  .hero-visual       { grid-column: 2; grid-row: 1 / span 2; align-self: center; }
+  .hero-orbit-label  { display: none; }
   @media (max-width: 1024px) {
     .hero-grid { grid-template-columns: 1fr; }
+    /* Single column — let everything flow in source order (copy, label,
+       orbit, CTAs). Clears the desktop row/column pins. */
+    .hero-content,
+    .hero-cta-row,
+    .hero-visual,
+    .hero-orbit-label { grid-column: 1; grid-row: auto; }
     .hero-visual { display: none; }
   }
   /* Back-compat for any callers still passing the .hero-grid--solo modifier */
@@ -639,33 +655,41 @@
     /* Hero copy + CTAs — tighten and stack so nothing overflows
        the viewport on phones. */
     .hero-section {
-      padding-top: clamp(110px, 22vw, 160px);
-      padding-bottom: clamp(40px, 8vw, 64px);
+      /* The section slides up under the sticky navbar (margin-top:-nav-h),
+         so padding-top must clear the 104px bar PLUS leave breathing room —
+         otherwise the eyebrow pill kisses the navbar. ~40px clear gap. */
+      padding-top: clamp(144px, 38vw, 184px);
+      padding-bottom: clamp(36px, 7vw, 56px);
       min-height: auto;
     }
     .hero-grid {
-      gap: 32px;
+      gap: 20px;
     }
     .hero-eyebrow {
-      font-size: 10.5px;
-      padding: 7px 14px 7px 11px;
-      letter-spacing: 0.14em;
-      margin-bottom: 22px;
+      font-size: 9.5px;
+      padding: 6px 12px 6px 10px;
+      gap: 8px;
+      letter-spacing: 0.13em;
+      margin-bottom: 18px;
     }
     .hero-title {
-      font-size: clamp(30px, 8.4vw, 44px);
+      /* Big, tight, clean headline — the hero's anchor on mobile. Words wrap
+         to their own lines ("We Market" / "Healthcare." / "Relentlessly.")
+         the way the reference's stacked heading reads. */
+      font-size: clamp(52px, 15.5vw, 74px);
+      line-height: 0.94;
       max-width: none;
-      margin-bottom: 20px;
-      letter-spacing: -0.03em;
+      margin-bottom: 18px;
+      letter-spacing: -0.045em;
     }
     .hero-title .accent-text {
-      margin-top: 8px;
+      margin-top: 2px;
     }
     .hero-lede {
       font-size: 15px;
-      line-height: 1.6;
-      max-width: none;
-      margin-bottom: 28px;
+      line-height: 1.55;
+      max-width: 42ch;
+      margin-bottom: 0;
     }
     .hero-cta-row {
       flex-direction: column;
@@ -3822,6 +3846,68 @@
     .svc-stage-cta .svc-cta-primary { width: 100%; justify-content: space-between; }
     .svc-bottom { grid-template-columns: 1fr; gap: 14px; }
     .svc-bottom-label { width: 100%; margin-bottom: 4px; }
+  }
+
+  /* ====================================================================
+     HOME HERO — MOBILE (≤640px)
+     Bring the N+ social orbit back on phones and stack the banner like the
+     reference mock: eyebrow → title → lede → "One team · Every channel"
+     label → compact orbit → full-width CTAs. The orbit is hidden 641–1024px
+     (tablet) by the rules above; this block only re-enables it on phones.
+     ==================================================================== */
+  @media (max-width: 640px) {
+    /* Re-show the hero orbit + its caption (overrides the .hero-visual and
+       .svc-orbit display:none set in the ≤1024 / desktop rules). */
+    .hero-section .hero-visual { display: block; }
+    .hero-section .hero-visual .svc-orbit { display: block; }
+
+    /* Caption above the orbit. Spacing above/below comes from the grid's
+       row gap — no extra margin, so it reads as one tidy block with the orbit. */
+    .hero-orbit-label {
+      display: block;
+      margin: 0;
+      text-align: center;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #8A93A6;
+    }
+
+    /* Orbit wrap: drop the desktop rightward shift + fixed aspect box and let
+       the (square) orbit center itself and size to the phone width. The box is
+       sized to the actual artwork footprint (hub + ring ≈ 210px) so there is
+       no dead whitespace padding it out. */
+    .hero-section .hero-visual {
+      margin-left: 0;
+      aspect-ratio: auto;
+      width: 100%;
+    }
+    .hero-svc-orbit-wrap::before { display: none; } /* desktop side glow off */
+    .hero-section .hero-svc-orbit-wrap > .svc-orbit,
+    .hero-section .svc-orbit {
+      transform: none;
+      margin: 0 auto;
+      width: min(64vw, 230px);
+      max-width: 230px;
+    }
+
+    /* Shrink the central hub so the orbiting social chips ride a visible
+       dashed ring with clear air between them and the core (reference look). */
+    .hero-section .svc-orbit-hub { width: 108px; height: 108px; }
+    .hero-section .svc-orbit-hub-mark { font-size: 24px; margin-bottom: 4px; }
+    .hero-section .svc-orbit-hub-name { font-size: 8.5px; letter-spacing: 0.16em; }
+    .hero-section .svc-orbit-hub-tag  { font-size: 7.5px; margin-top: 3px; }
+
+    /* Social chips a touch larger for tap-target clarity. They orbit at the
+       keyframe's 90px radius, which lands them on the hub's outer dashed ring
+       (hub ::after, inset -36px → radius 90px). */
+    .hero-section .hub-bubble { width: 30px; height: 30px; margin: -15px 0 0 -15px; }
+    .hero-section .hub-bubble svg { width: 13px; height: 13px; }
+
+    /* The wide service text-pills would overflow a 300px orbit — drop them on
+       phones; the social ring carries the "all your channels" idea. */
+    .hero-section .svc-float { display: none; }
   }
 
   /* ============ WHO WE SERVE ============ */

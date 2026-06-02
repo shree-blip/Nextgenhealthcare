@@ -201,7 +201,8 @@ const Hero = ({ children }: HeroProps) => {
 
       <div className="container-shell">
         <div className="hero-grid">
-          {/* LEFT - copy + CTAs */}
+          {/* LEFT - copy (CTAs are a separate grid item so the orbit can sit
+              between the copy and the buttons on mobile — see Hero CSS) */}
           <div className="hero-content">
             <div className="hero-eyebrow reveal d1">
               <span className="hero-pulse" aria-hidden="true" />
@@ -215,19 +216,12 @@ const Hero = ({ children }: HeroProps) => {
             </h1>
 
             <p className="hero-lede reveal d3">{t('home:hero.lede')}</p>
-
-            <div className="hero-cta-row reveal d4">
-              <MotionButton to="/free-growth-audit" className="m-btn-cta hero-mbtn">
-                {t('home:hero.ctaPrimary')}
-                <ArrowIcon strokeWidth={2} />
-              </MotionButton>
-
-              <Link to="/our-work" className="link-secondary">
-                {t('home:hero.ctaSecondary')}
-                <ArrowIcon size={14} strokeWidth={2} />
-              </Link>
-            </div>
           </div>
+
+          {/* Mobile-only caption above the orbit. Hidden on desktop. */}
+          <p className="hero-orbit-label reveal d3" aria-hidden="true">
+            {t('home:hero.orbitLabel')}
+          </p>
 
           <Parallax
             as="div"
@@ -261,6 +255,18 @@ const Hero = ({ children }: HeroProps) => {
               ))}
             </div>
           </Parallax>
+
+          <div className="hero-cta-row reveal d4">
+            <MotionButton to="/free-growth-audit" className="m-btn-cta hero-mbtn">
+              {t('home:hero.ctaPrimary')}
+              <ArrowIcon strokeWidth={2} />
+            </MotionButton>
+
+            <Link to="/our-work" className="link-secondary">
+              {t('home:hero.ctaSecondary')}
+              <ArrowIcon size={14} strokeWidth={2} />
+            </Link>
+          </div>
         </div>
 
         {children}
