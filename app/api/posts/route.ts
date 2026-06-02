@@ -3,9 +3,14 @@ import { revalidateTag } from 'next/cache';
 import { prisma } from '@server/prisma';
 import { requireAdmin } from '@server/auth';
 import { sanitizeText } from '@server/sanitize';
+import { normalizeTargetLang, translateRecords } from '@server/translate';
+
+// Translating long article bodies can exceed Vercel's default 10s function limit.
+export const maxDuration = 60;
 
 export async function GET(req: NextRequest) {
   try {
+    const lang = normalizeTargetLang(req.nextUrl.searchParams.get('lang'));
     const slug = req.nextUrl.searchParams.get('slug')?.trim();
     if (slug) {
       const post = await prisma.post.findUnique({
@@ -13,7 +18,23 @@ export async function GET(req: NextRequest) {
         include: { author: true, categories: true, tags: true },
       });
       if (!post) return NextResponse.json({ error: 'Not found' }, { status: 404 });
-      return NextResponse.json(post, {
+      const out = lang
+        ? (
+            await translateRecords(
+              'post',
+              lang,
+              [post],
+              (p) => ({
+                ...(p.title ? { title: p.title } : {}),
+                ...(p.excerpt ? { excerpt: p.excerpt } : {}),
+                ...(p.content ? { content: p.content } : {}),
+                ...(p.coverImageAlt ? { coverImageAlt: p.coverImageAlt } : {}),
+              }),
+              (p, t) => ({ ...p, ...t }),
+            )
+          )[0]
+        : post;
+      return NextResponse.json(out, {
         headers: { 'Cache-Control': 'public, max-age=60, stale-while-revalidate=600' },
       });
     }
@@ -31,7 +52,19 @@ export async function GET(req: NextRequest) {
         updatedAt: true,
       },
     });
-    return NextResponse.json(posts, {
+    const out = lang
+      ? await translateRecords(
+          'post',
+          lang,
+          posts,
+          (p) => ({
+            ...(p.title ? { title: p.title } : {}),
+            ...(p.excerpt ? { excerpt: p.excerpt } : {}),
+          }),
+          (p, t) => ({ ...p, ...t }),
+        )
+      : posts;
+    return NextResponse.json(out, {
       headers: { 'Cache-Control': 'public, max-age=30, stale-while-revalidate=300' },
     });
   } catch (err) {

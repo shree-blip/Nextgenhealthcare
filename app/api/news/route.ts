@@ -1,18 +1,24 @@
 import { NextResponse } from 'next/server';
 import { prisma } from '@server/prisma';
+import { normalizeTargetLang, translateRecords } from '@server/translate';
 
 /**
  * Public news endpoints.
  *
- *   GET /api/news          → list all published articles (slim payload)
- *   GET /api/news?slug=x   → single article by slug (full payload)
+ *   GET /api/news              → list all published articles (slim payload)
+ *   GET /api/news?slug=x       → single article by slug (full payload)
+ *   GET /api/news?lang=es[&…]  → same, with title/excerpt/content translated
  *
  * Admin create/update/delete live under /api/admin/news.
  */
 
+// Translating long article bodies can exceed Vercel's default 10s function limit.
+export const maxDuration = 60;
+
 export async function GET(req: Request) {
   try {
     const { searchParams } = new URL(req.url);
+    const lang = normalizeTargetLang(searchParams.get('lang'));
     const slug = searchParams.get('slug')?.trim();
 
     if (slug) {
@@ -20,7 +26,23 @@ export async function GET(req: Request) {
       if (!article || !article.publishedAt) {
         return NextResponse.json({ error: 'Not found' }, { status: 404 });
       }
-      const res = NextResponse.json(article);
+      const out = lang
+        ? (
+            await translateRecords(
+              'news',
+              lang,
+              [article],
+              (a) => ({
+                ...(a.title ? { title: a.title } : {}),
+                ...(a.excerpt ? { excerpt: a.excerpt } : {}),
+                ...(a.content ? { content: a.content } : {}),
+                ...(a.coverImageAlt ? { coverImageAlt: a.coverImageAlt } : {}),
+              }),
+              (a, t) => ({ ...a, ...t }),
+            )
+          )[0]
+        : article;
+      const res = NextResponse.json(out);
       res.headers.set('Cache-Control', 'public, max-age=60, stale-while-revalidate=600');
       return res;
     }
@@ -43,7 +65,19 @@ export async function GET(req: Request) {
         updatedAt: true,
       },
     });
-    const res = NextResponse.json(articles);
+    const out = lang
+      ? await translateRecords(
+          'news',
+          lang,
+          articles,
+          (a) => ({
+            ...(a.title ? { title: a.title } : {}),
+            ...(a.excerpt ? { excerpt: a.excerpt } : {}),
+          }),
+          (a, t) => ({ ...a, ...t }),
+        )
+      : articles;
+    const res = NextResponse.json(out);
     res.headers.set('Cache-Control', 'public, max-age=30, stale-while-revalidate=300');
     return res;
   } catch (err) {

@@ -28,12 +28,16 @@ interface DbNewsArticle {
 type DbState = 'loading' | 'ready' | 'not-found' | 'error';
 
 const DbNewsArticleView = ({ slug }: { slug: string }) => {
+  const { i18n } = useTranslation();
+  const lang = i18n.language?.toLowerCase().startsWith('es') ? 'es' : 'en';
   const [article, setArticle] = useState<DbNewsArticle | null>(null);
   const [state, setState] = useState<DbState>('loading');
 
   useEffect(() => {
     let cancelled = false;
-    fetch(`/api/news?slug=${encodeURIComponent(slug)}`)
+    const url =
+      `/api/news?slug=${encodeURIComponent(slug)}` + (lang === 'es' ? '&lang=es' : '');
+    fetch(url)
       .then(async (res) => {
         if (res.status === 404) return { _missing: true } as const;
         if (!res.ok) throw new Error('Failed to load');
@@ -52,7 +56,7 @@ const DbNewsArticleView = ({ slug }: { slug: string }) => {
     return () => {
       cancelled = true;
     };
-  }, [slug]);
+  }, [slug, lang]);
 
   if (state === 'loading') {
     return (

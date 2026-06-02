@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { ArrowIcon } from '@/components/icons';
 
 /**
@@ -21,10 +22,14 @@ interface DbNews {
   publishedAt: string | null;
 }
 
-// Instant-paint strategy mirrors BlogFeed: SSR seed → localStorage → in-memory.
-// /api/news still runs in the background to pick up newly-published articles.
-const CACHE_KEY = 'healthcare-news:newsroom:v2';
-let memoryCache: DbNews[] | null = null;
+type NewsLang = 'en' | 'es';
+
+// Instant-paint strategy mirrors BlogFeed: SSR seed (English only) →
+// localStorage → in-memory, all keyed per language so switching to Español
+// never shows stale English. /api/news still runs in the background to pick
+// up newly-published articles.
+const CACHE_PREFIX = 'healthcare-news:newsroom:v3:';
+const memoryCache: Partial<Record<NewsLang, DbNews[]>> = {};
 
 function readSeedNews(): DbNews[] | null {
   if (typeof window === 'undefined') return null;
@@ -33,30 +38,32 @@ function readSeedNews(): DbNews[] | null {
   return null;
 }
 
-function readCached(): DbNews[] | null {
-  if (memoryCache) return memoryCache;
-  const seed = readSeedNews();
-  if (seed) {
-    memoryCache = seed;
-    return seed;
+function readCached(lang: NewsLang): DbNews[] | null {
+  if (memoryCache[lang]) return memoryCache[lang]!;
+  if (lang === 'en') {
+    const seed = readSeedNews();
+    if (seed) {
+      memoryCache.en = seed;
+      return seed;
+    }
   }
   if (typeof window === 'undefined') return null;
   try {
-    const raw = window.localStorage.getItem(CACHE_KEY);
+    const raw = window.localStorage.getItem(CACHE_PREFIX + lang);
     if (!raw) return null;
     const parsed = JSON.parse(raw);
     if (!Array.isArray(parsed)) return null;
-    memoryCache = parsed;
+    memoryCache[lang] = parsed;
     return parsed;
   } catch {
     return null;
   }
 }
 
-function writeCached(items: DbNews[]) {
-  memoryCache = items;
+function writeCached(lang: NewsLang, items: DbNews[]) {
+  memoryCache[lang] = items;
   try {
-    window.localStorage.setItem(CACHE_KEY, JSON.stringify(items));
+    window.localStorage.setItem(CACHE_PREFIX + lang, JSON.stringify(items));
   } catch {
     /* ignore */
   }
@@ -72,18 +79,25 @@ function formatDate(iso: string | null) {
 }
 
 const NewsroomStrip = () => {
-  const cached = readCached();
-  const [items, setItems] = useState<DbNews[]>(cached ?? []);
+  const { i18n } = useTranslation();
+  const lang: NewsLang = i18n.language?.toLowerCase().startsWith('es') ? 'es' : 'en';
+
+  const [items, setItems] = useState<DbNews[]>(() => readCached(lang) ?? []);
 
   useEffect(() => {
     let cancelled = false;
-    fetch('/api/news')
+
+    // Paint this language's cache immediately on a switch, then revalidate.
+    setItems(readCached(lang) ?? []);
+
+    const url = lang === 'es' ? '/api/news?lang=es' : '/api/news';
+    fetch(url)
       .then((res) => (res.ok ? res.json() : []))
       .then((data: DbNews[]) => {
         if (cancelled) return;
         const list = Array.isArray(data) ? data : [];
         setItems(list);
-        writeCached(list);
+        writeCached(lang, list);
       })
       .catch(() => {
         /* leave cached items in place */
@@ -91,7 +105,7 @@ const NewsroomStrip = () => {
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [lang]);
 
   if (items.length === 0) return null;
 

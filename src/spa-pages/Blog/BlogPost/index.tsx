@@ -32,6 +32,8 @@ function DbPostView({ slug }: { slug: string }) {
   // refetch in the background to pull in the full `content` (which isn't in
   // the list payload).
   const location = useLocation();
+  const { i18n } = useTranslation();
+  const lang = i18n.language?.toLowerCase().startsWith('es') ? 'es' : 'en';
   const preloaded = (location.state as { post?: Partial<DbPost> } | null)?.post ?? null;
 
   const initialPost: DbPost | null = preloaded
@@ -55,7 +57,9 @@ function DbPostView({ slug }: { slug: string }) {
 
   useEffect(() => {
     let cancelled = false;
-    fetch(`/api/posts?slug=${encodeURIComponent(slug)}`)
+    const url =
+      `/api/posts?slug=${encodeURIComponent(slug)}` + (lang === 'es' ? '&lang=es' : '');
+    fetch(url)
       .then(async (res) => {
         if (cancelled) return;
         if (res.status === 404) {
@@ -78,7 +82,7 @@ function DbPostView({ slug }: { slug: string }) {
       cancelled = true;
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [slug]);
+  }, [slug, lang]);
 
   if (state === 'loading') {
     return (

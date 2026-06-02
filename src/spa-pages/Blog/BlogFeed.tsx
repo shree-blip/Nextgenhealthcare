@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { ArrowIcon, ClockIcon } from '@/components/icons';
 
 /**
@@ -22,15 +23,20 @@ interface DbPost {
 
 type LoadState = 'loading' | 'ready' | 'error';
 
+type FeedLang = 'en' | 'es';
+
 // Instant-paint strategy (in priority order):
 //   1. window.__SEED__.posts — injected by the Next.js server component on
 //      first visit, so the page paints with content already in the HTML.
+//      The seed is ENGLISH only, so it's used for `en` exclusively.
 //   2. localStorage cache — survives across tabs/sessions, so repeat visitors
 //      see content instantly even without the SSR seed.
 //   3. In-memory cache — survives client-side navigation within one tab.
-// Whichever fires first paints; /api/posts then revalidates in the background.
-const POSTS_CACHE_KEY = 'blog-feed:v2';
-let memoryCache: DbPost[] | null = null;
+// Caches are keyed per language so switching to Español never shows stale
+// English (or vice-versa). Whichever fires first paints; /api/posts then
+// revalidates in the background.
+const POSTS_CACHE_PREFIX = 'blog-feed:v3:';
+const memoryCache: Partial<Record<FeedLang, DbPost[]>> = {};
 
 function readSeedPosts(): DbPost[] | null {
   if (typeof window === 'undefined') return null;
@@ -39,30 +45,32 @@ function readSeedPosts(): DbPost[] | null {
   return null;
 }
 
-function readCachedPosts(): DbPost[] | null {
-  if (memoryCache) return memoryCache;
-  const seed = readSeedPosts();
-  if (seed) {
-    memoryCache = seed;
-    return seed;
+function readCachedPosts(lang: FeedLang): DbPost[] | null {
+  if (memoryCache[lang]) return memoryCache[lang]!;
+  if (lang === 'en') {
+    const seed = readSeedPosts();
+    if (seed) {
+      memoryCache.en = seed;
+      return seed;
+    }
   }
   if (typeof window === 'undefined') return null;
   try {
-    const raw = window.localStorage.getItem(POSTS_CACHE_KEY);
+    const raw = window.localStorage.getItem(POSTS_CACHE_PREFIX + lang);
     if (!raw) return null;
     const parsed = JSON.parse(raw) as DbPost[];
     if (!Array.isArray(parsed)) return null;
-    memoryCache = parsed;
+    memoryCache[lang] = parsed;
     return parsed;
   } catch {
     return null;
   }
 }
 
-function writeCachedPosts(posts: DbPost[]) {
-  memoryCache = posts;
+function writeCachedPosts(lang: FeedLang, posts: DbPost[]) {
+  memoryCache[lang] = posts;
   try {
-    window.localStorage.setItem(POSTS_CACHE_KEY, JSON.stringify(posts));
+    window.localStorage.setItem(POSTS_CACHE_PREFIX + lang, JSON.stringify(posts));
   } catch {
     /* storage may be full / disabled — silently skip */
   }
@@ -355,16 +363,33 @@ function CompactCard({ post }: { post: DbPost }) {
 /* ─── Main feed ────────────────────────────────────────────── */
 
 export default function BlogFeed() {
+  const { i18n } = useTranslation();
+  const lang: FeedLang = i18n.language?.toLowerCase().startsWith('es') ? 'es' : 'en';
+
   // Hydrate from cache synchronously so first paint is instant on repeat visits.
-  const cached = readCachedPosts();
-  const [posts, setPosts] = useState<DbPost[]>(cached ?? []);
-  const [state, setState] = useState<LoadState>(cached ? 'ready' : 'loading');
+  const [posts, setPosts] = useState<DbPost[]>(() => readCachedPosts(lang) ?? []);
+  const [state, setState] = useState<LoadState>(() =>
+    readCachedPosts(lang) ? 'ready' : 'loading',
+  );
 
   useEffect(() => {
     let cancelled = false;
-    // Always revalidate in the background — the cached list paints immediately,
-    // then this fetch refreshes with any new posts the admin published.
-    fetch('/api/posts')
+
+    // On a language switch, paint that language's cache immediately (or clear
+    // to the loading state) before the network refresh lands.
+    const cached = readCachedPosts(lang);
+    if (cached) {
+      setPosts(cached);
+      setState('ready');
+    } else {
+      setPosts([]);
+      setState('loading');
+    }
+
+    // Always revalidate in the background. For Español the API translates the
+    // title/excerpt (cached server-side) and returns Spanish content.
+    const url = lang === 'es' ? '/api/posts?lang=es' : '/api/posts';
+    fetch(url)
       .then((res) => (res.ok ? res.json() : []))
       .then((data: DbPost[]) => {
         if (cancelled) return;
@@ -376,7 +401,7 @@ export default function BlogFeed() {
           );
         setPosts(published);
         setState('ready');
-        writeCachedPosts(published);
+        writeCachedPosts(lang, published);
       })
       .catch(() => {
         // Only show the error state if we have nothing cached to fall back to.
@@ -385,8 +410,7 @@ export default function BlogFeed() {
     return () => {
       cancelled = true;
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [lang]);
 
   const lead = posts[0];
   const features = useMemo(() => posts.slice(1, 4), [posts]);
