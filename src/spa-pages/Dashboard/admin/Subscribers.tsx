@@ -52,18 +52,18 @@ export default function NewsletterSubscribersPage() {
                 <p className="text-sm font-medium text-slate-600 dark:text-slate-400">Total Subscribers</p>
                 <p className="text-3xl font-black text-slate-900 dark:text-white mt-1">{subscribers.length}</p>
               </div>
-              <Mail className="h-12 w-12 text-emerald-500" />
+              <Mail className="h-12 w-12 text-[#4A3208]" />
             </div>
           </div>
           <div className="bg-white dark:bg-slate-900 rounded-2xl p-6 shadow-sm border border-slate-200 dark:border-slate-700">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm font-medium text-slate-600 dark:text-slate-400">Active</p>
-                <p className="text-3xl font-black text-emerald-600 mt-1">
+                <p className="text-3xl font-black text-[#4A3208] mt-1">
                   {subscribers.filter(s => s.active).length}
                 </p>
               </div>
-              <CheckCircle className="h-12 w-12 text-emerald-500" />
+              <CheckCircle className="h-12 w-12 text-[#4A3208]" />
             </div>
           </div>
           <div className="bg-white dark:bg-slate-900 rounded-2xl p-6 shadow-sm border border-slate-200 dark:border-slate-700">
@@ -121,7 +121,7 @@ export default function NewsletterSubscribersPage() {
                     </td>
                     <td className="py-4 px-6">
                       {subscriber.active ? (
-                        <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium bg-emerald-100 dark:bg-emerald-900/40 text-emerald-800 dark:text-emerald-300">
+                        <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium bg-[#F5C857] dark:bg-[#F5C857]/40 text-[#4A3208] dark:text-[#4A3208]">
                           <CheckCircle className="h-3 w-3" />
                           Active
                         </span>

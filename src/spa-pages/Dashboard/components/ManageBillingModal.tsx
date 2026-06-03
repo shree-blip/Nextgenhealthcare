@@ -144,7 +144,7 @@ export default function ManageBillingModal({
                   value={formData.email}
                   onChange={handleInputChange}
                   placeholder="billing@clinic.com"
-                  className="w-full px-4 py-3 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                  className="w-full px-4 py-3 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#E5B73A]"
                 />
               </div>
 
@@ -160,7 +160,7 @@ export default function ManageBillingModal({
                     value={formData.address}
                     onChange={handleInputChange}
                     placeholder="Street Address"
-                    className="w-full px-4 py-3 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                    className="w-full px-4 py-3 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#E5B73A]"
                   />
 
                   <div className="grid grid-cols-2 gap-3">
@@ -170,13 +170,13 @@ export default function ManageBillingModal({
                       value={formData.city}
                       onChange={handleInputChange}
                       placeholder="City"
-                      className="px-4 py-3 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                      className="px-4 py-3 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#E5B73A]"
                     />
                     <select
                       name="country"
                       value={formData.country}
                       onChange={handleInputChange}
-                      className="px-4 py-3 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                      className="px-4 py-3 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#E5B73A]"
                     >
                       {COUNTRIES.map((c) => (
                         <option key={c.code} value={c.code}>
@@ -192,7 +192,7 @@ export default function ManageBillingModal({
                         name="state"
                         value={formData.state}
                         onChange={handleInputChange}
-                        className="px-4 py-3 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                        className="px-4 py-3 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#E5B73A]"
                       >
                         <option value="">Select State</option>
                         {US_STATES.map((state) => (
@@ -208,7 +208,7 @@ export default function ManageBillingModal({
                       value={formData.zipCode}
                       onChange={handleInputChange}
                       placeholder="Postal Code"
-                      className="px-4 py-3 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                      className="px-4 py-3 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#E5B73A]"
                     />
                   </div>
                 </div>
@@ -232,7 +232,7 @@ export default function ManageBillingModal({
                 <button
                   type="submit"
                   disabled={saving}
-                  className="flex-1 px-4 py-3 bg-emerald-500 hover:bg-emerald-600 text-white font-semibold rounded-xl transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
+                  className="flex-1 px-4 py-3 bg-[#F5C857] hover:bg-[#E9B83A] text-[#4A3208] font-semibold rounded-xl transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
                 >
                   {saving ? (
                     <>

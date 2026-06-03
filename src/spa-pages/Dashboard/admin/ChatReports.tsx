@@ -91,7 +91,7 @@ export default function AdminChatReportsPage() {
                       </div>
                       <div className="flex flex-col items-end gap-2">
                         <span className="text-xs px-2.5 py-1 rounded-full bg-slate-100 dark:bg-slate-700 text-slate-900 dark:text-white">{session.language || 'en'}</span>
-                        <span className="text-xs px-2.5 py-1 rounded-full bg-emerald-100 dark:bg-emerald-900/40 text-emerald-700 dark:text-emerald-300">{session.totalMessages} messages</span>
+                        <span className="text-xs px-2.5 py-1 rounded-full bg-[#F5C857] dark:bg-[#F5C857]/40 text-[#4A3208] dark:text-[#4A3208]">{session.totalMessages} messages</span>
                       </div>
                     </div>
                   </button>
@@ -110,7 +110,7 @@ export default function AdminChatReportsPage() {
                             key={message.id}
                             className={`rounded-xl p-3 border ${
                               message.role === 'user'
-                                ? 'bg-emerald-50 dark:bg-emerald-900/30 border-emerald-200 dark:border-emerald-800'
+                                ? 'bg-[#F5C857] dark:bg-[#F5C857]/30 border-[#EAD08A] dark:border-[#EAD08A]'
                                 : 'bg-slate-50 dark:bg-slate-800 border-slate-200 dark:border-slate-700'
                             }`}
                           >

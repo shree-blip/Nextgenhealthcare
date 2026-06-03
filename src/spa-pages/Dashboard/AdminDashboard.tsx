@@ -112,7 +112,7 @@ function ServiceCategoryCheckboxGrid({
               key={category}
               className={`flex cursor-pointer items-start gap-3 rounded-xl border px-3 py-2.5 text-sm transition-colors ${
                 checked
-                  ? 'border-emerald-300 bg-emerald-50 text-emerald-900 dark:border-emerald-700 dark:bg-emerald-900/20 dark:text-emerald-100'
+                  ? 'border-[#EAD08A] bg-[#F5C857] text-[#4A3208] dark:border-[#EAD08A] dark:bg-[#F5C857]/20 dark:text-[#4A3208]'
                   : 'border-slate-200 bg-white text-slate-700 hover:border-slate-300 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:hover:border-slate-600'
               }`}
             >
@@ -120,7 +120,7 @@ function ServiceCategoryCheckboxGrid({
                 type="checkbox"
                 checked={checked}
                 onChange={() => onChange(toggleServiceCategorySelection(selectedCategories, category))}
-                className="mt-0.5 h-4 w-4 rounded border-slate-300 text-emerald-500 focus:ring-emerald-500"
+                className="mt-0.5 h-4 w-4 rounded border-slate-300 text-[#4A3208] focus:ring-[#E5B73A]"
               />
               <span className="leading-5">{category}</span>
             </label>
@@ -219,7 +219,7 @@ function StaffManagementSection({
   const getPlanPillClasses = (label: string) => {
     if (label === 'Scale Elite') return 'bg-amber-100 dark:bg-amber-900/30 text-amber-800 dark:text-amber-400';
     if (label === 'Growth Pro') return 'bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-400';
-    if (label === 'Starter Care') return 'bg-emerald-100 dark:bg-emerald-900/30 text-emerald-800 dark:text-emerald-400';
+    if (label === 'Starter Care') return 'bg-[#F5C857] dark:bg-[#F5C857]/30 text-[#4A3208] dark:text-[#4A3208]';
     return 'bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300';
   };
 
@@ -258,7 +258,7 @@ function StaffManagementSection({
                       <span className={`text-xs px-3 py-1 rounded-full font-bold ${
                         listedUser.role === 'admin' || listedUser.role === 'super_admin'
                           ? 'bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-400'
-                          : 'bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400'
+                          : 'bg-[#F5C857] dark:bg-[#F5C857]/30 text-[#4A3208] dark:text-[#4A3208]'
                       }`}>
                         {listedUser.role}
                       </span>
@@ -458,7 +458,7 @@ function StaffManagementSection({
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search by name, email, or role..."
-              className="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 pl-10 pr-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
+              className="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 pl-10 pr-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#E5B73A]"
             />
             <Users className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
           </div>
@@ -469,7 +469,7 @@ function StaffManagementSection({
               onClick={() => setActiveFilter('all')}
               className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${
                 activeFilter === 'all'
-                  ? 'bg-gradient-to-r from-emerald-500 to-cyan-500 text-white shadow-md shadow-emerald-600/20'
+                  ? 'bg-gradient-to-r from-[#F5C857] to-[#E9B83A] text-[#4A3208] shadow-md shadow-[color:#EAD08A]'
                   : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700'
               }`}
             >
@@ -510,7 +510,7 @@ function StaffManagementSection({
           {/* Create User Button */}
           <button
             onClick={() => setShowCreateModal(true)}
-            className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-emerald-500 to-cyan-500 px-5 py-2.5 text-sm font-semibold text-white shadow-md shadow-emerald-600/20 transition-opacity hover:opacity-95 whitespace-nowrap"
+            className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-[#F5C857] to-[#E9B83A] px-5 py-2.5 text-sm font-semibold text-[#4A3208] shadow-md shadow-[color:#EAD08A] transition-opacity hover:opacity-95 whitespace-nowrap"
           >
             <Plus className="h-4 w-4" />
             Create User
@@ -585,7 +585,7 @@ function StaffManagementSection({
           <div className="flex gap-3 pt-2">
             <button
               type="submit"
-              className="flex-1 inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-emerald-500 to-cyan-500 px-4 py-2.5 text-sm font-semibold text-white shadow-md shadow-emerald-600/20 transition-opacity hover:opacity-95"
+              className="flex-1 inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#F5C857] to-[#E9B83A] px-4 py-2.5 text-sm font-semibold text-[#4A3208] shadow-md shadow-[color:#EAD08A] transition-opacity hover:opacity-95"
             >
               <Plus className="h-4 w-4" />
               Create User
@@ -657,7 +657,7 @@ function StaffManagementSection({
           <div className="flex gap-3 pt-2">
             <button
               onClick={handleSaveEdit}
-              className="flex-1 inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-emerald-500 to-cyan-500 px-4 py-2.5 text-sm font-semibold text-white shadow-md shadow-emerald-600/20 transition-opacity hover:opacity-95"
+              className="flex-1 inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#F5C857] to-[#E9B83A] px-4 py-2.5 text-sm font-semibold text-[#4A3208] shadow-md shadow-[color:#EAD08A] transition-opacity hover:opacity-95"
             >
               <Save className="h-4 w-4" />
               Save Changes
@@ -2212,7 +2212,7 @@ function AdminDashboardContent() {
           <button
             onClick={handleAddClient}
             disabled={!newClientName || !newClientEmail || !newClientPassword || actionFeedback.loading}
-            className="flex-1 bg-emerald-500 text-black font-bold py-2 rounded-lg hover:bg-emerald-400 disabled:opacity-50"
+            className="flex-1 bg-[#F5C857] text-[#4A3208] font-bold py-2 rounded-lg hover:bg-[#E9B83A] disabled:opacity-50"
           >
             {actionFeedback.loading ? 'Adding...' : 'Add User'}
           </button>
@@ -2286,7 +2286,7 @@ function AdminDashboardContent() {
           <button
             onClick={handleAddClinic}
             disabled={!newClinicName || !newClinicType || !newClinicLocation}
-            className="flex-1 bg-emerald-500 text-black font-bold py-2 rounded-lg hover:bg-emerald-400 disabled:opacity-50"
+            className="flex-1 bg-[#F5C857] text-[#4A3208] font-bold py-2 rounded-lg hover:bg-[#E9B83A] disabled:opacity-50"
           >
             Add Clinic
           </button>
@@ -2355,7 +2355,7 @@ function AdminDashboardContent() {
                   value={editingClinic.name}
                   onChange={(e) => setEditingClinic({ ...editingClinic, name: e.target.value })}
                   placeholder="Enter clinic name"
-                  className="w-full appearance-none rounded-xl border border-slate-200/80 dark:border-slate-700/80 bg-white dark:bg-slate-900/60 px-4 py-3 text-sm font-semibold text-slate-800 dark:text-slate-200 placeholder:text-slate-400 shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-400"
+                  className="w-full appearance-none rounded-xl border border-slate-200/80 dark:border-slate-700/80 bg-white dark:bg-slate-900/60 px-4 py-3 text-sm font-semibold text-slate-800 dark:text-slate-200 placeholder:text-slate-400 shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-[#E5B73A] focus:border-[#E5B73A]"
                 />
               </div>
               <div>
@@ -2366,7 +2366,7 @@ function AdminDashboardContent() {
                   <select
                     value={editingClinic.type}
                     onChange={(e) => setEditingClinic({ ...editingClinic, type: e.target.value })}
-                    className="w-full appearance-none rounded-xl border border-slate-200/80 dark:border-slate-700/80 bg-white dark:bg-slate-900/60 px-4 py-3 pr-10 text-sm font-semibold text-slate-800 dark:text-slate-200 shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-400"
+                    className="w-full appearance-none rounded-xl border border-slate-200/80 dark:border-slate-700/80 bg-white dark:bg-slate-900/60 px-4 py-3 pr-10 text-sm font-semibold text-slate-800 dark:text-slate-200 shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-[#E5B73A] focus:border-[#E5B73A]"
                   >
                     <option value="">Select clinic type...</option>
                     <option value="ER">Emergency Room (ER)</option>
@@ -2389,7 +2389,7 @@ function AdminDashboardContent() {
                   value={editingClinic.location}
                   onChange={(e) => setEditingClinic({ ...editingClinic, location: e.target.value })}
                   placeholder="e.g., Houston, TX"
-                  className="w-full appearance-none rounded-xl border border-slate-200/80 dark:border-slate-700/80 bg-white dark:bg-slate-900/60 px-4 py-3 text-sm font-semibold text-slate-800 dark:text-slate-200 placeholder:text-slate-400 shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-400"
+                  className="w-full appearance-none rounded-xl border border-slate-200/80 dark:border-slate-700/80 bg-white dark:bg-slate-900/60 px-4 py-3 text-sm font-semibold text-slate-800 dark:text-slate-200 placeholder:text-slate-400 shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-[#E5B73A] focus:border-[#E5B73A]"
                 />
               </div>
               <ServiceCategoryCheckboxGrid
@@ -2402,12 +2402,12 @@ function AdminDashboardContent() {
                 disabled={gmbState.clinicSaving}
                 className={`w-full px-4 py-3 rounded-xl text-sm font-bold transition-all flex items-center justify-center gap-2 ${
                   gmbState.clinicSaving
-                    ? 'bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 cursor-wait'
-                    : 'bg-emerald-500 hover:bg-emerald-600 text-white shadow-sm hover:shadow-md'
+                    ? 'bg-[#F5C857] dark:bg-[#F5C857]/30 text-[#4A3208] dark:text-[#4A3208] cursor-wait'
+                    : 'bg-[#F5C857] hover:bg-[#E9B83A] text-[#4A3208] shadow-sm hover:shadow-md'
                 }`}
               >
                 {gmbState.clinicSaving ? (
-                  <><DashboardLoader variant="inline" className="text-emerald-500" /> Saving...</>
+                  <><DashboardLoader variant="inline" className="text-[#4A3208]" /> Saving...</>
                 ) : (
                   <><Save className="h-4 w-4" /> Save Clinic Details</>
                 )}
@@ -2446,8 +2446,8 @@ function AdminDashboardContent() {
                   </span>
                 );
                 if (allConfigured) return (
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold bg-emerald-100 dark:bg-emerald-900/40 text-emerald-700 dark:text-emerald-400">
-                    <span className="h-2 w-2 rounded-full bg-emerald-500" /> Connected
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold bg-[#F5C857] dark:bg-[#F5C857]/40 text-[#4A3208] dark:text-[#4A3208]">
+                    <span className="h-2 w-2 rounded-full bg-[#F5C857]" /> Connected
                   </span>
                 );
                 if (anyConfigured) return (
@@ -2552,7 +2552,7 @@ function AdminDashboardContent() {
                           <p className="text-[11px] text-slate-400 dark:text-slate-500">Select your Google Business Profile location</p>
                         </div>
                         {gmbState.connection.businessLocationId ? (
-                          <span className="inline-flex items-center gap-1 text-[10px] px-2.5 py-1 rounded-full bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 font-bold shrink-0">
+                          <span className="inline-flex items-center gap-1 text-[10px] px-2.5 py-1 rounded-full bg-[#F5C857] dark:bg-[#F5C857]/30 text-[#4A3208] dark:text-[#4A3208] font-bold shrink-0">
                             <Check className="h-3 w-3" /> Selected
                           </span>
                         ) : gmbState.accounts.length > 0 ? (
@@ -2633,7 +2633,7 @@ function AdminDashboardContent() {
                           <p className="text-[11px] text-slate-400 dark:text-slate-500">Select your GA4 property for traffic data</p>
                         </div>
                         {gmbState.selectedGA4Property ? (
-                          <span className="inline-flex items-center gap-1 text-[10px] px-2.5 py-1 rounded-full bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 font-bold shrink-0">
+                          <span className="inline-flex items-center gap-1 text-[10px] px-2.5 py-1 rounded-full bg-[#F5C857] dark:bg-[#F5C857]/30 text-[#4A3208] dark:text-[#4A3208] font-bold shrink-0">
                             <Check className="h-3 w-3" /> Selected
                           </span>
                         ) : gmbState.ga4Properties.length > 0 ? (
@@ -2686,7 +2686,7 @@ function AdminDashboardContent() {
                           <p className="text-[11px] text-slate-400 dark:text-slate-500">Select your Search Console property for SEO data</p>
                         </div>
                         {gmbState.selectedSCSite ? (
-                          <span className="inline-flex items-center gap-1 text-[10px] px-2.5 py-1 rounded-full bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 font-bold shrink-0">
+                          <span className="inline-flex items-center gap-1 text-[10px] px-2.5 py-1 rounded-full bg-[#F5C857] dark:bg-[#F5C857]/30 text-[#4A3208] dark:text-[#4A3208] font-bold shrink-0">
                             <Check className="h-3 w-3" /> Selected
                           </span>
                         ) : gmbState.scSites.length > 0 ? (
@@ -2733,13 +2733,13 @@ function AdminDashboardContent() {
                     {/* STEP 4: Google Ads */}
                     <div className="rounded-2xl border border-slate-200/80 dark:border-slate-700/80 overflow-hidden bg-white/70 dark:bg-slate-800/30 backdrop-blur-sm">
                       <div className="flex items-center gap-3 px-5 py-4 bg-white/80 dark:bg-slate-800/60 border-b border-slate-100 dark:border-slate-700/50">
-                        <span className="h-7 w-7 rounded-lg bg-green-500 text-white text-xs font-bold flex items-center justify-center shrink-0">4</span>
+                        <span className="h-7 w-7 rounded-lg bg-[#F5C857] text-[#4A3208] text-xs font-bold flex items-center justify-center shrink-0">4</span>
                         <div className="flex-1 min-w-0">
                           <p className="text-sm font-bold text-slate-800 dark:text-slate-200">Google Ads</p>
                           <p className="text-[11px] text-slate-400 dark:text-slate-500">Select your Google Ads account for campaign data</p>
                         </div>
                         {gmbState.selectedAdsCustomerId ? (
-                          <span className="inline-flex items-center gap-1 text-[10px] px-2.5 py-1 rounded-full bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 font-bold shrink-0">
+                          <span className="inline-flex items-center gap-1 text-[10px] px-2.5 py-1 rounded-full bg-[#F5C857] dark:bg-[#F5C857]/30 text-[#4A3208] dark:text-[#4A3208] font-bold shrink-0">
                             <Check className="h-3 w-3" /> Selected
                           </span>
                         ) : gmbState.adsAccounts.length > 0 ? (
@@ -2764,7 +2764,7 @@ function AdminDashboardContent() {
                               <select
                                 value={gmbState.selectedAdsCustomerId}
                                 onChange={(e) => setGmbState(prev => ({ ...prev, selectedAdsCustomerId: e.target.value }))}
-                                className="w-full appearance-none rounded-2xl border border-slate-200/80 dark:border-slate-700/80 bg-white/90 dark:bg-slate-900/60 px-4 py-3 pr-10 text-sm font-semibold text-slate-800 dark:text-slate-200 shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-400"
+                                className="w-full appearance-none rounded-2xl border border-slate-200/80 dark:border-slate-700/80 bg-white/90 dark:bg-slate-900/60 px-4 py-3 pr-10 text-sm font-semibold text-slate-800 dark:text-slate-200 shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-[#E5B73A] focus:border-[#E5B73A]"
                               >
                                 <option value="">Choose an account...</option>
                                 {gmbState.adsAccounts.map((a) => (
@@ -2798,7 +2798,7 @@ function AdminDashboardContent() {
                       ].map(item => (
                         <span key={item.key} className={`inline-flex items-center gap-1.5 text-[11px] font-semibold px-2.5 py-1 rounded-full border ${
                           item.active
-                            ? 'bg-emerald-50 dark:bg-emerald-900/20 border-emerald-200 dark:border-emerald-800/40 text-emerald-700 dark:text-emerald-400'
+                            ? 'bg-[#F5C857] dark:bg-[#F5C857]/20 border-[#EAD08A] dark:border-[#EAD08A] text-[#4A3208] dark:text-[#4A3208]'
                             : 'bg-slate-50 dark:bg-slate-800/50 border-slate-200 dark:border-slate-700 text-slate-400 dark:text-slate-500'
                         }`}>
                           {item.active ? <Check className="h-3 w-3" /> : <span className="h-3 w-3 rounded-full border border-current opacity-40" />}
@@ -2999,12 +2999,12 @@ function AdminDashboardContent() {
 
               {/* ── 5. Status messages ── */}
               {gmbState.message && (
-                <div className="flex items-start gap-3 p-4 rounded-xl bg-emerald-50 dark:bg-emerald-900/15 border border-emerald-200 dark:border-emerald-800/40 animate-in fade-in">
-                  <div className="h-6 w-6 rounded-full bg-emerald-500 flex items-center justify-center shrink-0 mt-0.5">
+                <div className="flex items-start gap-3 p-4 rounded-xl bg-[#F5C857] dark:bg-[#F5C857]/15 border border-[#EAD08A] dark:border-[#EAD08A] animate-in fade-in">
+                  <div className="h-6 w-6 rounded-full bg-[#F5C857] flex items-center justify-center shrink-0 mt-0.5">
                     <Check className="h-3.5 w-3.5 text-white" />
                   </div>
                   <div>
-                    <p className="text-sm font-semibold text-emerald-800 dark:text-emerald-300">{gmbState.message}</p>
+                    <p className="text-sm font-semibold text-[#4A3208] dark:text-[#4A3208]">{gmbState.message}</p>
                   </div>
                 </div>
               )}
@@ -3053,7 +3053,7 @@ function AdminDashboardContent() {
           <button
             onClick={() => selectedUser && handleQuickAssign(selectedUser)}
             disabled={!selectedUser || actionFeedback.loading}
-            className="flex-1 bg-emerald-500 text-black font-bold py-2 rounded-lg hover:bg-emerald-400 disabled:opacity-50"
+            className="flex-1 bg-[#F5C857] text-[#4A3208] font-bold py-2 rounded-lg hover:bg-[#E9B83A] disabled:opacity-50"
           >
             {actionFeedback.loading ? 'Assigning...' : 'Assign'}
           </button>
@@ -3110,7 +3110,7 @@ function AdminDashboardContent() {
 export default function AdminDashboard() {
   return (
     <Suspense fallback={<div className="min-h-screen flex items-center justify-center bg-slate-50 dark:bg-slate-950">
-      <DashboardLoader variant="page" label="Loading dashboard..." className="text-emerald-500" />
+      <DashboardLoader variant="page" label="Loading dashboard..." className="text-[#4A3208]" />
     </div>}>
       <AdminDashboardContent />
     </Suspense>
@@ -3205,7 +3205,7 @@ function AdminProfileView({ user }: { user: any }) {
             animate={{ opacity: 1, y: 0 }}
             className={`p-4 rounded-xl border ${
               message.type === 'success'
-                ? 'bg-emerald-50 border-emerald-200 text-emerald-800 dark:bg-emerald-900/20 dark:border-emerald-800 dark:text-emerald-300'
+                ? 'bg-[#F5C857] border-[#EAD08A] text-[#4A3208] dark:bg-[#F5C857]/20 dark:border-[#EAD08A] dark:text-[#4A3208]'
                 : 'bg-red-50 border-red-200 text-red-800 dark:bg-red-900/20 dark:border-red-800 dark:text-red-300'
             }`}
           >
@@ -3214,7 +3214,7 @@ function AdminProfileView({ user }: { user: any }) {
         )}
 
         <div className="bg-white dark:bg-slate-800 rounded-3xl border border-slate-200 dark:border-slate-700 overflow-hidden">
-          <div className="bg-gradient-to-r from-emerald-500 to-teal-500 p-8">
+          <div className="bg-gradient-to-r from-[#F5C857] to-[#E9B83A] p-8">
             <div className="flex items-center gap-6">
               <div className="relative">
                 <div className="w-24 h-24 rounded-full bg-white/20 backdrop-blur flex items-center justify-center overflow-hidden border-4 border-white/30">
@@ -3224,14 +3224,14 @@ function AdminProfileView({ user }: { user: any }) {
                     <span className="text-3xl font-bold text-white">{user?.name?.substring(0, 2).toUpperCase()}</span>
                   )}
                 </div>
-                <label className="absolute bottom-0 right-0 p-2 rounded-full bg-white dark:bg-slate-800 border-2 border-emerald-500 cursor-pointer hover:scale-110 transition-transform">
-                  <Camera className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
+                <label className="absolute bottom-0 right-0 p-2 rounded-full bg-white dark:bg-slate-800 border-2 border-[#EAD08A] cursor-pointer hover:scale-110 transition-transform">
+                  <Camera className="h-4 w-4 text-[#4A3208] dark:text-[#4A3208]" />
                   <input type="file" accept="image/*" onChange={handleFileChange} className="hidden" />
                 </label>
               </div>
               <div className="text-white">
                 <h2 className="text-2xl font-bold">{user?.name}</h2>
-                <p className="text-emerald-100 flex items-center gap-2 mt-1">
+                <p className="text-[#4A3208] flex items-center gap-2 mt-1">
                   <ShieldAlert className="h-4 w-4" />
                   Administrator
                 </p>
@@ -3263,7 +3263,7 @@ function AdminProfileView({ user }: { user: any }) {
                 type="text"
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                className="w-full px-4 py-3 bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-xl focus:outline-none focus:border-emerald-500 dark:text-white"
+                className="w-full px-4 py-3 bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-xl focus:outline-none focus:border-[#E5B73A] dark:text-white"
               />
             </div>
           </div>
@@ -3272,7 +3272,7 @@ function AdminProfileView({ user }: { user: any }) {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="flex items-center justify-center gap-2 w-full bg-emerald-500 hover:bg-emerald-600 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold py-3 rounded-xl transition-all"
+          className="flex items-center justify-center gap-2 w-full bg-[#F5C857] hover:bg-[#E9B83A] disabled:opacity-50 disabled:cursor-not-allowed text-[#4A3208] font-bold py-3 rounded-xl transition-all"
         >
           <Save className="h-5 w-5" />
           {isSubmitting ? 'Saving...' : 'Save Changes'}
@@ -3342,7 +3342,7 @@ function DashboardSettingsView({ role }: { role: 'admin' | 'client' }) {
           <div
             className={`mb-6 p-4 rounded-xl border ${
               message.type === 'success'
-                ? 'bg-emerald-50 border-emerald-200 text-emerald-800 dark:bg-emerald-900/20 dark:border-emerald-800 dark:text-emerald-300'
+                ? 'bg-[#F5C857] border-[#EAD08A] text-[#4A3208] dark:bg-[#F5C857]/20 dark:border-[#EAD08A] dark:text-[#4A3208]'
                 : 'bg-red-50 border-red-200 text-red-800 dark:bg-red-900/20 dark:border-red-800 dark:text-red-300'
             }`}
           >
@@ -3358,7 +3358,7 @@ function DashboardSettingsView({ role }: { role: 'admin' | 'client' }) {
                 type={showCurrentPassword ? 'text' : 'password'}
                 value={currentPassword}
                 onChange={(e) => setCurrentPassword(e.target.value)}
-                className="w-full px-4 py-3 pr-12 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                className="w-full px-4 py-3 pr-12 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-[#E5B73A]"
                 required
               />
               <button
@@ -3378,7 +3378,7 @@ function DashboardSettingsView({ role }: { role: 'admin' | 'client' }) {
                 type={showNewPassword ? 'text' : 'password'}
                 value={newPassword}
                 onChange={(e) => setNewPassword(e.target.value)}
-                className="w-full px-4 py-3 pr-12 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                className="w-full px-4 py-3 pr-12 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-[#E5B73A]"
                 minLength={6}
                 required
               />
@@ -3399,7 +3399,7 @@ function DashboardSettingsView({ role }: { role: 'admin' | 'client' }) {
                 type={showConfirmPassword ? 'text' : 'password'}
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
-                className="w-full px-4 py-3 pr-12 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                className="w-full px-4 py-3 pr-12 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-[#E5B73A]"
                 minLength={6}
                 required
               />
@@ -3416,7 +3416,7 @@ function DashboardSettingsView({ role }: { role: 'admin' | 'client' }) {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full bg-emerald-500 hover:bg-emerald-400 text-black font-bold py-3 rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+            className="w-full bg-[#F5C857] hover:bg-[#E9B83A] text-[#4A3208] font-bold py-3 rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
           >
             {isSubmitting ? 'Updating Password...' : (
               <>
@@ -3445,7 +3445,7 @@ function NavItem({ icon: Icon, label, active = false, onClick, dark = false }: {
     <button
       onClick={onClick}
       className={`w-full text-left flex items-center gap-3 p-3 rounded-xl transition-all ${
-        active ? 'bg-emerald-500 text-black font-bold' : dark ? 'text-slate-300 hover:text-white hover:bg-slate-700' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
+        active ? 'bg-[#F5C857] text-[#4A3208] font-bold' : dark ? 'text-slate-300 hover:text-white hover:bg-slate-700' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
       }`}
     >
       <Icon className="h-5 w-5" />
@@ -3541,7 +3541,7 @@ function ContentForSection(props: {
             <div className="flex gap-3">
               <button 
                 onClick={onAddClient}
-                className="flex items-center gap-2 bg-emerald-500 text-black px-6 py-3 rounded-xl font-bold hover:bg-emerald-400 transition-all"
+                className="flex items-center gap-2 bg-[#F5C857] text-[#4A3208] px-6 py-3 rounded-xl font-bold hover:bg-[#E9B83A] transition-all"
               >
                 <Plus className="h-5 w-5" /> {t('New User')}
               </button>
@@ -3559,7 +3559,7 @@ function ContentForSection(props: {
             <h3 className="text-xl font-bold mb-6">{t('Assign Clinics to Clients')}</h3>
             <div className="flex flex-wrap gap-4 mb-8">
               <select 
-                className="bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-3 dark:text-slate-200 focus:outline-none focus:border-emerald-500 min-w-[200px]"
+                className="bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-3 dark:text-slate-200 focus:outline-none focus:border-[#E5B73A] min-w-[200px]"
                 value={selectedUser}
                 onChange={(e) => setSelectedUser(e.target.value)}
               >
@@ -3569,7 +3569,7 @@ function ContentForSection(props: {
                 ))}
               </select>
               <select 
-                className="bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-3 dark:text-slate-200 focus:outline-none focus:border-emerald-500 min-w-[200px]"
+                className="bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-3 dark:text-slate-200 focus:outline-none focus:border-[#E5B73A] min-w-[200px]"
                 value={selectedClinic}
                 onChange={(e) => setSelectedClinic(e.target.value)}
               >
@@ -3581,7 +3581,7 @@ function ContentForSection(props: {
               <button 
                 onClick={handleAssign}
                 disabled={!selectedUser || !selectedClinic || isActionLoading}
-                className="bg-emerald-500 text-black px-6 py-3 rounded-xl font-bold hover:bg-emerald-400 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                className="bg-[#F5C857] text-[#4A3208] px-6 py-3 rounded-xl font-bold hover:bg-[#E9B83A] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {isActionLoading ? 'Assigning...' : 'Assign'}
               </button>
@@ -3646,11 +3646,11 @@ function ContentForSection(props: {
                         </td>
                         <td className="px-4 py-4">
                           <div className="flex flex-col gap-2">
-                            <span className="text-emerald-500 text-xs">Live Sync Active</span>
+                            <span className="text-[#4A3208] text-xs">Live Sync Active</span>
                             <div className="flex gap-2">
                               <button 
                                 onClick={() => onQuickAssign(clinic.id)}
-                                className="text-xs bg-emerald-500 text-black px-3 py-1 rounded hover:bg-emerald-400 transition-colors font-bold"
+                                className="text-xs bg-[#F5C857] text-[#4A3208] px-3 py-1 rounded hover:bg-[#E9B83A] transition-colors font-bold"
                               >
                                 + Assign
                               </button>
@@ -3682,13 +3682,13 @@ function ContentForSection(props: {
             {/* Total Patient Visits - Last Week */}
             <div className="glass rounded-2xl p-6 border border-slate-200 dark:border-slate-700">
               <div className="flex items-center gap-2 mb-2">
-                <Activity className="h-5 w-5 text-emerald-500" />
+                <Activity className="h-5 w-5 text-[#4A3208]" />
                 <h4 className="text-sm font-medium text-slate-600 dark:text-slate-400">Last Week</h4>
               </div>
               <p className="text-3xl font-bold mb-1">{commandCenterData.weeklyPatients.toLocaleString()}</p>
               <p className="text-xs text-slate-500 dark:text-slate-400">Patient Visits</p>
               <div className="mt-3 flex items-center gap-1 text-xs">
-                <span className={commandCenterData.weeklyPatientsTrend >= 0 ? 'text-emerald-500' : 'text-red-500'}>
+                <span className={commandCenterData.weeklyPatientsTrend >= 0 ? 'text-[#4A3208]' : 'text-red-500'}>
                   {commandCenterData.weeklyPatientsTrend >= 0 ? '↑' : '↓'} {Math.abs(commandCenterData.weeklyPatientsTrend)}%
                 </span>
                 <span className="text-slate-500 dark:text-slate-400">vs prev week</span>
@@ -3704,7 +3704,7 @@ function ContentForSection(props: {
               <p className="text-3xl font-bold mb-1">{commandCenterData.monthlyPatients.toLocaleString()}</p>
               <p className="text-xs text-slate-500 dark:text-slate-400">Patient Visits</p>
               <div className="mt-3 flex items-center gap-1 text-xs">
-                <span className={commandCenterData.monthlyPatientsTrend >= 0 ? 'text-emerald-500' : 'text-red-500'}>
+                <span className={commandCenterData.monthlyPatientsTrend >= 0 ? 'text-[#4A3208]' : 'text-red-500'}>
                   {commandCenterData.monthlyPatientsTrend >= 0 ? '↑' : '↓'} {Math.abs(commandCenterData.monthlyPatientsTrend)}%
                 </span>
                 <span className="text-slate-500 dark:text-slate-400">vs prev month</span>
@@ -3748,12 +3748,12 @@ function ContentForSection(props: {
             <div className="glass rounded-2xl p-6 border border-slate-200 dark:border-slate-700">
               <div className="flex items-center justify-between mb-6">
                 <div className="flex items-center gap-2">
-                  <Building2 className="h-5 w-5 text-emerald-500" />
+                  <Building2 className="h-5 w-5 text-[#4A3208]" />
                   <h3 className="text-lg font-bold">Top Performing Clinics</h3>
                 </div>
                 <button 
                   onClick={() => navigateToSection('Analytics')}
-                  className="text-xs text-emerald-500 hover:underline"
+                  className="text-xs text-[#4A3208] hover:underline"
                 >
                   View All
                 </button>
@@ -3769,7 +3769,7 @@ function ContentForSection(props: {
                       <div className="text-right">
                         <p className="font-bold text-lg">{clinic.patients.toLocaleString()}</p>
                         <p className="text-xs">
-                          <span className={clinic.trend >= 0 ? 'text-emerald-500' : 'text-red-500'}>
+                          <span className={clinic.trend >= 0 ? 'text-[#4A3208]' : 'text-red-500'}>
                             {clinic.trend >= 0 ? '↑' : '↓'} {Math.abs(clinic.trend)}%
                           </span>
                         </p>
@@ -3847,7 +3847,7 @@ function ContentForSection(props: {
                       <p className="text-sm font-medium text-slate-700 dark:text-slate-300">All systems operational</p>
                       <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">No alerts or issues detected</p>
                     </div>
-                    <span className="text-xs px-2 py-1 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 rounded-full">OK</span>
+                    <span className="text-xs px-2 py-1 bg-[#F5C857] dark:bg-[#F5C857]/30 text-[#4A3208] dark:text-[#4A3208] rounded-full">OK</span>
                   </div>
                 )}
               </div>
@@ -3921,7 +3921,7 @@ function ContentForSection(props: {
                   <tr key={client.id} className="hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
                     <td className="px-4 py-4 font-bold">{client.name}</td>
                     <td className="px-4 py-4 text-sm text-slate-600 dark:text-slate-400">{client.email}</td>
-                    <td className="px-4 py-4"><span className="text-xs bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 px-3 py-1 rounded-full">{client.role}</span></td>
+                    <td className="px-4 py-4"><span className="text-xs bg-[#F5C857] dark:bg-[#F5C857]/30 text-[#4A3208] dark:text-[#4A3208] px-3 py-1 rounded-full">{client.role}</span></td>
                     <td className="px-4 py-4 text-sm text-slate-600 dark:text-slate-400">{client.createdAt ? new Date(client.createdAt).toLocaleDateString() : 'N/A'}</td>
                     <td className="px-4 py-4 flex items-center gap-2">
                       <span className="text-xs bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 px-3 py-1 rounded-full">Active</span>
@@ -3934,7 +3934,7 @@ function ContentForSection(props: {
                 {users.filter(u => u.role === 'client').length === 0 && (
                   <tr>
                     <td colSpan={5} className="px-4 py-8 text-center text-slate-500 dark:text-slate-400">
-                      No clients registered yet. <button onClick={onAddClient} className="text-emerald-500 font-bold hover:underline">Add one now</button>
+                      No clients registered yet. <button onClick={onAddClient} className="text-[#4A3208] font-bold hover:underline">Add one now</button>
                     </td>
                   </tr>
                 )}
@@ -3954,7 +3954,7 @@ function ContentForSection(props: {
             </div>
             <button
               onClick={onAddClinic}
-              className="flex items-center gap-2 bg-emerald-500 text-black px-4 py-2 rounded-xl font-bold hover:bg-emerald-400 transition-all"
+              className="flex items-center gap-2 bg-[#F5C857] text-[#4A3208] px-4 py-2 rounded-xl font-bold hover:bg-[#E9B83A] transition-all"
             >
               <Plus className="h-5 w-5" /> Add Clinic
             </button>
@@ -3994,7 +3994,7 @@ function ContentForSection(props: {
                 {clinics.length === 0 && (
                   <tr>
                     <td colSpan={6} className="px-4 py-8 text-center text-slate-500 dark:text-slate-400">
-                      No clinics registered yet. <button onClick={onAddClinic} className="text-emerald-500 font-bold hover:underline">Add one now</button>
+                      No clinics registered yet. <button onClick={onAddClinic} className="text-[#4A3208] font-bold hover:underline">Add one now</button>
                     </td>
                   </tr>
                 )}
@@ -4027,7 +4027,7 @@ function ContentForSection(props: {
                 </div>
                 <div className="glass rounded-xl p-4 border border-slate-200 dark:border-slate-700">
                   <p className="text-xs text-slate-500 uppercase tracking-wider">New Users (7d)</p>
-                  <p className="text-3xl font-black text-emerald-500">{platformHealth.recent?.users7d || 0}</p>
+                  <p className="text-3xl font-black text-[#4A3208]">{platformHealth.recent?.users7d || 0}</p>
                 </div>
                 <div className="glass rounded-xl p-4 border border-slate-200 dark:border-slate-700">
                   <p className="text-xs text-slate-500 uppercase tracking-wider">Posts (7d)</p>
@@ -4047,7 +4047,7 @@ function ContentForSection(props: {
                     <div key={i} className="flex items-start gap-3 p-3 bg-slate-50 dark:bg-slate-800/50 rounded-xl transition-all hover:bg-slate-100 dark:hover:bg-slate-800">
                       <div className={`w-2 h-2 mt-2 rounded-full flex-shrink-0 ${
                         item.type === 'lead' ? 'bg-blue-500' :
-                        item.type === 'user' ? 'bg-emerald-500' :
+                        item.type === 'user' ? 'bg-[#F5C857]' :
                         item.type === 'post' ? 'bg-purple-500' :
                         item.type === 'chat' ? 'bg-amber-500' :
                         item.type === 'news' ? 'bg-rose-500' :
@@ -4091,14 +4091,14 @@ function ContentForSection(props: {
               <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mb-8">
                 {[
                   { label: 'Users', value: platformHealth.counts?.users, color: 'text-blue-500' },
-                  { label: 'Clinics', value: platformHealth.counts?.clinics, color: 'text-emerald-500' },
+                  { label: 'Clinics', value: platformHealth.counts?.clinics, color: 'text-[#4A3208]' },
                   { label: 'Blog Posts', value: platformHealth.counts?.posts, color: 'text-purple-500' },
                   { label: 'News Articles', value: platformHealth.counts?.news, color: 'text-rose-500' },
                   { label: 'Leads', value: platformHealth.counts?.leads, color: 'text-amber-500' },
-                  { label: 'Subscribers', value: platformHealth.counts?.subscribers, color: 'text-cyan-500' },
+                  { label: 'Subscribers', value: platformHealth.counts?.subscribers, color: 'text-[#4A3208]' },
                   { label: 'Chat Sessions', value: platformHealth.counts?.chatSessions, color: 'text-indigo-500' },
                   { label: 'Chat Messages', value: platformHealth.counts?.chatMessages, color: 'text-pink-500' },
-                  { label: 'Google Connected', value: platformHealth.counts?.connectedClinics, color: 'text-green-500' },
+                  { label: 'Google Connected', value: platformHealth.counts?.connectedClinics, color: 'text-[#4A3208]' },
                 ].map((stat, i) => (
                   <div key={i} className="glass rounded-xl p-4 border border-slate-200 dark:border-slate-700">
                     <p className="text-xs text-slate-500 uppercase tracking-wider">{stat.label}</p>
@@ -4114,10 +4114,10 @@ function ContentForSection(props: {
                   <div className="space-y-4">
                     <div className="flex items-center justify-between">
                       <span className="text-sm text-slate-600 dark:text-slate-400">Published Posts</span>
-                      <span className="font-bold text-emerald-500">{platformHealth.content?.publishedPosts ?? 0}</span>
+                      <span className="font-bold text-[#4A3208]">{platformHealth.content?.publishedPosts ?? 0}</span>
                     </div>
                     <div className="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-2">
-                      <div className="bg-emerald-500 h-2 rounded-full transition-all" style={{ width: `${platformHealth.counts?.posts ? Math.round((platformHealth.content?.publishedPosts / platformHealth.counts.posts) * 100) : 0}%` }} />
+                      <div className="bg-[#F5C857] h-2 rounded-full transition-all" style={{ width: `${platformHealth.counts?.posts ? Math.round((platformHealth.content?.publishedPosts / platformHealth.counts.posts) * 100) : 0}%` }} />
                     </div>
                     <div className="flex items-center justify-between">
                       <span className="text-sm text-slate-600 dark:text-slate-400">Draft Posts</span>
@@ -4137,9 +4137,9 @@ function ContentForSection(props: {
                       <span className="text-sm">New Leads</span>
                       <span className="font-bold text-blue-600 dark:text-blue-400">{platformHealth.recent?.leads24h ?? 0} today</span>
                     </div>
-                    <div className="flex items-center justify-between p-3 bg-emerald-50 dark:bg-emerald-900/20 rounded-lg">
+                    <div className="flex items-center justify-between p-3 bg-[#F5C857] dark:bg-[#F5C857]/20 rounded-lg">
                       <span className="text-sm">New Users</span>
-                      <span className="font-bold text-emerald-600 dark:text-emerald-400">{platformHealth.recent?.users7d ?? 0} this week</span>
+                      <span className="font-bold text-[#4A3208] dark:text-[#4A3208]">{platformHealth.recent?.users7d ?? 0} this week</span>
                     </div>
                     <div className="flex items-center justify-between p-3 bg-purple-50 dark:bg-purple-900/20 rounded-lg">
                       <span className="text-sm">New Posts</span>
@@ -4191,10 +4191,10 @@ function ContentForSection(props: {
                 </div>
                 <div className="glass rounded-xl p-5 border border-slate-200 dark:border-slate-700">
                   <div className="flex items-center gap-2 mb-2">
-                    <Mail className="h-5 w-5 text-cyan-500" />
+                    <Mail className="h-5 w-5 text-[#4A3208]" />
                     <p className="text-xs text-slate-500 uppercase tracking-wider">Subscribers</p>
                   </div>
-                  <p className="text-3xl font-black text-cyan-500">{platformHealth.counts?.subscribers ?? 0}</p>
+                  <p className="text-3xl font-black text-[#4A3208]">{platformHealth.counts?.subscribers ?? 0}</p>
                   <p className="text-xs text-slate-500 mt-1">Active newsletter subscribers</p>
                 </div>
                 <div className="glass rounded-xl p-5 border border-slate-200 dark:border-slate-700">
@@ -4218,7 +4218,7 @@ function ContentForSection(props: {
                           <div className="w-2 h-2 bg-purple-500 rounded-full flex-shrink-0" />
                           <span className="text-sm truncate">{item.title?.replace('Blog: ', '')}</span>
                         </div>
-                        <span className={`text-xs px-2 py-0.5 rounded-full flex-shrink-0 ${item.detail === 'published' ? 'bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700' : 'bg-amber-100 dark:bg-amber-900/30 text-amber-700'}`}>
+                        <span className={`text-xs px-2 py-0.5 rounded-full flex-shrink-0 ${item.detail === 'published' ? 'bg-[#F5C857] dark:bg-[#F5C857]/30 text-[#4A3208]' : 'bg-amber-100 dark:bg-amber-900/30 text-amber-700'}`}>
                           {item.detail}
                         </span>
                       </div>
@@ -4238,7 +4238,7 @@ function ContentForSection(props: {
                           <div className="w-2 h-2 bg-rose-500 rounded-full flex-shrink-0" />
                           <span className="text-sm truncate">{item.title?.replace('News: ', '')}</span>
                         </div>
-                        <span className={`text-xs px-2 py-0.5 rounded-full flex-shrink-0 ${item.detail === 'published' ? 'bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700' : 'bg-amber-100 dark:bg-amber-900/30 text-amber-700'}`}>
+                        <span className={`text-xs px-2 py-0.5 rounded-full flex-shrink-0 ${item.detail === 'published' ? 'bg-[#F5C857] dark:bg-[#F5C857]/30 text-[#4A3208]' : 'bg-amber-100 dark:bg-amber-900/30 text-amber-700'}`}>
                           {item.detail}
                         </span>
                       </div>
@@ -4273,7 +4273,7 @@ function ContentForSection(props: {
             </div>
             <div className="flex items-center gap-3">
               {platformHealthLoading && <DashboardLoader variant="inline" />}
-              <Link to="/dashboard/admin/leads" className="text-sm font-bold text-emerald-500 hover:underline">
+              <Link to="/dashboard/admin/leads" className="text-sm font-bold text-[#4A3208] hover:underline">
                 View All Leads →
               </Link>
             </div>
@@ -4288,7 +4288,7 @@ function ContentForSection(props: {
                 {[
                   { label: 'New', value: platformHealth.leadPipeline?.new ?? 0, color: 'bg-blue-500', textColor: 'text-blue-500', bgLight: 'bg-blue-50 dark:bg-blue-900/20' },
                   { label: 'Contacted', value: platformHealth.leadPipeline?.contacted ?? 0, color: 'bg-yellow-500', textColor: 'text-yellow-600', bgLight: 'bg-yellow-50 dark:bg-yellow-900/20' },
-                  { label: 'Qualified', value: platformHealth.leadPipeline?.qualified ?? 0, color: 'bg-emerald-500', textColor: 'text-emerald-500', bgLight: 'bg-emerald-50 dark:bg-emerald-900/20' },
+                  { label: 'Qualified', value: platformHealth.leadPipeline?.qualified ?? 0, color: 'bg-[#F5C857]', textColor: 'text-[#4A3208]', bgLight: 'bg-[#F5C857] dark:bg-[#F5C857]/20' },
                   { label: 'Closed', value: platformHealth.leadPipeline?.closed ?? 0, color: 'bg-slate-500', textColor: 'text-slate-500', bgLight: 'bg-slate-50 dark:bg-slate-800' },
                 ].map((stage, i) => (
                   <div key={i} className={`rounded-xl p-5 border border-slate-200 dark:border-slate-700 ${stage.bgLight}`}>
@@ -4313,7 +4313,7 @@ function ContentForSection(props: {
                 </div>
                 <div className="glass rounded-xl p-5 border border-slate-200 dark:border-slate-700">
                   <p className="text-xs text-slate-500 uppercase tracking-wider">Qualified Rate</p>
-                  <p className="text-3xl font-black text-emerald-500">
+                  <p className="text-3xl font-black text-[#4A3208]">
                     {platformHealth.counts?.leads ? Math.round(((platformHealth.leadPipeline?.qualified ?? 0) / platformHealth.counts.leads) * 100) : 0}%
                   </p>
                 </div>
@@ -4330,7 +4330,7 @@ function ContentForSection(props: {
                       <div className="flex items-center gap-3 min-w-0">
                         <div className={`w-2 h-2 rounded-full flex-shrink-0 ${
                           item.status === 'new' ? 'bg-blue-500' :
-                          item.status === 'qualified' ? 'bg-emerald-500' :
+                          item.status === 'qualified' ? 'bg-[#F5C857]' :
                           item.status === 'contacted' ? 'bg-yellow-500' :
                           'bg-slate-400'
                         }`} />
@@ -4342,7 +4342,7 @@ function ContentForSection(props: {
                       <div className="flex items-center gap-2 flex-shrink-0">
                         <span className={`text-xs px-2 py-0.5 rounded-full ${
                           item.status === 'new' ? 'bg-blue-100 dark:bg-blue-900/30 text-blue-700' :
-                          item.status === 'qualified' ? 'bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700' :
+                          item.status === 'qualified' ? 'bg-[#F5C857] dark:bg-[#F5C857]/30 text-[#4A3208]' :
                           item.status === 'contacted' ? 'bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700' :
                           'bg-slate-100 dark:bg-slate-800 text-slate-600'
                         }`}>{item.status}</span>
@@ -4613,7 +4613,7 @@ function BlogManagementSection({
           </button>
           <Link
             to="/dashboard/admin/blog/new"
-            className="flex items-center gap-2 bg-emerald-500 text-black px-5 py-3 rounded-xl font-bold hover:bg-emerald-400 transition-all"
+            className="flex items-center gap-2 bg-[#F5C857] text-[#4A3208] px-5 py-3 rounded-xl font-bold hover:bg-[#E9B83A] transition-all"
           >
             <Plus className="h-5 w-5" /> New Post
           </Link>
@@ -4704,18 +4704,18 @@ function BlogManagementSection({
 
       {loading ? (
         <div className="flex items-center justify-center py-12">
-          <DashboardLoader variant="card" label="Loading posts..." className="text-emerald-500" />
+          <DashboardLoader variant="card" label="Loading posts..." className="text-[#4A3208]" />
         </div>
       ) : posts.length === 0 ? (
         <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-700 p-12 text-center">
           <FileText className="h-12 w-12 text-slate-400 mx-auto mb-4" />
           <p className="text-slate-600 dark:text-slate-400 mb-4">No posts yet. Create your first blog post!</p>
-          <Link to="/dashboard/admin/blog/new" className="text-emerald-500 dark:text-emerald-400 font-bold hover:underline">Create Post →</Link>
+          <Link to="/dashboard/admin/blog/new" className="text-[#4A3208] dark:text-[#4A3208] font-bold hover:underline">Create Post →</Link>
         </div>
       ) : (
         <div className="grid gap-4">
           {posts.map(post => (
-            <div key={post.id} className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl p-5 hover:border-emerald-300 dark:hover:border-emerald-700 transition-all">
+            <div key={post.id} className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl p-5 hover:border-[#E5B73A] dark:hover:border-[#E5B73A] transition-all">
               <div className="flex items-start gap-4">
                 {/* Thumbnail */}
                 {post.coverImage ? (
@@ -4737,8 +4737,8 @@ function BlogManagementSection({
                       <div className="flex flex-wrap items-center gap-3 text-xs">
                         <span className="text-slate-500 dark:text-slate-500 font-mono">/{post.slug}</span>
                         {post.publishedAt ? (
-                          <span className="inline-flex items-center gap-1.5 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 px-2.5 py-1 rounded-full font-medium">
-                            <span className="w-1.5 h-1.5 bg-emerald-500 dark:bg-emerald-400 rounded-full"></span>
+                          <span className="inline-flex items-center gap-1.5 bg-[#F5C857] dark:bg-[#F5C857]/30 text-[#4A3208] dark:text-[#4A3208] px-2.5 py-1 rounded-full font-medium">
+                            <span className="w-1.5 h-1.5 bg-[#F5C857] dark:bg-[#F5C857] rounded-full"></span>
                             Published
                           </span>
                         ) : (
@@ -4771,7 +4771,7 @@ function BlogManagementSection({
                     className={`p-2 rounded-lg transition-all ${
                       post.publishedAt
                         ? 'text-amber-600 dark:text-amber-400 hover:bg-amber-50 dark:hover:bg-amber-900/20'
-                        : 'text-emerald-600 dark:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-900/20'
+                        : 'text-[#4A3208] dark:text-[#4A3208] hover:bg-[#E9B83A] dark:hover:bg-[#E9B83A]'
                     }`}
                     title={post.publishedAt ? 'Unpublish' : 'Publish'}
                   >
@@ -5004,7 +5004,7 @@ function NewsManagementSection({
           </button>
           <Link
             to="/dashboard/admin/news/new"
-            className="flex items-center gap-2 bg-emerald-500 text-black px-5 py-3 rounded-xl font-bold hover:bg-emerald-400 transition-all"
+            className="flex items-center gap-2 bg-[#F5C857] text-[#4A3208] px-5 py-3 rounded-xl font-bold hover:bg-[#E9B83A] transition-all"
           >
             <Plus className="h-5 w-5" /> New Article
           </Link>
@@ -5095,18 +5095,18 @@ function NewsManagementSection({
 
       {loading ? (
         <div className="flex items-center justify-center py-12">
-          <DashboardLoader variant="card" label="Loading articles..." className="text-emerald-500" />
+          <DashboardLoader variant="card" label="Loading articles..." className="text-[#4A3208]" />
         </div>
       ) : articles.length === 0 ? (
         <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-700 p-12 text-center">
           <Newspaper className="h-12 w-12 text-slate-400 mx-auto mb-4" />
           <p className="text-slate-600 dark:text-slate-400 mb-4">No news articles yet. Create your first one!</p>
-          <Link to="/dashboard/admin/news/new" className="text-emerald-500 dark:text-emerald-400 font-bold hover:underline">Create Article →</Link>
+          <Link to="/dashboard/admin/news/new" className="text-[#4A3208] dark:text-[#4A3208] font-bold hover:underline">Create Article →</Link>
         </div>
       ) : (
         <div className="grid gap-4">
           {articles.map(article => (
-            <div key={article.id} className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl p-5 hover:border-emerald-300 dark:hover:border-emerald-700 transition-all">
+            <div key={article.id} className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl p-5 hover:border-[#E5B73A] dark:hover:border-[#E5B73A] transition-all">
               <div className="flex items-start gap-4">
                 {/* Thumbnail */}
                 {article.coverImage ? (
@@ -5133,8 +5133,8 @@ function NewsManagementSection({
                           </span>
                         )}
                         {article.publishedAt ? (
-                          <span className="inline-flex items-center gap-1.5 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 px-2.5 py-1 rounded-full font-medium">
-                            <span className="w-1.5 h-1.5 bg-emerald-500 dark:bg-emerald-400 rounded-full"></span>
+                          <span className="inline-flex items-center gap-1.5 bg-[#F5C857] dark:bg-[#F5C857]/30 text-[#4A3208] dark:text-[#4A3208] px-2.5 py-1 rounded-full font-medium">
+                            <span className="w-1.5 h-1.5 bg-[#F5C857] dark:bg-[#F5C857] rounded-full"></span>
                             Published
                           </span>
                         ) : (
@@ -5167,7 +5167,7 @@ function NewsManagementSection({
                     className={`p-2 rounded-lg transition-all ${
                       article.publishedAt
                         ? 'text-amber-600 dark:text-amber-400 hover:bg-amber-50 dark:hover:bg-amber-900/20'
-                        : 'text-emerald-600 dark:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-900/20'
+                        : 'text-[#4A3208] dark:text-[#4A3208] hover:bg-[#E9B83A] dark:hover:bg-[#E9B83A]'
                     }`}
                     title={article.publishedAt ? 'Unpublish' : 'Publish'}
                   >

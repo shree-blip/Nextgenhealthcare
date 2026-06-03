@@ -180,7 +180,7 @@ export default function AiCreatorPage() {
       {/* Header */}
       <header className="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 px-8 py-6">
         <div className="flex items-center gap-3">
-          <Sparkles className="h-8 w-8 text-emerald-500" />
+          <Sparkles className="h-8 w-8 text-[#4A3208]" />
           <div>
             <h1 className="text-2xl font-bold text-slate-900 dark:text-white">
               AI Creator Studio
@@ -206,7 +206,7 @@ export default function AiCreatorPage() {
                 onClick={() => setMode('text')}
                 className={`flex flex-col items-center gap-2 p-4 rounded-xl transition-all ${
                   mode === 'text'
-                    ? 'bg-emerald-500 text-white shadow-lg shadow-emerald-500/20'
+                    ? 'bg-[#F5C857] text-[#4A3208] shadow-lg shadow-[color:#EAD08A]'
                     : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700'
                 }`}
               >
@@ -217,7 +217,7 @@ export default function AiCreatorPage() {
                 onClick={() => setMode('image')}
                 className={`flex flex-col items-center gap-2 p-4 rounded-xl transition-all ${
                   mode === 'image'
-                    ? 'bg-emerald-500 text-white shadow-lg shadow-emerald-500/20'
+                    ? 'bg-[#F5C857] text-[#4A3208] shadow-lg shadow-[color:#EAD08A]'
                     : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700'
                 }`}
               >
@@ -228,7 +228,7 @@ export default function AiCreatorPage() {
                 onClick={() => setMode('video')}
                 className={`flex flex-col items-center gap-2 p-4 rounded-xl transition-all ${
                   mode === 'video'
-                    ? 'bg-emerald-500 text-white shadow-lg shadow-emerald-500/20'
+                    ? 'bg-[#F5C857] text-[#4A3208] shadow-lg shadow-[color:#EAD08A]'
                     : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700'
                 }`}
               >
@@ -250,7 +250,7 @@ export default function AiCreatorPage() {
                   <button
                     key={idx}
                     onClick={() => handleTemplateClick(template)}
-                    className="px-4 py-2 bg-slate-100 dark:bg-slate-800 hover:bg-emerald-100 dark:hover:bg-emerald-900/30 text-slate-700 dark:text-slate-300 hover:text-emerald-700 dark:hover:text-emerald-400 rounded-full text-sm font-medium transition-colors"
+                    className="px-4 py-2 bg-slate-100 dark:bg-slate-800 hover:bg-[#E9B83A] dark:hover:bg-[#E9B83A] text-slate-700 dark:text-slate-300 hover:text-[#4A3208] dark:hover:text-[#4A3208] rounded-full text-sm font-medium transition-colors"
                   >
                     {template.label}
                   </button>
@@ -271,7 +271,7 @@ export default function AiCreatorPage() {
                     onClick={() => setTone(t)}
                     className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
                       tone === t
-                        ? 'bg-emerald-500 text-white'
+                        ? 'bg-[#F5C857] text-[#4A3208]'
                         : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700'
                     }`}
                   >
@@ -294,7 +294,7 @@ export default function AiCreatorPage() {
                     onClick={() => setFormat(f)}
                     className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
                       format === f
-                        ? 'bg-emerald-500 text-white'
+                        ? 'bg-[#F5C857] text-[#4A3208]'
                         : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700'
                     }`}
                   >
@@ -317,7 +317,7 @@ export default function AiCreatorPage() {
                 mode === 'text' ? 'write' : 'generate'
               }...`}
               rows={6}
-              className="w-full px-4 py-3 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-950 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 resize-none"
+              className="w-full px-4 py-3 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-950 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#E5B73A] resize-none"
             />
           </div>
 
@@ -325,7 +325,7 @@ export default function AiCreatorPage() {
           <button
             onClick={handleGenerate}
             disabled={loading || !prompt.trim()}
-            className="w-full py-4 bg-gradient-to-r from-emerald-500 to-cyan-500 hover:from-emerald-600 hover:to-cyan-600 text-white rounded-xl font-bold text-lg shadow-lg shadow-emerald-500/20 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3"
+            className="w-full py-4 bg-gradient-to-r from-[#F5C857] to-[#E9B83A] hover:from-[#E9B83A] hover:to-[#DDA92B] text-[#4A3208] rounded-xl font-bold text-lg shadow-lg shadow-[color:#EAD08A] transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3"
           >
             {loading ? (
               <>
@@ -390,7 +390,7 @@ export default function AiCreatorPage() {
 
             {loading && (
               <div className="h-full flex flex-col items-center justify-center">
-                <Loader2 className="h-12 w-12 text-emerald-500 animate-spin mb-4" />
+                <Loader2 className="h-12 w-12 text-[#4A3208] animate-spin mb-4" />
                 <p className="text-lg font-medium text-slate-900 dark:text-white mb-2">
                   Generating your {mode}...
                 </p>
@@ -447,7 +447,7 @@ export default function AiCreatorPage() {
             <div
               className={`flex items-center gap-3 px-6 py-4 rounded-xl shadow-2xl ${
                 notification.type === 'success'
-                  ? 'bg-emerald-500 text-white'
+                  ? 'bg-[#F5C857] text-[#4A3208]'
                   : 'bg-red-500 text-white'
               }`}
             >

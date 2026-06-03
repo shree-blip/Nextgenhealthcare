@@ -149,9 +149,9 @@ export default function SearchConsoleTab({ clinicId, isDark = false }: SearchCon
     { label: 'Avg Position', value: avgPosition.toFixed(1), icon: <Target className="h-5 w-5" />, color: 'purple' },
   ];
 
-  const iconColor: Record<string, string> = { emerald: 'text-emerald-500', blue: 'text-blue-500', amber: 'text-amber-500', purple: 'text-purple-500' };
-  const iconBg: Record<string, string> = { emerald: 'bg-emerald-500/10', blue: 'bg-blue-500/10', amber: 'bg-amber-500/10', purple: 'bg-purple-500/10' };
-  const gradBg: Record<string, string> = { emerald: 'from-emerald-500/10 to-emerald-500/5', blue: 'from-blue-500/10 to-blue-500/5', amber: 'from-amber-500/10 to-amber-500/5', purple: 'from-purple-500/10 to-purple-500/5' };
+  const iconColor: Record<string, string> = { emerald: 'text-[#4A3208]', blue: 'text-blue-500', amber: 'text-amber-500', purple: 'text-purple-500' };
+  const iconBg: Record<string, string> = { emerald: 'bg-[#F5C857]/10', blue: 'bg-blue-500/10', amber: 'bg-amber-500/10', purple: 'bg-purple-500/10' };
+  const gradBg: Record<string, string> = { emerald: 'from-[#F5C857] to-[#E9B83A]', blue: 'from-blue-500/10 to-blue-500/5', amber: 'from-amber-500/10 to-amber-500/5', purple: 'from-purple-500/10 to-purple-500/5' };
 
   return (
     <div className="space-y-6">
@@ -203,7 +203,7 @@ export default function SearchConsoleTab({ clinicId, isDark = false }: SearchCon
             <YAxis yAxisId="right" orientation="right" stroke={isDark ? '#64748b' : '#94a3b8'} fontSize={11} tickLine={false} axisLine={false} />
             <Tooltip contentStyle={tooltipStyle} />
             <Legend wrapperStyle={{ fontSize: '12px', fontWeight: 600 }} />
-            <Bar yAxisId="left" dataKey="clicks" name="Clicks" fill="#10b981" radius={[8, 8, 0, 0]} />
+            <Bar yAxisId="left" dataKey="clicks" name="Clicks" fill="#CC8F1A" radius={[8, 8, 0, 0]} />
             <Bar yAxisId="left" dataKey="impressions" name="Impressions" fill="#3b82f6" radius={[8, 8, 0, 0]} />
           </BarChart>
         </ResponsiveContainer>
@@ -226,7 +226,7 @@ export default function SearchConsoleTab({ clinicId, isDark = false }: SearchCon
       {/* Top Blogs Visited */}
       {topBlogs.length > 0 && (
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} className={glassCard}>
-          <h3 className={headingClass}><div className="h-8 w-8 rounded-xl bg-emerald-500/10 flex items-center justify-center"><FileText className="h-4 w-4 text-emerald-500" /></div>Top Blogs Visited</h3>
+          <h3 className={headingClass}><div className="h-8 w-8 rounded-xl bg-[#F5C857]/10 flex items-center justify-center"><FileText className="h-4 w-4 text-[#4A3208]" /></div>Top Blogs Visited</h3>
           <div className="overflow-x-auto -mx-6 px-6">
             <table className="w-full text-sm">
               <thead>
@@ -252,7 +252,7 @@ export default function SearchConsoleTab({ clinicId, isDark = false }: SearchCon
                     <tr key={i} className={`group transition-colors ${i % 2 === 0 ? (isDark ? 'bg-slate-900/30' : 'bg-slate-50/50') : ''} ${isDark ? 'hover:bg-slate-700/40' : 'hover:bg-slate-100/60'}`}>
                       <td className={`py-3 px-3 font-mono text-xs ${isDark ? 'text-slate-500' : 'text-slate-400'}`}>{i + 1}</td>
                       <td className={`py-3 px-3 font-semibold truncate max-w-xs ${isDark ? 'text-white' : 'text-slate-900'}`} title={p.page}>{blogTitle}</td>
-                      <td className="py-3 px-3 text-right"><span className="font-bold text-emerald-500">{p.clicks?.toLocaleString()}</span></td>
+                      <td className="py-3 px-3 text-right"><span className="font-bold text-[#4A3208]">{p.clicks?.toLocaleString()}</span></td>
                       <td className={`py-3 px-3 text-right ${isDark ? 'text-slate-300' : 'text-slate-600'}`}>{p.impressions?.toLocaleString()}</td>
                     </tr>
                   );

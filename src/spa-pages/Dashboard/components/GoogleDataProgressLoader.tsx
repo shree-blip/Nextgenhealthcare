@@ -39,8 +39,8 @@ export default function GoogleDataProgressLoader({ isLoading, isDark = false }: 
   if (!isLoading && progress === 0) return null;
 
   const barColor = isDark
-    ? 'from-emerald-400 via-teal-400 to-cyan-400'
-    : 'from-emerald-500 via-teal-500 to-cyan-500';
+    ? 'from-[#F5C857] via-[#F0C04A] to-[#E9B83A]'
+    : 'from-[#F5C857] via-[#F0C04A] to-[#E9B83A]';
 
   return (
     <motion.div
@@ -55,7 +55,7 @@ export default function GoogleDataProgressLoader({ isLoading, isDark = false }: 
       }`}
     >
       <div className="flex items-center gap-3 mb-3">
-        <div className="h-9 w-9 rounded-xl bg-gradient-to-br from-emerald-400 to-teal-500 flex items-center justify-center shadow-sm shadow-emerald-500/20">
+        <div className="h-9 w-9 rounded-xl bg-gradient-to-br from-[#F5C857] to-[#E9B83A] flex items-center justify-center shadow-sm shadow-[color:#EAD08A]">
           {isLoading ? (
             <Loader2 className="h-4.5 w-4.5 text-white animate-spin" />
           ) : (
@@ -72,7 +72,7 @@ export default function GoogleDataProgressLoader({ isLoading, isDark = false }: 
             {isLoading ? 'Connecting to Google Analytics & Search Console APIs...' : 'All data is up to date.'}
           </p>
         </div>
-        <span className={`text-sm font-black tabular-nums ${isDark ? 'text-emerald-400' : 'text-emerald-600'}`}>
+        <span className={`text-sm font-black tabular-nums ${isDark ? 'text-[#4A3208]' : 'text-[#4A3208]'}`}>
           {progress}%
         </span>
       </div>

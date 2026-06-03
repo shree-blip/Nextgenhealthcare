@@ -61,7 +61,7 @@ export default function AdminSettings() {
                       }}
                       className={`flex items-center justify-center gap-1 p-3 rounded-lg transition-all ${
                         preferences.theme === id
-                          ? 'bg-emerald-500 text-white'
+                          ? 'bg-[#F5C857] text-[#4A3208]'
                           : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700'
                       }`}
                     >
@@ -86,7 +86,7 @@ export default function AdminSettings() {
                       }}
                       className={`w-full flex items-center gap-2 p-3 rounded-lg transition-all ${
                         preferences.language === id
-                          ? 'bg-emerald-500 text-white'
+                          ? 'bg-[#F5C857] text-[#4A3208]'
                           : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700'
                       }`}
                     >

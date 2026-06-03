@@ -288,7 +288,7 @@ export default function RichTextEditor({
         {/* Font/Heading Dropdown */}
         <select
           onChange={(e) => handleHeading(e.target.value)}
-          className="px-2 py-1 text-sm bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 border border-slate-200 dark:border-slate-600 rounded-lg focus:outline-none focus:border-emerald-500"
+          className="px-2 py-1 text-sm bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 border border-slate-200 dark:border-slate-600 rounded-lg focus:outline-none focus:border-[#E5B73A]"
           defaultValue=""
         >
           <option value="" disabled>Format</option>
@@ -304,7 +304,7 @@ export default function RichTextEditor({
         {/* Font Size */}
         <select
           onChange={(e) => handleFontSize(e.target.value)}
-          className="px-2 py-1 text-sm bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 border border-slate-200 dark:border-slate-600 rounded-lg focus:outline-none focus:border-emerald-500"
+          className="px-2 py-1 text-sm bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 border border-slate-200 dark:border-slate-600 rounded-lg focus:outline-none focus:border-[#E5B73A]"
           defaultValue="3"
         >
           <option value="1">Small</option>
@@ -401,9 +401,9 @@ export default function RichTextEditor({
       <div className="border-t border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/80 p-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="flex items-start gap-3">
-            <div className="p-3 bg-white dark:bg-slate-900 rounded-lg border-2 border-dashed border-emerald-500/30 dark:border-emerald-500/20 flex-1">
+            <div className="p-3 bg-white dark:bg-slate-900 rounded-lg border-2 border-dashed border-[#EAD08A] dark:border-[#EAD08A] flex-1">
               <div className="flex items-center gap-2 mb-2">
-                <ImageIcon className="h-5 w-5 text-emerald-600 dark:text-emerald-400" />
+                <ImageIcon className="h-5 w-5 text-[#4A3208] dark:text-[#4A3208]" />
                 <span className="font-medium text-sm text-slate-900 dark:text-slate-100">Insert Image</span>
               </div>
               <p className="text-xs text-slate-500 dark:text-slate-400 mb-2">
@@ -412,7 +412,7 @@ export default function RichTextEditor({
               <button
                 type="button"
                 onClick={handleImageClick}
-                className="w-full px-3 py-2 bg-emerald-500 text-black text-sm font-bold rounded-lg hover:bg-emerald-400 transition-colors"
+                className="w-full px-3 py-2 bg-[#F5C857] text-[#4A3208] text-sm font-bold rounded-lg hover:bg-[#E9B83A] transition-colors"
               >
                 Add Image
               </button>
@@ -461,7 +461,7 @@ export default function RichTextEditor({
                   value={linkUrl}
                   onChange={(e) => setLinkUrl(e.target.value)}
                   placeholder="https://example.com"
-                  className="w-full px-3 py-2 border border-slate-200 dark:border-slate-700 rounded-lg bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:outline-none focus:border-emerald-500"
+                  className="w-full px-3 py-2 border border-slate-200 dark:border-slate-700 rounded-lg bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:outline-none focus:border-[#E5B73A]"
                   autoFocus
                 />
               </div>
@@ -472,7 +472,7 @@ export default function RichTextEditor({
                   value={linkText}
                   onChange={(e) => setLinkText(e.target.value)}
                   placeholder="Click here"
-                  className="w-full px-3 py-2 border border-slate-200 dark:border-slate-700 rounded-lg bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:outline-none focus:border-emerald-500"
+                  className="w-full px-3 py-2 border border-slate-200 dark:border-slate-700 rounded-lg bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:outline-none focus:border-[#E5B73A]"
                 />
                 <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">If empty, selected text or URL will be used</p>
               </div>
@@ -485,7 +485,7 @@ export default function RichTextEditor({
                       name="linkTarget"
                       checked={linkTarget === '_blank'}
                       onChange={() => setLinkTarget('_blank')}
-                      className="text-emerald-600 focus:ring-emerald-500"
+                      className="text-[#4A3208] focus:ring-[#E5B73A]"
                     />
                     <span className="text-sm flex items-center gap-1 text-slate-700 dark:text-slate-300">
                       New tab <ExternalLink className="h-3 w-3" />
@@ -497,7 +497,7 @@ export default function RichTextEditor({
                       name="linkTarget"
                       checked={linkTarget === '_self'}
                       onChange={() => setLinkTarget('_self')}
-                      className="text-emerald-600 focus:ring-emerald-500"
+                      className="text-[#4A3208] focus:ring-[#E5B73A]"
                     />
                     <span className="text-sm text-slate-700 dark:text-slate-300">Same tab</span>
                   </label>
@@ -508,7 +508,7 @@ export default function RichTextEditor({
                   type="button"
                   onClick={handleLinkInsertClick}
                   disabled={!linkUrl}
-                  className="flex-1 px-4 py-2 bg-emerald-500 text-black font-bold rounded-lg hover:bg-emerald-400 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="flex-1 px-4 py-2 bg-[#F5C857] text-[#4A3208] font-bold rounded-lg hover:bg-[#E9B83A] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   Insert Link
                 </button>
@@ -557,7 +557,7 @@ export default function RichTextEditor({
                 <button
                   type="button"
                   onClick={() => fileInputRef.current?.click()}
-                  className="w-full p-4 border-2 border-dashed border-slate-300 dark:border-slate-600 rounded-lg hover:border-emerald-500 transition-colors text-left"
+                  className="w-full p-4 border-2 border-dashed border-slate-300 dark:border-slate-600 rounded-lg hover:border-[#E5B73A] transition-colors text-left"
                 >
                   <div className="flex items-center gap-3">
                     <Upload className="h-8 w-8 text-slate-400 dark:text-slate-500" />
@@ -568,7 +568,7 @@ export default function RichTextEditor({
                   </div>
                 </button>
                 {imageFile && (
-                  <p className="mt-2 text-sm text-emerald-600 dark:text-emerald-400 flex items-center gap-2">
+                  <p className="mt-2 text-sm text-[#4A3208] dark:text-[#4A3208] flex items-center gap-2">
                     <ImageIcon className="h-4 w-4" />
                     {imageFile.name}
                   </p>
@@ -596,7 +596,7 @@ export default function RichTextEditor({
                     setImageFile(null);
                   }}
                   placeholder="https://example.com/image.jpg"
-                  className="w-full px-3 py-2 border border-slate-200 dark:border-slate-700 rounded-lg bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:outline-none focus:border-emerald-500"
+                  className="w-full px-3 py-2 border border-slate-200 dark:border-slate-700 rounded-lg bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:outline-none focus:border-[#E5B73A]"
                 />
               </div>
 
@@ -608,7 +608,7 @@ export default function RichTextEditor({
                   value={imageAlt}
                   onChange={(e) => setImageAlt(e.target.value)}
                   placeholder="Describe the image for accessibility"
-                  className="w-full px-3 py-2 border border-slate-200 dark:border-slate-700 rounded-lg bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:outline-none focus:border-emerald-500"
+                  className="w-full px-3 py-2 border border-slate-200 dark:border-slate-700 rounded-lg bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:outline-none focus:border-[#E5B73A]"
                 />
                 <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
                   Auto-generated from blog title. Edit if needed for better SEO & accessibility.
@@ -620,7 +620,7 @@ export default function RichTextEditor({
                   type="button"
                   onClick={handleImageUploadClick}
                   disabled={(!imageFile && !imageUrl) || !imageAlt || uploadingImage}
-                  className="flex-1 px-4 py-2 bg-emerald-500 text-black font-bold rounded-lg hover:bg-emerald-400 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="flex-1 px-4 py-2 bg-[#F5C857] text-[#4A3208] font-bold rounded-lg hover:bg-[#E9B83A] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {uploadingImage ? 'Uploading...' : 'Insert Image'}
                 </button>
@@ -669,7 +669,7 @@ export default function RichTextEditor({
           margin: 0.83em 0;
         }
         [contenteditable] blockquote {
-          border-left: 4px solid #10b981;
+          border-left: 4px solid #CC8F1A;
           padding-left: 1em;
           margin: 1em 0;
           color: #475569;

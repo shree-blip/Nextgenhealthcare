@@ -76,7 +76,7 @@ interface ClientAnalyticsViewProps {
   onLoadingStateChange?: (loading: boolean) => void;
 }
 
-const TRAFFIC_COLORS = ['#10b981', '#3b82f6', '#f59e0b', '#ef4444', '#8b5cf6'];
+const TRAFFIC_COLORS = ['#CC8F1A', '#3b82f6', '#f59e0b', '#ef4444', '#8b5cf6'];
 
 /** Compute the Monday of a given ISO week number */
 function getWeekStartDate(year: number, weekNumber: number): Date {
@@ -209,7 +209,7 @@ export default function ClientAnalyticsView({ refreshTrigger, isAdmin = false, o
   if (loading) {
     return (
       <div className="flex items-center justify-center py-24">
-        <DashboardLoader variant="page" label="Loading analytics..." className="text-emerald-500" />
+        <DashboardLoader variant="page" label="Loading analytics..." className="text-[#4A3208]" />
       </div>
     );
   }
@@ -406,12 +406,12 @@ export default function ClientAnalyticsView({ refreshTrigger, isAdmin = false, o
           {/* GA4 Summary Cards */}
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-7 gap-3">
             {[
-              { label: 'Active Users', value: ga4Summary.totalUsers.toLocaleString(), icon: <Users className="h-5 w-5 text-emerald-400" /> },
-              { label: 'New Users', value: ga4Summary.newUsers.toLocaleString(), icon: <Users className="h-5 w-5 text-cyan-400" /> },
+              { label: 'Active Users', value: ga4Summary.totalUsers.toLocaleString(), icon: <Users className="h-5 w-5 text-[#4A3208]" /> },
+              { label: 'New Users', value: ga4Summary.newUsers.toLocaleString(), icon: <Users className="h-5 w-5 text-[#4A3208]" /> },
               { label: 'Sessions', value: ga4Summary.totalSessions.toLocaleString(), icon: <Globe className="h-5 w-5 text-blue-400" /> },
               { label: 'Page Views', value: ga4Summary.totalPageViews.toLocaleString(), icon: <Eye className="h-5 w-5 text-purple-400" /> },
               { label: 'Bounce Rate', value: `${ga4Summary.avgBounceRate}%`, icon: <TrendingUp className="h-5 w-5 text-red-400" /> },
-              { label: 'Engagement', value: `${ga4Summary.avgEngagement}%`, icon: <TrendingUp className="h-5 w-5 text-green-400" /> },
+              { label: 'Engagement', value: `${ga4Summary.avgEngagement}%`, icon: <TrendingUp className="h-5 w-5 text-[#4A3208]" /> },
               { label: 'Conversions', value: ga4Summary.totalConversions.toLocaleString(), icon: <MousePointerClick className="h-5 w-5 text-amber-400" /> },
             ].map((card) => (
               <div key={card.label} className="rounded-xl p-4 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
@@ -433,7 +433,7 @@ export default function ClientAnalyticsView({ refreshTrigger, isAdmin = false, o
                   <YAxis stroke={axisStroke} />
                   <Tooltip contentStyle={tooltipStyle} />
                   <Legend />
-                  <Area type="monotone" dataKey="users" name="Active Users" stroke="#10b981" fill="#10b981" fillOpacity={0.3} />
+                  <Area type="monotone" dataKey="users" name="Active Users" stroke="#CC8F1A" fill="#CC8F1A" fillOpacity={0.3} />
                   <Area type="monotone" dataKey="sessions" name="Sessions" stroke="#3b82f6" fill="#3b82f6" fillOpacity={0.2} />
                   <Area type="monotone" dataKey="pageViews" name="Page Views" stroke="#8b5cf6" fill="#8b5cf6" fillOpacity={0.15} />
                 </AreaChart>
@@ -540,7 +540,7 @@ export default function ClientAnalyticsView({ refreshTrigger, isAdmin = false, o
                   <YAxis yAxisId="right" orientation="right" stroke={axisStroke} />
                   <Tooltip contentStyle={tooltipStyle} />
                   <Legend />
-                  <Line yAxisId="left" type="monotone" dataKey="clicks" name="Clicks" stroke="#10b981" strokeWidth={2} dot={false} />
+                  <Line yAxisId="left" type="monotone" dataKey="clicks" name="Clicks" stroke="#CC8F1A" strokeWidth={2} dot={false} />
                   <Line yAxisId="right" type="monotone" dataKey="impressions" name="Impressions" stroke="#8b5cf6" strokeWidth={2} dot={false} />
                 </LineChart>
               </ResponsiveContainer>
@@ -568,7 +568,7 @@ export default function ClientAnalyticsView({ refreshTrigger, isAdmin = false, o
                       return (
                         <tr key={i} className="border-b border-slate-200/50 dark:border-slate-700/50 hover:bg-slate-100 dark:hover:bg-slate-700/30">
                           <td className="py-2 px-3 truncate max-w-[200px]" title={p.page}>{path}</td>
-                          <td className="text-right py-2 px-3 font-semibold text-emerald-400">{p.clicks.toLocaleString()}</td>
+                          <td className="text-right py-2 px-3 font-semibold text-[#4A3208]">{p.clicks.toLocaleString()}</td>
                           <td className="text-right py-2 px-3">{p.impressions.toLocaleString()}</td>
                         </tr>
                       );
@@ -608,7 +608,7 @@ export default function ClientAnalyticsView({ refreshTrigger, isAdmin = false, o
       {gbpSummary && (
         <>
           <div className="flex items-center gap-2 pt-4">
-            <Globe className="h-5 w-5 text-emerald-400" />
+            <Globe className="h-5 w-5 text-[#4A3208]" />
             <h2 className="text-lg font-bold text-slate-900 dark:text-white">Google Business Profile</h2>
             <span className="text-xs text-slate-500 ml-2">Filtered range</span>
           </div>
@@ -637,7 +637,7 @@ export default function ClientAnalyticsView({ refreshTrigger, isAdmin = false, o
       {adsData.length > 0 && (
         <>
           <div className="flex items-center gap-2 pt-4">
-            <DollarSign className="h-5 w-5 text-green-400" />
+            <DollarSign className="h-5 w-5 text-[#4A3208]" />
             <h2 className="text-lg font-bold text-slate-900 dark:text-white">Google Ads & Ad Spend</h2>
             <span className="text-xs text-slate-500 ml-2">Filtered range</span>
           </div>
@@ -651,7 +651,7 @@ export default function ClientAnalyticsView({ refreshTrigger, isAdmin = false, o
               <>
                 <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
                   <div className="rounded-xl p-4 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
-                    <p className="text-2xl font-bold text-green-400">${totalGoogleAdsSpend.toFixed(2)}</p>
+                    <p className="text-2xl font-bold text-[#4A3208]">${totalGoogleAdsSpend.toFixed(2)}</p>
                     <p className="text-slate-500 dark:text-slate-400 text-xs mt-1">Total Ad Spend</p>
                   </div>
                   <div className="rounded-xl p-4 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
@@ -684,7 +684,7 @@ export default function ClientAnalyticsView({ refreshTrigger, isAdmin = false, o
                         formatter={(value: any, name: any) => [name === 'Spend ($)' ? `$${Number(value || 0).toFixed(2)}` : Number(value || 0).toLocaleString(), name]}
                       />
                       <Legend />
-                      <Area yAxisId="left" type="monotone" dataKey="cost" name="Spend ($)" stroke="#10b981" fill="#10b981" fillOpacity={0.3} />
+                      <Area yAxisId="left" type="monotone" dataKey="cost" name="Spend ($)" stroke="#CC8F1A" fill="#CC8F1A" fillOpacity={0.3} />
                       <Area yAxisId="right" type="monotone" dataKey="clicks" name="Clicks" stroke="#3b82f6" fill="#3b82f6" fillOpacity={0.15} />
                     </AreaChart>
                   </ResponsiveContainer>
@@ -772,7 +772,7 @@ export default function ClientAnalyticsView({ refreshTrigger, isAdmin = false, o
                 <YAxis yAxisId="right" orientation="right" stroke={axisStroke} />
                 <Tooltip contentStyle={tooltipStyle} />
                 <Legend />
-                <Bar yAxisId="left" dataKey="patientCount" name="Patients" fill="#10b981" />
+                <Bar yAxisId="left" dataKey="patientCount" name="Patients" fill="#CC8F1A" />
                 <Bar yAxisId="right" dataKey="conversionRate" name="Conv Rate (%)" fill="#f59e0b" />
               </BarChart>
             </ResponsiveContainer>

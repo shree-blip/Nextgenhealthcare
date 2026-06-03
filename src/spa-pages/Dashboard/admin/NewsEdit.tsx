@@ -144,7 +144,7 @@ export default function EditNewsArticle() {
   if (loading) {
     return (
       <div className="dashboard-scope min-h-screen flex items-center justify-center bg-slate-50 dark:bg-slate-950">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-emerald-500" />
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#EAD08A]" />
       </div>
     );
   }
@@ -153,7 +153,7 @@ export default function EditNewsArticle() {
     return (
       <div className="dashboard-scope min-h-screen p-10 bg-slate-50 dark:bg-slate-950">
         <p className="text-red-600">{loadError}</p>
-        <Link to="/dashboard/admin?view=news-management" className="text-emerald-500 underline">
+        <Link to="/dashboard/admin?view=news-management" className="text-[#4A3208] underline">
           Back to News Management
         </Link>
       </div>
@@ -166,7 +166,7 @@ export default function EditNewsArticle() {
         <div className="flex items-center gap-3 mb-6">
           <Link
             to="/dashboard/admin"
-            className="inline-flex items-center gap-2 px-4 py-2 text-slate-700 dark:text-slate-200 hover:text-slate-900 dark:hover:text-white bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg hover:border-emerald-500 transition-all"
+            className="inline-flex items-center gap-2 px-4 py-2 text-slate-700 dark:text-slate-200 hover:text-slate-900 dark:hover:text-white bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg hover:border-[#E5B73A] transition-all"
           >
             <LayoutDashboard className="h-4 w-4" />
             Dashboard
@@ -174,7 +174,7 @@ export default function EditNewsArticle() {
           <span className="text-slate-400">/</span>
           <Link
             to="/dashboard/admin?view=news-management"
-            className="inline-flex items-center gap-2 px-4 py-2 text-slate-700 dark:text-slate-200 hover:text-slate-900 dark:hover:text-white bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg hover:border-emerald-500 transition-all"
+            className="inline-flex items-center gap-2 px-4 py-2 text-slate-700 dark:text-slate-200 hover:text-slate-900 dark:hover:text-white bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg hover:border-[#E5B73A] transition-all"
           >
             <ArrowLeft className="h-4 w-4" />
             News Management
@@ -199,7 +199,7 @@ export default function EditNewsArticle() {
                   name="title"
                   value={form.title}
                   onChange={handleChange}
-                  className="w-full border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:outline-none focus:border-emerald-500"
+                  className="w-full border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:outline-none focus:border-[#E5B73A]"
                   required
                 />
               </div>
@@ -211,7 +211,7 @@ export default function EditNewsArticle() {
                   name="slug"
                   value={form.slug}
                   onChange={handleChange}
-                  className="w-full border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:outline-none focus:border-emerald-500"
+                  className="w-full border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:outline-none focus:border-[#E5B73A]"
                   required
                 />
               </div>
@@ -226,7 +226,7 @@ export default function EditNewsArticle() {
                   name="coverImage"
                   value={form.coverImage}
                   onChange={handleChange}
-                  className="flex-1 border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:outline-none focus:border-emerald-500"
+                  className="flex-1 border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:outline-none focus:border-[#E5B73A]"
                   placeholder="Enter image URL or upload"
                 />
                 <input
@@ -244,7 +244,7 @@ export default function EditNewsArticle() {
                   type="button"
                   onClick={() => fileInputRef.current?.click()}
                   disabled={uploading}
-                  className="px-4 py-2 bg-emerald-500 text-black font-bold rounded-lg hover:bg-emerald-400 transition-colors flex items-center gap-2 disabled:opacity-50"
+                  className="px-4 py-2 bg-[#F5C857] text-[#4A3208] font-bold rounded-lg hover:bg-[#E9B83A] transition-colors flex items-center gap-2 disabled:opacity-50"
                 >
                   <Upload className="h-5 w-5" />
                   {uploading ? 'Uploading…' : 'Upload'}
@@ -267,8 +267,8 @@ export default function EditNewsArticle() {
                   onClick={() => fileInputRef.current?.click()}
                   className={`mt-3 p-6 border-2 border-dashed rounded-lg text-center cursor-pointer transition-colors ${
                     dragOver
-                      ? 'border-emerald-500 bg-emerald-50 dark:bg-emerald-900/20'
-                      : 'border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-800/50 hover:border-emerald-400'
+                      ? 'border-[#EAD08A] bg-[#F5C857] dark:bg-[#F5C857]/20'
+                      : 'border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-800/50 hover:border-[#E5B73A]'
                   }`}
                 >
                   <ImageIcon className="h-8 w-8 mx-auto text-slate-400 dark:text-slate-500 mb-2" />
@@ -292,7 +292,7 @@ export default function EditNewsArticle() {
                 name="coverImageAlt"
                 value={form.coverImageAlt}
                 onChange={handleChange}
-                className="w-full border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-emerald-500 mt-3"
+                className="w-full border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-[#E5B73A] mt-3"
                 placeholder="ALT text"
               />
             </div>
@@ -306,7 +306,7 @@ export default function EditNewsArticle() {
                   name="publisher"
                   value={form.publisher}
                   onChange={handleChange}
-                  className="w-full border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:outline-none focus:border-emerald-500"
+                  className="w-full border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:outline-none focus:border-[#E5B73A]"
                 />
               </div>
               <div>
@@ -317,7 +317,7 @@ export default function EditNewsArticle() {
                   name="source"
                   value={form.source}
                   onChange={handleChange}
-                  className="w-full border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:outline-none focus:border-emerald-500"
+                  className="w-full border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:outline-none focus:border-[#E5B73A]"
                 />
               </div>
               <div>
@@ -328,7 +328,7 @@ export default function EditNewsArticle() {
                   name="sourceUrl"
                   value={form.sourceUrl}
                   onChange={handleChange}
-                  className="w-full border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:outline-none focus:border-emerald-500"
+                  className="w-full border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:outline-none focus:border-[#E5B73A]"
                 />
               </div>
               <div>
@@ -340,7 +340,7 @@ export default function EditNewsArticle() {
                   name="sourceDate"
                   value={form.sourceDate}
                   onChange={handleChange}
-                  className="w-full border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:outline-none focus:border-emerald-500"
+                  className="w-full border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:outline-none focus:border-[#E5B73A]"
                 />
               </div>
             </div>
@@ -354,7 +354,7 @@ export default function EditNewsArticle() {
                   name="seoTitle"
                   value={form.seoTitle}
                   onChange={handleChange}
-                  className="w-full border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:outline-none focus:border-emerald-500"
+                  className="w-full border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:outline-none focus:border-[#E5B73A]"
                 />
               </div>
               <div>
@@ -365,7 +365,7 @@ export default function EditNewsArticle() {
                   name="metaDesc"
                   value={form.metaDesc}
                   onChange={handleChange}
-                  className="w-full border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:outline-none focus:border-emerald-500"
+                  className="w-full border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:outline-none focus:border-[#E5B73A]"
                 />
               </div>
             </div>
@@ -379,7 +379,7 @@ export default function EditNewsArticle() {
                 value={form.excerpt}
                 onChange={handleChange}
                 rows={2}
-                className="w-full border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:outline-none focus:border-emerald-500"
+                className="w-full border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:outline-none focus:border-[#E5B73A]"
               />
             </div>
 
@@ -405,7 +405,7 @@ export default function EditNewsArticle() {
                 name="publishedAt"
                 value={form.publishedAt}
                 onChange={handleChange}
-                className="w-full border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:outline-none focus:border-emerald-500"
+                className="w-full border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:outline-none focus:border-[#E5B73A]"
               />
               <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
                 Clear this to revert to draft.
@@ -418,7 +418,7 @@ export default function EditNewsArticle() {
               <button
                 type="submit"
                 disabled={submitting}
-                className="px-6 py-3 bg-emerald-500 text-black font-bold rounded-xl hover:bg-emerald-400 transition-colors disabled:opacity-50"
+                className="px-6 py-3 bg-[#F5C857] text-[#4A3208] font-bold rounded-xl hover:bg-[#E9B83A] transition-colors disabled:opacity-50"
               >
                 {submitting ? 'Saving…' : 'Save Changes'}
               </button>

@@ -57,7 +57,7 @@ export default function ContactLeadsPage() {
     switch (status) {
       case 'new': return 'bg-blue-100 dark:bg-blue-900/40 text-blue-800 dark:text-blue-300';
       case 'contacted': return 'bg-yellow-100 dark:bg-yellow-900/40 text-yellow-800 dark:text-yellow-300';
-      case 'qualified': return 'bg-emerald-100 dark:bg-emerald-900/40 text-emerald-800 dark:text-emerald-300';
+      case 'qualified': return 'bg-[#F5C857] dark:bg-[#F5C857]/40 text-[#4A3208] dark:text-[#4A3208]';
       case 'closed': return 'bg-slate-100 dark:bg-slate-700 text-slate-900 dark:text-white';
       default: return 'bg-slate-100 dark:bg-slate-700 text-slate-900 dark:text-white';
     }
@@ -93,7 +93,7 @@ export default function ContactLeadsPage() {
                 <p className="text-sm font-medium text-slate-600 dark:text-slate-400">Total Leads</p>
                 <p className="text-3xl font-black text-slate-900 dark:text-white mt-1">{leads.length}</p>
               </div>
-              <Users className="h-12 w-12 text-emerald-500" />
+              <Users className="h-12 w-12 text-[#4A3208]" />
             </div>
           </div>
           <div className="bg-white dark:bg-slate-900 rounded-2xl p-6 shadow-sm border border-slate-200 dark:border-slate-700">
@@ -109,9 +109,9 @@ export default function ContactLeadsPage() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm font-medium text-slate-600 dark:text-slate-400">Qualified</p>
-                <p className="text-3xl font-black text-emerald-600 mt-1">{qualifiedLeads}</p>
+                <p className="text-3xl font-black text-[#4A3208] mt-1">{qualifiedLeads}</p>
               </div>
-              <Target className="h-12 w-12 text-emerald-500" />
+              <Target className="h-12 w-12 text-[#4A3208]" />
             </div>
           </div>
           <div className="bg-white dark:bg-slate-900 rounded-2xl p-6 shadow-sm border border-slate-200 dark:border-slate-700">
@@ -216,7 +216,7 @@ export default function ContactLeadsPage() {
                             onClick={() => updateStatus(lead.id, status)}
                             className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
                               lead.status === status
-                                ? 'bg-emerald-500 text-white'
+                                ? 'bg-[#F5C857] text-[#4A3208]'
                                 : 'bg-white dark:bg-slate-800 text-slate-900 dark:text-white border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700'
                             }`}
                           >

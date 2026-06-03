@@ -75,7 +75,7 @@ export default function AdminBlogListPage() {
           </div>
           <Link
             to="/dashboard/admin/blog/new"
-            className="inline-flex items-center gap-2 rounded-xl bg-emerald-500 px-5 py-2.5 text-sm font-semibold text-white hover:bg-emerald-600 shadow-md"
+            className="inline-flex items-center gap-2 rounded-xl bg-[#F5C857] px-5 py-2.5 text-sm font-semibold text-[#4A3208] hover:bg-[#E9B83A] shadow-md"
           >
             <Plus className="h-4 w-4" /> New Post
           </Link>
@@ -100,7 +100,7 @@ export default function AdminBlogListPage() {
             </p>
             <Link
               to="/dashboard/admin/blog/new"
-              className="inline-flex items-center gap-2 rounded-xl bg-emerald-500 px-5 py-2.5 text-sm font-semibold text-white hover:bg-emerald-600"
+              className="inline-flex items-center gap-2 rounded-xl bg-[#F5C857] px-5 py-2.5 text-sm font-semibold text-[#4A3208] hover:bg-[#E9B83A]"
             >
               <Plus className="h-4 w-4" /> Create your first post
             </Link>
@@ -131,7 +131,7 @@ export default function AdminBlogListPage() {
                     <td className="px-5 py-4 text-xs font-mono text-slate-500">{post.slug}</td>
                     <td className="px-5 py-4">
                       {post.publishedAt ? (
-                        <span className="text-xs px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 font-bold">
+                        <span className="text-xs px-3 py-1 rounded-full bg-[#F5C857] text-[#4A3208] font-bold">
                           Published
                         </span>
                       ) : (

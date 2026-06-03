@@ -264,7 +264,7 @@ function SectionInput({ label, name, type = 'number', value, onChange, step = 'a
         className={`w-full px-4 py-3 border-2 rounded-xl transition-all font-medium ${
           readOnly
             ? 'bg-slate-100 dark:bg-slate-700/50 border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 cursor-not-allowed'
-            : 'bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-900 dark:text-slate-100 focus:outline-none focus:border-emerald-500 dark:focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 dark:focus:ring-emerald-500/30 hover:border-slate-300 dark:hover:border-slate-600'
+            : 'bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-900 dark:text-slate-100 focus:outline-none focus:border-[#E5B73A] dark:focus:border-[#E5B73A] focus:ring-2 focus:ring-[#E5B73A] dark:focus:ring-[#E5B73A] hover:border-slate-300 dark:hover:border-slate-600'
         }`}
       />
       {helperText && <p className="text-xs text-slate-500 dark:text-slate-400 mt-1.5">{helperText}</p>}
@@ -305,7 +305,7 @@ function MetricsInputGrid({ metrics, onChange }: { metrics: FormMetrics; onChang
   return (
     <div className="space-y-6">
       {/* SECTION 1: Content & SEO */}
-      <div className="p-5 rounded-2xl border border-slate-200 dark:border-slate-700 bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-blue-950/20 dark:to-cyan-950/20 backdrop-blur-sm">
+      <div className="p-5 rounded-2xl border border-slate-200 dark:border-slate-700 bg-gradient-to-br from-blue-50 to-[#E9B83A] dark:from-blue-950/20 dark:to-[#E9B83A] backdrop-blur-sm">
         <h4 className="font-bold text-blue-700 dark:text-blue-300 mb-4 text-xs uppercase tracking-widest flex items-center gap-2"><span>📊</span> Content & SEO</h4>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <SectionInput label="Blogs Published" name="blogsPublished" value={metrics.blogsPublished} onChange={onChange} />
@@ -384,8 +384,8 @@ function MetricsInputGrid({ metrics, onChange }: { metrics: FormMetrics; onChang
       </div>
 
       {/* SECTION 6: Patient Metrics */}
-      <div className="p-5 rounded-2xl border border-slate-200 dark:border-slate-700 bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-emerald-950/20 dark:to-teal-950/20 backdrop-blur-sm">
-        <h4 className="font-bold text-emerald-700 dark:text-emerald-300 mb-4 text-xs uppercase tracking-widest flex items-center gap-2"><span>👥</span> Patient Metrics</h4>
+      <div className="p-5 rounded-2xl border border-slate-200 dark:border-slate-700 bg-gradient-to-br from-[#F5C857] to-[#E9B83A] dark:from-[#F5C857] dark:to-[#E9B83A] backdrop-blur-sm">
+        <h4 className="font-bold text-[#4A3208] dark:text-[#4A3208] mb-4 text-xs uppercase tracking-widest flex items-center gap-2"><span>👥</span> Patient Metrics</h4>
         
         {/* Manual Inputs */}
         <div className="mb-5 pb-5 border-b border-slate-200 dark:border-slate-700">
@@ -402,7 +402,7 @@ function MetricsInputGrid({ metrics, onChange }: { metrics: FormMetrics; onChang
           <SectionInput label="Daily Patient Avg" name="dailyPatientAvg" value={dailyPatientAvg} onChange={onChange} readOnly={true} helperText="Patient Count ÷ 7" />
           <SectionInput label="Conversion Rate (%)" name="conversionRate" value={conversionRate.toString()} onChange={onChange} readOnly={true} helperText="(Digital Conversion ÷ Patient Count) × 100" />
         </div>
-        <p className="text-xs text-emerald-700 dark:text-emerald-300 mt-3 p-3 bg-emerald-100 dark:bg-emerald-900/30 rounded-lg border border-emerald-200 dark:border-emerald-800/50">
+        <p className="text-xs text-[#4A3208] dark:text-[#4A3208] mt-3 p-3 bg-[#F5C857] dark:bg-[#F5C857]/30 rounded-lg border border-[#EAD08A] dark:border-[#EAD08A]">
           ℹ️ All calculated fields update automatically when you change the manual inputs above.
         </p>
       </div>
@@ -746,7 +746,7 @@ export default function AnalyticsForm({ onSaved }: { onSaved?: () => void } = {}
               className="bg-white dark:bg-slate-900 rounded-3xl shadow-2xl dark:border-2 dark:border-slate-700/60 w-full max-w-3xl max-h-[90vh] overflow-y-auto"
             >
               {/* Modal Header with Gradient */}
-              <div className="sticky top-0 bg-gradient-to-r from-cyan-50 to-blue-50 dark:from-cyan-950/30 dark:to-blue-950/30 rounded-t-3xl px-6 py-5 border-b border-slate-200 dark:border-slate-700 flex items-center justify-between gap-4 z-10">
+              <div className="sticky top-0 bg-gradient-to-r from-[#F5C857] to-blue-50 dark:from-[#F5C857] dark:to-blue-950/30 rounded-t-3xl px-6 py-5 border-b border-slate-200 dark:border-slate-700 flex items-center justify-between gap-4 z-10">
                 <div className="flex items-center gap-3">
                   <span className="text-3xl">📅</span>
                   <div>
@@ -757,7 +757,7 @@ export default function AnalyticsForm({ onSaved }: { onSaved?: () => void } = {}
                 <button
                   onClick={() => setShowEditModal(false)}
                   disabled={editLoading}
-                  className="p-2.5 hover:bg-cyan-200/40 dark:hover:bg-cyan-900/40 rounded-full disabled:opacity-50 transition-colors"
+                  className="p-2.5 hover:bg-[#E9B83A] dark:hover:bg-[#E9B83A] rounded-full disabled:opacity-50 transition-colors"
                 >
                   <X className="h-6 w-6 text-slate-600 dark:text-slate-400" />
                 </button>
@@ -775,7 +775,7 @@ export default function AnalyticsForm({ onSaved }: { onSaved?: () => void } = {}
 
               {/* Success Message */}
               {editSuccess && (
-                <div className="mx-6 mt-5 flex items-start gap-3 p-4 bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-800/50 rounded-2xl text-emerald-700 dark:text-emerald-300 animate-in fade-in">
+                <div className="mx-6 mt-5 flex items-start gap-3 p-4 bg-[#F5C857] dark:bg-[#F5C857]/30 border border-[#EAD08A] dark:border-[#EAD08A] rounded-2xl text-[#4A3208] dark:text-[#4A3208] animate-in fade-in">
                   <Check className="h-5 w-5 shrink-0 mt-0.5" />
                   <div>
                     <p className="font-semibold text-sm">✓ Saved successfully! Data syncing to dashboards...</p>
@@ -799,7 +799,7 @@ export default function AnalyticsForm({ onSaved }: { onSaved?: () => void } = {}
                   <button
                     type="submit"
                     disabled={editLoading}
-                    className="flex-1 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 dark:from-emerald-600 dark:to-teal-600 dark:hover:from-emerald-500 dark:hover:to-teal-500 text-white font-bold py-3 px-6 rounded-xl flex items-center justify-center gap-2 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl"
+                    className="flex-1 bg-gradient-to-r from-[#F5C857] to-[#E9B83A] hover:from-[#E9B83A] hover:to-[#DDA92B] dark:from-[#F5C857] dark:to-[#E9B83A] dark:hover:from-[#E9B83A] dark:hover:to-[#DDA92B] text-[#4A3208] font-bold py-3 px-6 rounded-xl flex items-center justify-center gap-2 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl"
                   >
                     {editLoading ? (
                       <>
@@ -835,13 +835,13 @@ export default function AnalyticsForm({ onSaved }: { onSaved?: () => void } = {}
         )}
 
         {submitted && (
-          <div className="flex items-center gap-3 p-4 bg-emerald-50 dark:bg-emerald-900/30 border border-emerald-200 dark:border-emerald-800 rounded-2xl text-emerald-700 dark:text-emerald-300">
+          <div className="flex items-center gap-3 p-4 bg-[#F5C857] dark:bg-[#F5C857]/30 border border-[#EAD08A] dark:border-[#EAD08A] rounded-2xl text-[#4A3208] dark:text-[#4A3208]">
             <Check className="h-5 w-5 shrink-0" />
             <span className="font-semibold">Analytics saved and synced to client dashboards.</span>
           </div>
         )}
 
-        <div className="rounded-2xl p-6 border border-slate-200 dark:border-slate-700 bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-emerald-950/50 dark:to-teal-950/50">
+        <div className="rounded-2xl p-6 border border-slate-200 dark:border-slate-700 bg-gradient-to-br from-[#F5C857] to-[#E9B83A] dark:from-[#F5C857] dark:to-[#E9B83A]">
           <h3 className="text-lg font-bold mb-2 flex items-center gap-2">
             <span>📍 Clinic & Week Selection</span>
           </h3>
@@ -858,7 +858,7 @@ export default function AnalyticsForm({ onSaved }: { onSaved?: () => void } = {}
                 <select
                   value={selectedClinicId}
                   onChange={(e) => setSelectedClinicId(e.target.value)}
-                  className="w-full px-4 py-3 border-2 border-slate-300 dark:border-slate-600 rounded-xl bg-white dark:bg-slate-800 dark:text-slate-200 focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 hover:border-emerald-400 dark:hover:border-emerald-500 transition-all appearance-none cursor-pointer font-medium"
+                  className="w-full px-4 py-3 border-2 border-slate-300 dark:border-slate-600 rounded-xl bg-white dark:bg-slate-800 dark:text-slate-200 focus:outline-none focus:border-[#E5B73A] focus:ring-2 focus:ring-[#E5B73A] hover:border-[#E5B73A] dark:hover:border-[#E5B73A] transition-all appearance-none cursor-pointer font-medium"
                   required
                 >
                   <option value="">Select a clinic...</option>
@@ -892,7 +892,7 @@ export default function AnalyticsForm({ onSaved }: { onSaved?: () => void } = {}
                     setSelectedYear(Number(e.target.value));
                     setSelectedWeekKey('');
                   }}
-                  className="w-full px-4 py-3 border-2 border-slate-300 dark:border-slate-600 rounded-xl bg-white dark:bg-slate-800 dark:text-slate-200 focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 hover:border-emerald-400 dark:hover:border-emerald-500 transition-all appearance-none cursor-pointer font-medium"
+                  className="w-full px-4 py-3 border-2 border-slate-300 dark:border-slate-600 rounded-xl bg-white dark:bg-slate-800 dark:text-slate-200 focus:outline-none focus:border-[#E5B73A] focus:ring-2 focus:ring-[#E5B73A] hover:border-[#E5B73A] dark:hover:border-[#E5B73A] transition-all appearance-none cursor-pointer font-medium"
                 >
                   {yearOptions.map((year) => (
                     <option key={year} value={year}>{year}</option>
@@ -916,7 +916,7 @@ export default function AnalyticsForm({ onSaved }: { onSaved?: () => void } = {}
                 <select
                   value={selectedWeekKey}
                   onChange={(e) => setSelectedWeekKey(e.target.value)}
-                  className="w-full px-4 py-3 border-2 border-slate-300 dark:border-slate-600 rounded-xl bg-white dark:bg-slate-800 dark:text-slate-200 focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 hover:border-emerald-400 dark:hover:border-emerald-500 transition-all appearance-none cursor-pointer font-medium"
+                  className="w-full px-4 py-3 border-2 border-slate-300 dark:border-slate-600 rounded-xl bg-white dark:bg-slate-800 dark:text-slate-200 focus:outline-none focus:border-[#E5B73A] focus:ring-2 focus:ring-[#E5B73A] hover:border-[#E5B73A] dark:hover:border-[#E5B73A] transition-all appearance-none cursor-pointer font-medium"
                 >
                   {weeks.map((week) => (
                     <option key={week.key} value={week.key}>{week.weekLabel}</option>
@@ -931,8 +931,8 @@ export default function AnalyticsForm({ onSaved }: { onSaved?: () => void } = {}
             </div>
           </div>
 
-          <div className="mt-4 p-3 bg-emerald-100/50 dark:bg-emerald-900/30 border border-emerald-200 dark:border-emerald-800 rounded-lg">
-            <p className="text-xs font-semibold text-emerald-700 dark:text-emerald-300 flex items-center gap-2">
+          <div className="mt-4 p-3 bg-[#F5C857]/50 dark:bg-[#F5C857]/30 border border-[#EAD08A] dark:border-[#EAD08A] rounded-lg">
+            <p className="text-xs font-semibold text-[#4A3208] dark:text-[#4A3208] flex items-center gap-2">
               <span>💡</span>
               On Mondays, this defaults to last week so you can enter last week&apos;s data quickly.
             </p>
@@ -940,7 +940,7 @@ export default function AnalyticsForm({ onSaved }: { onSaved?: () => void } = {}
         </div>
 
         {isLoadingWeekData && (
-          <div className="flex items-center gap-2 text-sm font-semibold text-emerald-600 dark:text-emerald-400">
+          <div className="flex items-center gap-2 text-sm font-semibold text-[#4A3208] dark:text-[#4A3208]">
             <Loader2 className="h-4 w-4 animate-spin" /> Loading saved week data...
           </div>
         )}
@@ -953,7 +953,7 @@ export default function AnalyticsForm({ onSaved }: { onSaved?: () => void } = {}
         <button
           type="submit"
           disabled={loading || isLoadingWeekData}
-          className="w-full bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 dark:from-emerald-600 dark:to-teal-600 dark:hover:from-emerald-500 dark:hover:to-teal-500 text-white font-bold py-4 px-6 rounded-2xl shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="w-full bg-gradient-to-r from-[#F5C857] to-[#E9B83A] hover:from-[#E9B83A] hover:to-[#DDA92B] dark:from-[#F5C857] dark:to-[#E9B83A] dark:hover:from-[#E9B83A] dark:hover:to-[#DDA92B] text-[#4A3208] font-bold py-4 px-6 rounded-2xl shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {loading ? (
             <>
@@ -972,7 +972,7 @@ export default function AnalyticsForm({ onSaved }: { onSaved?: () => void } = {}
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="mt-8 rounded-2xl border border-slate-200 dark:border-slate-700 bg-gradient-to-br from-cyan-50 to-blue-50 dark:from-cyan-950/50 dark:to-blue-950/50 p-6"
+          className="mt-8 rounded-2xl border border-slate-200 dark:border-slate-700 bg-gradient-to-br from-[#F5C857] to-blue-50 dark:from-[#F5C857] dark:to-blue-950/50 p-6"
         >
           <h2 className="text-2xl font-bold mb-4 text-slate-900 dark:text-white">📅 Week History</h2>
           <p className="text-sm text-slate-600 dark:text-slate-400 mb-4">Click "Edit" to update any week. Changes sync instantly to client dashboards.</p>

@@ -11,7 +11,7 @@ import {
 import RichTextEditor from './RichTextEditor';
 /* ── Shared input class names ────────────────────────────── */
 export const inputCls =
-  'w-full border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2.5 bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/40 focus:border-emerald-500 dark:focus:border-emerald-500 transition-colors';
+  'w-full border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2.5 bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-[#E5B73A] focus:border-[#E5B73A] dark:focus:border-[#E5B73A] transition-colors';
 
 export const labelCls =
   'block text-sm font-semibold mb-1.5 text-slate-700 dark:text-slate-300';
@@ -103,7 +103,7 @@ export function CoverImageCard({
               className="shrink-0 p-2.5 rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400 transition-colors"
             >
               {copied ? (
-                <Check className="h-4 w-4 text-emerald-500" />
+                <Check className="h-4 w-4 text-[#4A3208]" />
               ) : (
                 <Copy className="h-4 w-4" />
               )}
@@ -124,7 +124,7 @@ export function CoverImageCard({
             type="button"
             onClick={() => fileRef.current?.click()}
             disabled={uploading}
-            className="shrink-0 flex items-center gap-2 px-4 py-2.5 bg-emerald-500 text-black font-bold rounded-lg hover:bg-emerald-400 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            className="shrink-0 flex items-center gap-2 px-4 py-2.5 bg-[#F5C857] text-[#4A3208] font-bold rounded-lg hover:bg-[#E9B83A] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
             <Upload className="h-4 w-4" />
             {uploading ? 'Uploading…' : 'Upload'}
@@ -174,8 +174,8 @@ export function CoverImageCard({
         )}
 
         {uploading && (
-          <div className="flex items-center gap-2 text-sm text-emerald-600 dark:text-emerald-400">
-            <div className="h-4 w-4 border-2 border-emerald-500 border-t-transparent rounded-full animate-spin" />
+          <div className="flex items-center gap-2 text-sm text-[#4A3208] dark:text-[#4A3208]">
+            <div className="h-4 w-4 border-2 border-[#EAD08A] border-t-transparent rounded-full animate-spin" />
             Uploading and saving…
           </div>
         )}
@@ -305,8 +305,8 @@ export function PublishDateCard({
         </div>
         {isPublished && (
           <div className="pt-2 border-t border-slate-200 dark:border-slate-700">
-            <div className="inline-flex items-center gap-1.5 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 px-3 py-1.5 rounded-lg font-medium text-sm">
-              <span className="w-2 h-2 bg-emerald-500 rounded-full" />
+            <div className="inline-flex items-center gap-1.5 bg-[#F5C857] dark:bg-[#F5C857]/30 text-[#4A3208] dark:text-[#4A3208] px-3 py-1.5 rounded-lg font-medium text-sm">
+              <span className="w-2 h-2 bg-[#F5C857] rounded-full" />
               Published
             </div>
           </div>
@@ -343,7 +343,7 @@ export function PageHeader({
       {/* Left: back + title */}
       <div className="flex items-center gap-3">
         <Link to={backHref}
-          className="inline-flex items-center gap-2 px-3.5 py-2 text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl hover:border-emerald-500 dark:hover:border-emerald-500 transition-all text-sm font-medium"
+          className="inline-flex items-center gap-2 px-3.5 py-2 text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl hover:border-[#E5B73A] dark:hover:border-[#E5B73A] transition-all text-sm font-medium"
         >
           <ArrowLeft className="h-4 w-4" />
           {backLabel}
@@ -361,8 +361,8 @@ export function PageHeader({
       {/* Right: status + actions */}
       <div className="flex items-center gap-2">
         {isPublished && (
-          <span className="inline-flex items-center gap-1.5 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 px-3 py-1.5 rounded-lg font-medium text-sm">
-            <span className="w-2 h-2 bg-emerald-500 rounded-full" />
+          <span className="inline-flex items-center gap-1.5 bg-[#F5C857] dark:bg-[#F5C857]/30 text-[#4A3208] dark:text-[#4A3208] px-3 py-1.5 rounded-lg font-medium text-sm">
+            <span className="w-2 h-2 bg-[#F5C857] rounded-full" />
             Published
           </span>
         )}
@@ -380,7 +380,7 @@ export function PageHeader({
             type="button"
             onClick={onPublish}
             disabled={saving}
-            className="flex items-center gap-2 px-5 py-2.5 bg-emerald-500 hover:bg-emerald-400 text-black font-bold rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed text-sm"
+            className="flex items-center gap-2 px-5 py-2.5 bg-[#F5C857] hover:bg-[#E9B83A] text-[#4A3208] font-bold rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed text-sm"
           >
             <Check className="h-4 w-4" />
             Publish

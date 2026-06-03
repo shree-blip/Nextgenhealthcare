@@ -29,7 +29,7 @@ export default function BackgroundTaskNotification({ tasks, onDismiss }: Backgro
               task.status === 'running'
                 ? 'bg-white/95 dark:bg-slate-900/95 border-blue-200 dark:border-blue-800'
                 : task.status === 'success'
-                ? 'bg-white/95 dark:bg-slate-900/95 border-emerald-200 dark:border-emerald-800'
+                ? 'bg-white/95 dark:bg-slate-900/95 border-[#EAD08A] dark:border-[#EAD08A]'
                 : 'bg-white/95 dark:bg-slate-900/95 border-red-200 dark:border-red-800'
             }`}
           >
@@ -38,7 +38,7 @@ export default function BackgroundTaskNotification({ tasks, onDismiss }: Backgro
                 task.status === 'running'
                   ? 'bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400'
                   : task.status === 'success'
-                  ? 'bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400'
+                  ? 'bg-[#F5C857] dark:bg-[#F5C857]/30 text-[#4A3208] dark:text-[#4A3208]'
                   : 'bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400'
               }`}>
                 {task.status === 'running' && (

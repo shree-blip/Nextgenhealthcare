@@ -102,14 +102,14 @@ export default function NewBlogPost() {
           {/* Breadcrumb Navigation */}
           <div className="flex items-center gap-3 mb-6">
             <Link to="/dashboard/admin"
-              className="inline-flex items-center gap-2 px-4 py-2 text-slate-700 dark:text-slate-200 hover:text-slate-900 dark:hover:text-white bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg hover:border-emerald-500 dark:hover:border-emerald-500 transition-all"
+              className="inline-flex items-center gap-2 px-4 py-2 text-slate-700 dark:text-slate-200 hover:text-slate-900 dark:hover:text-white bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg hover:border-[#E5B73A] dark:hover:border-[#E5B73A] transition-all"
             >
               <LayoutDashboard className="h-4 w-4" />
               Dashboard
             </Link>
             <span className="text-slate-400">/</span>
             <Link to="/dashboard/admin?view=blog-management"
-              className="inline-flex items-center gap-2 px-4 py-2 text-slate-700 dark:text-slate-200 hover:text-slate-900 dark:hover:text-white bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg hover:border-emerald-500 dark:hover:border-emerald-500 transition-all"
+              className="inline-flex items-center gap-2 px-4 py-2 text-slate-700 dark:text-slate-200 hover:text-slate-900 dark:hover:text-white bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg hover:border-[#E5B73A] dark:hover:border-[#E5B73A] transition-all"
             >
               <ArrowLeft className="h-4 w-4" />
               Blog Management
@@ -129,7 +129,7 @@ export default function NewBlogPost() {
                   name="title" 
                   value={form.title} 
                   onChange={handleTitleChange} 
-                  className="w-full border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-emerald-500 dark:focus:border-emerald-500 transition-colors" 
+                  className="w-full border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-[#E5B73A] dark:focus:border-[#E5B73A] transition-colors" 
                   placeholder="Enter post title"
                   required 
                 />
@@ -140,7 +140,7 @@ export default function NewBlogPost() {
                   name="slug" 
                   value={form.slug} 
                   onChange={handleChange} 
-                  className="w-full border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-emerald-500 dark:focus:border-emerald-500 transition-colors" 
+                  className="w-full border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-[#E5B73A] dark:focus:border-[#E5B73A] transition-colors" 
                   placeholder="url-friendly-slug"
                   required 
                 />
@@ -155,7 +155,7 @@ export default function NewBlogPost() {
                   name="coverImage"
                   value={form.coverImage}
                   onChange={handleChange}
-                  className="flex-1 border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-emerald-500 dark:focus:border-emerald-500 transition-colors"
+                  className="flex-1 border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-[#E5B73A] dark:focus:border-[#E5B73A] transition-colors"
                   placeholder="Enter image URL or upload"
                 />
                 <input
@@ -173,7 +173,7 @@ export default function NewBlogPost() {
                   type="button"
                   onClick={() => fileInputRef.current?.click()}
                   disabled={uploading}
-                  className="px-4 py-2 bg-emerald-500 text-black font-bold rounded-lg hover:bg-emerald-400 transition-colors flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="px-4 py-2 bg-[#F5C857] text-[#4A3208] font-bold rounded-lg hover:bg-[#E9B83A] transition-colors flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   <Upload className="h-5 w-5" />
                   {uploading ? 'Uploading…' : 'Upload'}
@@ -197,8 +197,8 @@ export default function NewBlogPost() {
                   onClick={() => fileInputRef.current?.click()}
                   className={`mt-3 p-6 border-2 border-dashed rounded-lg text-center cursor-pointer transition-colors ${
                     dragOver
-                      ? 'border-emerald-500 bg-emerald-50 dark:bg-emerald-900/20'
-                      : 'border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-800/50 hover:border-emerald-400'
+                      ? 'border-[#EAD08A] bg-[#F5C857] dark:bg-[#F5C857]/20'
+                      : 'border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-800/50 hover:border-[#E5B73A]'
                   }`}
                 >
                   <ImageIcon className="h-8 w-8 mx-auto text-slate-400 dark:text-slate-500 mb-2" />
@@ -228,7 +228,7 @@ export default function NewBlogPost() {
                 name="coverImageAlt" 
                 value={form.coverImageAlt} 
                 onChange={handleChange} 
-                className="w-full border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-emerald-500 dark:focus:border-emerald-500 transition-colors mt-3" 
+                className="w-full border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-[#E5B73A] dark:focus:border-[#E5B73A] transition-colors mt-3" 
                 placeholder="ALT text (auto-generated from title)"
               />
               <p className="text-xs text-slate-500 dark:text-slate-400">ALT text is auto-generated from your title for SEO & accessibility</p>
@@ -242,7 +242,7 @@ export default function NewBlogPost() {
                   name="seoTitle" 
                   value={form.seoTitle} 
                   onChange={handleChange} 
-                  className="w-full border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-emerald-500 dark:focus:border-emerald-500 transition-colors" 
+                  className="w-full border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-[#E5B73A] dark:focus:border-[#E5B73A] transition-colors" 
                   placeholder="SEO optimized title"
                 />
               </div>
@@ -252,7 +252,7 @@ export default function NewBlogPost() {
                   name="canonical" 
                   value={form.canonical} 
                   onChange={handleChange} 
-                  className="w-full border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-emerald-500 dark:focus:border-emerald-500 transition-colors" 
+                  className="w-full border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-[#E5B73A] dark:focus:border-[#E5B73A] transition-colors" 
                   placeholder="https://..."
                 />
               </div>
@@ -264,7 +264,7 @@ export default function NewBlogPost() {
                 name="metaDesc" 
                 value={form.metaDesc} 
                 onChange={handleChange} 
-                className="w-full border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-emerald-500 dark:focus:border-emerald-500 transition-colors" 
+                className="w-full border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-[#E5B73A] dark:focus:border-[#E5B73A] transition-colors" 
                 placeholder="Brief description for search engines (150-160 chars)"
               />
             </div>
@@ -276,7 +276,7 @@ export default function NewBlogPost() {
                 name="excerpt" 
                 value={form.excerpt} 
                 onChange={handleChange} 
-                className="w-full border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-emerald-500 dark:focus:border-emerald-500 transition-colors" 
+                className="w-full border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-[#E5B73A] dark:focus:border-[#E5B73A] transition-colors" 
                 rows={2}
                 placeholder="Brief summary shown in blog listings"
               />
@@ -302,7 +302,7 @@ export default function NewBlogPost() {
                 name="publishedAt" 
                 value={form.publishedAt} 
                 onChange={handleChange} 
-                className="w-full border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:outline-none focus:border-emerald-500 dark:focus:border-emerald-500 transition-colors" 
+                className="w-full border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:outline-none focus:border-[#E5B73A] dark:focus:border-[#E5B73A] transition-colors" 
               />
             </div>
 
@@ -310,7 +310,7 @@ export default function NewBlogPost() {
             <div className="flex gap-3 pt-4">
               <button 
                 type="submit" 
-                className="px-6 py-3 bg-emerald-500 text-black font-bold rounded-xl hover:bg-emerald-400 transition-colors"
+                className="px-6 py-3 bg-[#F5C857] text-[#4A3208] font-bold rounded-xl hover:bg-[#E9B83A] transition-colors"
               >
                 Create Post
               </button>

@@ -41,13 +41,13 @@ const SUGGESTIONS = [
     icon: TrendingUp,
     title: 'Growth Trends',
     prompt: 'Show me month-over-month patient growth trends',
-    color: 'from-blue-500 to-cyan-600',
+    color: 'from-blue-500 to-[#E9B83A]',
   },
   {
     icon: Target,
     title: 'Google Ads ROI',
     prompt: 'Summarize my Google Ads performance and ROI',
-    color: 'from-emerald-500 to-teal-600',
+    color: 'from-[#F5C857] to-[#E9B83A]',
   },
   {
     icon: PieChart,
@@ -182,7 +182,7 @@ function CopyButton({ text }: { text: string }) {
       className="p-1.5 rounded-lg opacity-0 group-hover:opacity-100 transition-all hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300"
       title="Copy message"
     >
-      {copied ? <Check className="h-3.5 w-3.5 text-emerald-500" /> : <Copy className="h-3.5 w-3.5" />}
+      {copied ? <Check className="h-3.5 w-3.5 text-[#4A3208]" /> : <Copy className="h-3.5 w-3.5" />}
     </button>
   );
 }
@@ -317,7 +317,7 @@ export default function PremiumAnalyticsChat({
             <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-violet-500 to-indigo-600 flex items-center justify-center shadow-lg shadow-violet-500/20">
               <Sparkles className="h-4 w-4 text-white" />
             </div>
-            <span className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 bg-emerald-400 rounded-full border-2 border-white dark:border-slate-900" />
+            <span className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 bg-[#F5C857] rounded-full border-2 border-white dark:border-slate-900" />
           </div>
           <div>
             <h3 className="text-sm font-bold text-slate-900 dark:text-white leading-tight">
@@ -361,7 +361,7 @@ export default function PremiumAnalyticsChat({
                   <Sparkles className="h-8 w-8 text-white" />
                 </div>
                 <motion.div
-                  className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-emerald-400 border-2 border-white dark:border-slate-900 flex items-center justify-center"
+                  className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-[#F5C857] border-2 border-white dark:border-slate-900 flex items-center justify-center"
                   animate={{ scale: [1, 1.2, 1] }}
                   transition={{ duration: 2, repeat: Infinity }}
                 >

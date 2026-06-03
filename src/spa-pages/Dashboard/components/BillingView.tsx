@@ -218,7 +218,7 @@ export default function BillingView({
                   value={formData.email}
                   onChange={handleInputChange}
                   placeholder="your@email.com"
-                  className="w-full px-4 py-3 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                  className="w-full px-4 py-3 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#E5B73A]"
                 />
               </div>
               <div>
@@ -229,7 +229,7 @@ export default function BillingView({
                   value={formData.fullName}
                   onChange={handleInputChange}
                   placeholder="John Doe"
-                  className="w-full px-4 py-3 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                  className="w-full px-4 py-3 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#E5B73A]"
                 />
               </div>
             </div>
@@ -249,7 +249,7 @@ export default function BillingView({
                   value={formData.billingAddress}
                   onChange={handleInputChange}
                   placeholder="123 Main Street"
-                  className="w-full px-4 py-3 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                  className="w-full px-4 py-3 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#E5B73A]"
                 />
               </div>
 
@@ -262,7 +262,7 @@ export default function BillingView({
                     value={formData.city}
                     onChange={handleInputChange}
                     placeholder="New York"
-                    className="w-full px-4 py-3 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                    className="w-full px-4 py-3 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#E5B73A]"
                   />
                 </div>
                 <div>
@@ -270,7 +270,7 @@ export default function BillingView({
                   <select
                     value={formData.country}
                     onChange={(e) => handleCountryChange(e.target.value)}
-                    className="w-full px-4 py-3 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                    className="w-full px-4 py-3 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#E5B73A]"
                   >
                     {COUNTRIES.map((c) => (
                       <option key={c.code} value={c.code}>
@@ -288,7 +288,7 @@ export default function BillingView({
                     <select
                       value={formData.state}
                       onChange={(e) => handleStateChange(e.target.value)}
-                      className="w-full px-4 py-3 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                      className="w-full px-4 py-3 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#E5B73A]"
                     >
                       <option value="">Select State</option>
                       {US_STATES.map((state) => (
@@ -307,7 +307,7 @@ export default function BillingView({
                     value={formData.zipCode}
                     onChange={handleInputChange}
                     placeholder="10001"
-                    className="w-full px-4 py-3 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                    className="w-full px-4 py-3 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#E5B73A]"
                   />
                 </div>
               </div>
@@ -328,7 +328,7 @@ export default function BillingView({
                   onChange={handleCardNumberChange}
                   placeholder="1234 5678 9012 3456"
                   maxLength={19}
-                  className="w-full px-4 py-3 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 font-mono"
+                  className="w-full px-4 py-3 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#E5B73A] font-mono"
                 />
               </div>
 
@@ -341,7 +341,7 @@ export default function BillingView({
                     onChange={handleCardExpiryChange}
                     placeholder="MM/YY"
                     maxLength={5}
-                    className="w-full px-4 py-3 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 font-mono"
+                    className="w-full px-4 py-3 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#E5B73A] font-mono"
                   />
                 </div>
                 <div>
@@ -352,7 +352,7 @@ export default function BillingView({
                     onChange={handleCardCvcChange}
                     placeholder="123"
                     maxLength={4}
-                    className="w-full px-4 py-3 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 font-mono"
+                    className="w-full px-4 py-3 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#E5B73A] font-mono"
                   />
                 </div>
               </div>
@@ -366,7 +366,7 @@ export default function BillingView({
         </div>
 
         <div className="lg:col-span-1">
-          <div className="sticky top-20 rounded-3xl p-8 border border-slate-200 dark:border-slate-700 bg-gradient-to-b from-emerald-50 to-white dark:from-slate-800 dark:to-slate-900">
+          <div className="sticky top-20 rounded-3xl p-8 border border-slate-200 dark:border-slate-700 bg-gradient-to-b from-[#F5C857] to-white dark:from-slate-800 dark:to-slate-900">
             <h3 className="text-lg font-bold mb-6">Order Summary</h3>
 
             <div className="mb-6 pb-6 border-b border-slate-200 dark:border-slate-700">
@@ -393,13 +393,13 @@ export default function BillingView({
 
             <div className="flex justify-between items-center mb-8 pb-8 border-b border-slate-200 dark:border-slate-700">
               <span className="text-lg font-bold">Total</span>
-              <span className="text-3xl font-black text-emerald-600">{formatCurrency(taxData.total)}</span>
+              <span className="text-3xl font-black text-[#4A3208]">{formatCurrency(taxData.total)}</span>
             </div>
 
             <button
               onClick={handlePayment}
               disabled={processing}
-              className="w-full py-4 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white font-bold rounded-2xl transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+              className="w-full py-4 bg-gradient-to-r from-[#F5C857] to-[#E9B83A] hover:from-[#E9B83A] hover:to-[#DDA92B] text-[#4A3208] font-bold rounded-2xl transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
             >
               {processing ? (
                 <>

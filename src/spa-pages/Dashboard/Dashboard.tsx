@@ -106,11 +106,11 @@ function Toast({ type, message, onClose }: { type: 'success' | 'error'; message:
       exit={{ opacity: 0, y: -20, x: '-50%' }}
       className={`fixed top-6 left-1/2 z-50 flex items-center gap-3 px-6 py-4 rounded-2xl shadow-xl border ${
         type === 'success'
-          ? 'bg-emerald-50 border-emerald-200 text-emerald-800'
+          ? 'bg-[#F5C857] border-[#EAD08A] text-[#4A3208]'
           : 'bg-red-50 border-red-200 text-red-800'
       }`}
     >
-      {type === 'success' ? <CheckCircle2 className="h-5 w-5 text-emerald-500" /> : <XCircle className="h-5 w-5 text-red-500" />}
+      {type === 'success' ? <CheckCircle2 className="h-5 w-5 text-[#4A3208]" /> : <XCircle className="h-5 w-5 text-red-500" />}
       <span className="font-semibold text-sm">{message}</span>
       <button onClick={onClose} className="ml-2 opacity-60 hover:opacity-100">
         <X className="h-4 w-4" />
@@ -123,7 +123,7 @@ function Toast({ type, message, onClose }: { type: 'success' | 'error'; message:
 export default function ClientDashboardPage() {
   return (
     <SitePreferencesProvider>
-      <Suspense fallback={<div className="min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white flex items-center justify-center"><DashboardLoader variant="page" label="Loading dashboard..." className="text-emerald-500" /></div>}>
+      <Suspense fallback={<div className="min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white flex items-center justify-center"><DashboardLoader variant="page" label="Loading dashboard..." className="text-[#4A3208]" /></div>}>
         <ClientDashboard />
       </Suspense>
     </SitePreferencesProvider>
@@ -359,7 +359,7 @@ function ClientDashboard() {
     }
   };
 
-  if (!user) return <div className="min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white flex items-center justify-center"><DashboardLoader variant="page" label="Loading..." className="text-emerald-500" /></div>;
+  if (!user) return <div className="min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white flex items-center justify-center"><DashboardLoader variant="page" label="Loading..." className="text-[#4A3208]" /></div>;
 
   const currentPlanIdRaw = subStatus?.planId || null;
   const currentPlanId = currentPlanIdRaw === 'platinum' ? 'premium' : currentPlanIdRaw;
@@ -460,18 +460,18 @@ function ClientDashboard() {
                 <input
                   type="text"
                   placeholder="Search patients..."
-                  className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm border border-slate-200/60 dark:border-slate-700/60 rounded-2xl py-2.5 pl-10 pr-4 text-sm focus:outline-none focus:border-emerald-400 focus:ring-2 focus:ring-emerald-500/10 dark:text-slate-200 transition-all shadow-sm"
+                  className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm border border-slate-200/60 dark:border-slate-700/60 rounded-2xl py-2.5 pl-10 pr-4 text-sm focus:outline-none focus:border-[#E5B73A] focus:ring-2 focus:ring-[#E5B73A] dark:text-slate-200 transition-all shadow-sm"
                 />
               </div>
               <button className="p-2.5 rounded-2xl bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm border border-slate-200/60 dark:border-slate-700/60 relative hover:shadow-md transition-all">
                 <Bell className="h-5 w-5 text-slate-600 dark:text-slate-300" />
-                <div className="absolute top-2 right-2 w-2 h-2 bg-emerald-500 rounded-full ring-2 ring-white dark:ring-slate-800" />
+                <div className="absolute top-2 right-2 w-2 h-2 bg-[#F5C857] rounded-full ring-2 ring-white dark:ring-slate-800" />
               </button>
 
               <div className="relative">
                 <button
                   onClick={() => setUserMenuOpen(!userMenuOpen)}
-                  className="h-10 w-10 rounded-2xl bg-gradient-to-br from-emerald-400 to-teal-500 flex items-center justify-center text-white font-bold text-sm uppercase hover:shadow-lg hover:shadow-emerald-500/20 transition-all active:scale-95"
+                  className="h-10 w-10 rounded-2xl bg-gradient-to-br from-[#F5C857] to-[#E9B83A] flex items-center justify-center text-[#4A3208] font-bold text-sm uppercase hover:shadow-lg hover:shadow-[color:#EAD08A] transition-all active:scale-95"
                 >
                   {user.name.substring(0, 2)}
                 </button>
@@ -715,8 +715,8 @@ function MembershipView({
 }) {
   return (
     <div className="space-y-8">
-      <div className="rounded-3xl p-8 border border-slate-200 dark:border-slate-700 bg-gradient-to-r from-slate-50 to-emerald-50 dark:from-slate-900 dark:to-emerald-950 relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-48 h-48 bg-emerald-500/10 blur-[80px] rounded-full" />
+      <div className="rounded-3xl p-8 border border-slate-200 dark:border-slate-700 bg-gradient-to-r from-slate-50 to-[#E9B83A] dark:from-slate-900 dark:to-[#E9B83A] relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-48 h-48 bg-[#F5C857]/10 blur-[80px] rounded-full" />
         <div className="relative flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div>
             <div className="text-sm text-slate-500 dark:text-slate-400 uppercase tracking-widest font-bold mb-2">Current Plan</div>
@@ -724,7 +724,7 @@ function MembershipView({
               {loadingSub ? (
                 <span className="flex items-center gap-2 text-slate-400"><DashboardLoader variant="inline" className="text-slate-400" /> Loading...</span>
               ) : currentPlanId ? (
-                <span className="text-emerald-600">{subStatus?.plan}</span>
+                <span className="text-[#4A3208]">{subStatus?.plan}</span>
               ) : (
                 <span className="text-slate-400">No Active Plan</span>
               )}
@@ -732,13 +732,13 @@ function MembershipView({
             {subStatus?.subscriptionStatus && (
               <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold ${
                 subStatus.subscriptionStatus === 'active'
-                  ? 'bg-emerald-100 text-emerald-700'
+                  ? 'bg-[#F5C857] text-[#4A3208]'
                   : subStatus.subscriptionStatus === 'past_due'
                   ? 'bg-yellow-100 text-yellow-700'
                   : 'bg-red-100 text-red-700'
               }`}>
                 <div className={`h-1.5 w-1.5 rounded-full ${
-                  subStatus.subscriptionStatus === 'active' ? 'bg-emerald-500' : subStatus.subscriptionStatus === 'past_due' ? 'bg-yellow-500' : 'bg-red-500'
+                  subStatus.subscriptionStatus === 'active' ? 'bg-[#F5C857]' : subStatus.subscriptionStatus === 'past_due' ? 'bg-yellow-500' : 'bg-red-500'
                 }`} />
                 {subStatus.subscriptionStatus.charAt(0).toUpperCase() + subStatus.subscriptionStatus.slice(1).replace('_', ' ')}
               </span>
@@ -800,7 +800,7 @@ function MembershipView({
             <h3 className="text-lg font-bold">Billing Details</h3>
             <button
               onClick={onEditBilling}
-              className="px-4 py-2 bg-emerald-500 hover:bg-emerald-600 text-white font-semibold rounded-xl text-sm transition-colors"
+              className="px-4 py-2 bg-[#F5C857] hover:bg-[#E9B83A] text-[#4A3208] font-semibold rounded-xl text-sm transition-colors"
             >
               Edit Billing
             </button>
@@ -835,7 +835,7 @@ function OverviewView({
   currentPlanId: string | null;
   onUpgradeClick: () => void;
 }) {
-  const CLINIC_COLORS = ['#10b981', '#3b82f6', '#f59e0b', '#ef4444', '#8b5cf6', '#ec4899'];
+  const CLINIC_COLORS = ['#CC8F1A', '#3b82f6', '#f59e0b', '#ef4444', '#8b5cf6', '#ec4899'];
   const MONTH_NAMES: Record<number, string> = {
     1: 'January', 2: 'February', 3: 'March', 4: 'April',
     5: 'May', 6: 'June', 7: 'July', 8: 'August',
@@ -963,10 +963,10 @@ function OverviewView({
         <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="mb-8 rounded-2xl p-5 border border-slate-200 dark:border-slate-700 bg-gradient-to-r from-white to-emerald-50 dark:from-slate-900 dark:to-emerald-950/40 text-slate-900 dark:text-slate-100 flex items-center justify-between"
+          className="mb-8 rounded-2xl p-5 border border-slate-200 dark:border-slate-700 bg-gradient-to-r from-white to-[#E9B83A] dark:from-slate-900 dark:to-[#E9B83A] text-slate-900 dark:text-slate-100 flex items-center justify-between"
         >
           <div className="flex items-center gap-3">
-            <Zap className="h-6 w-6 text-emerald-500" />
+            <Zap className="h-6 w-6 text-[#4A3208]" />
             <div>
               <span className="font-bold">Unlock premium features</span>
               <span className="text-slate-600 dark:text-slate-300 text-sm ml-2">— Choose a plan to get started with full marketing support</span>
@@ -974,7 +974,7 @@ function OverviewView({
           </div>
           <button
             onClick={onUpgradeClick}
-            className="rounded-full bg-emerald-500 px-6 py-2 font-semibold text-black hover:bg-emerald-400 transition-all hover:scale-105 shrink-0"
+            className="rounded-full bg-[#F5C857] px-6 py-2 font-semibold text-[#4A3208] hover:bg-[#E9B83A] transition-all hover:scale-105 shrink-0"
           >
             View Plans
           </button>
@@ -990,7 +990,7 @@ function OverviewView({
         </div>
       ) : loadingAnalytics ? (
         <div className="flex items-center justify-center py-24">
-          <DashboardLoader variant="page" label="Loading analytics..." className="text-emerald-500" />
+          <DashboardLoader variant="page" label="Loading analytics..." className="text-[#4A3208]" />
         </div>
       ) : (
         <>
@@ -1037,7 +1037,7 @@ function OverviewView({
                   <div className="flex justify-between items-center text-sm mt-4 pt-4 border-t border-slate-200 dark:border-slate-700">
                     <div>
                       <span className="text-slate-500 dark:text-slate-400 block text-xs">Patient Count</span>
-                      <span className="font-bold text-emerald-500 text-2xl">{clinic.lastPatients}</span>
+                      <span className="font-bold text-[#4A3208] text-2xl">{clinic.lastPatients}</span>
                     </div>
                     <div>
                       <span className="text-slate-500 dark:text-slate-400 block text-xs">Traffic</span>
@@ -1045,7 +1045,7 @@ function OverviewView({
                     </div>
                     <div>
                       <span className="text-slate-500 dark:text-slate-400 block text-xs">Growth</span>
-                      <span className={`font-bold text-2xl ${clinic.patientGrowth >= 0 ? 'text-emerald-500' : 'text-red-500'}`}>
+                      <span className={`font-bold text-2xl ${clinic.patientGrowth >= 0 ? 'text-[#4A3208]' : 'text-red-500'}`}>
                         {clinic.patientGrowth >= 0 ? '+' : ''}{clinic.patientGrowth.toFixed(0)}%
                       </span>
                     </div>
@@ -1076,7 +1076,7 @@ function OverviewView({
                     )}
                     <Tooltip contentStyle={{ borderRadius: '12px', border: '1px solid #e5e7eb' }} />
                     <Legend />
-                    <Bar dataKey="patients" fill="#10b981" name="Patient Count" radius={[4, 4, 4, 4]} />
+                    <Bar dataKey="patients" fill="#CC8F1A" name="Patient Count" radius={[4, 4, 4, 4]} />
                     <Bar dataKey="traffic" fill="#3b82f6" name="Traffic" radius={[4, 4, 4, 4]} />
                   </BarChart>
                 </ResponsiveContainer>
@@ -1146,7 +1146,7 @@ function NavItem({ icon: Icon, label, active = false, onClick, badge }: { icon: 
     if (badgeText === 'Coming Soon') return 'bg-slate-200/80 dark:bg-slate-600/80 text-slate-500 dark:text-slate-400';
     if (badgeText === 'Scale Elite') return 'bg-gradient-to-r from-amber-100 to-orange-100 dark:from-amber-500/20 dark:to-orange-500/20 text-amber-800 dark:text-amber-400';
     if (badgeText === 'Growth Pro') return 'bg-gradient-to-r from-blue-100 to-indigo-100 dark:from-blue-500/20 dark:to-indigo-500/20 text-blue-800 dark:text-blue-400';
-    if (badgeText === 'Starter Care') return 'bg-gradient-to-r from-emerald-100 to-teal-100 dark:from-emerald-500/20 dark:to-teal-500/20 text-emerald-800 dark:text-emerald-400';
+    if (badgeText === 'Starter Care') return 'bg-gradient-to-r from-[#F5C857] to-[#E9B83A] dark:from-[#F5C857] dark:to-[#E9B83A] text-[#4A3208] dark:text-[#4A3208]';
     if (badgeText === 'Premium' || badgeText === 'Premium Only') return 'bg-gradient-to-r from-purple-100 to-indigo-100 dark:from-purple-500/20 dark:to-indigo-500/20 text-purple-800 dark:text-purple-400';
     return 'bg-slate-200 dark:bg-slate-600 text-slate-900 dark:text-white';
   };
@@ -1156,13 +1156,13 @@ function NavItem({ icon: Icon, label, active = false, onClick, badge }: { icon: 
       onClick={onClick}
       className={`group relative w-full flex items-center gap-3 px-3 py-2.5 rounded-2xl transition-all text-left ${
         active
-          ? 'bg-white/90 dark:bg-slate-800/90 backdrop-blur-sm shadow-md shadow-emerald-500/10 border border-slate-200/60 dark:border-slate-700/60 text-slate-900 dark:text-white font-bold'
+          ? 'bg-white/90 dark:bg-slate-800/90 backdrop-blur-sm shadow-md shadow-[color:#EAD08A] border border-slate-200/60 dark:border-slate-700/60 text-slate-900 dark:text-white font-bold'
           : 'text-slate-500 hover:text-slate-900 hover:bg-white/60 dark:text-slate-400 dark:hover:text-white dark:hover:bg-slate-800/60'
       }`}
     >
-      {active && <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-6 rounded-r-full bg-gradient-to-b from-emerald-400 to-teal-500" />}
+      {active && <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-6 rounded-r-full bg-gradient-to-b from-[#F5C857] to-[#E9B83A]" />}
       <div className={`flex items-center justify-center h-8 w-8 rounded-xl transition-colors ${
-        active ? 'bg-gradient-to-br from-emerald-400 to-teal-500 text-white shadow-sm shadow-emerald-500/20' : 'text-current group-hover:bg-slate-100 dark:group-hover:bg-slate-700/60'
+        active ? 'bg-gradient-to-br from-[#F5C857] to-[#E9B83A] text-[#4A3208] shadow-sm shadow-[color:#EAD08A]' : 'text-current group-hover:bg-slate-100 dark:group-hover:bg-slate-700/60'
       }`}>
         <Icon className="h-4 w-4" />
       </div>
@@ -1177,12 +1177,12 @@ function NavItem({ icon: Icon, label, active = false, onClick, badge }: { icon: 
 function StatCard({ label, value, change, negative = false }: { label: string; value: string; change: string; negative?: boolean }) {
   return (
     <div className="group relative overflow-hidden rounded-3xl p-6 border border-slate-200/60 dark:border-slate-700/60 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm hover:shadow-lg transition-all">
-      <div className={`absolute inset-0 bg-gradient-to-br opacity-0 group-hover:opacity-100 transition-opacity ${negative ? 'from-red-500/5 to-rose-500/5' : 'from-emerald-500/5 to-teal-500/5'}`} />
+      <div className={`absolute inset-0 bg-gradient-to-br opacity-0 group-hover:opacity-100 transition-opacity ${negative ? 'from-red-500/5 to-rose-500/5' : 'from-[#F5C857] to-[#E9B83A]'}`} />
       <div className="relative z-10">
         <div className="text-[11px] text-slate-500 dark:text-slate-400 uppercase tracking-wider font-medium mb-2">{label}</div>
         <div className="text-3xl font-black text-slate-900 dark:text-white mb-2">{value}</div>
         {change && (
-          <div className={`inline-flex items-center gap-1 text-xs font-bold px-2 py-0.5 rounded-full ${negative ? 'text-red-600 bg-red-50 dark:text-red-400 dark:bg-red-500/10' : 'text-emerald-600 bg-emerald-50 dark:text-emerald-400 dark:bg-emerald-500/10'}`}>
+          <div className={`inline-flex items-center gap-1 text-xs font-bold px-2 py-0.5 rounded-full ${negative ? 'text-red-600 bg-red-50 dark:text-red-400 dark:bg-red-500/10' : 'text-[#4A3208] bg-[#F5C857] dark:text-[#4A3208] dark:bg-[#F5C857]/10'}`}>
             {change} <span className="text-slate-500 dark:text-slate-400 font-normal ml-1">vs last month</span>
           </div>
         )}
@@ -1271,7 +1271,7 @@ function ProfileView({ user, setToast }: { user: any; setToast: (toast: { type: 
     <div className="max-w-3xl">
       <form onSubmit={handleSubmit} className="space-y-8">
         <div className="bg-white dark:bg-slate-800 rounded-3xl border border-slate-200 dark:border-slate-700 overflow-hidden">
-          <div className="bg-gradient-to-r from-emerald-500 to-teal-500 p-8">
+          <div className="bg-gradient-to-r from-[#F5C857] to-[#E9B83A] p-8">
             <div className="flex items-center gap-6">
               <div className="relative">
                 <div className="w-24 h-24 rounded-full bg-white/20 backdrop-blur flex items-center justify-center overflow-hidden border-4 border-white/30">
@@ -1281,14 +1281,14 @@ function ProfileView({ user, setToast }: { user: any; setToast: (toast: { type: 
                     <span className="text-3xl font-bold text-white">{user.name.substring(0, 2).toUpperCase()}</span>
                   )}
                 </div>
-                <label className="absolute bottom-0 right-0 p-2 rounded-full bg-white dark:bg-slate-800 border-2 border-emerald-500 cursor-pointer hover:scale-110 transition-transform">
-                  <Camera className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
+                <label className="absolute bottom-0 right-0 p-2 rounded-full bg-white dark:bg-slate-800 border-2 border-[#EAD08A] cursor-pointer hover:scale-110 transition-transform">
+                  <Camera className="h-4 w-4 text-[#4A3208] dark:text-[#4A3208]" />
                   <input type="file" accept="image/*" onChange={handleFileChange} className="hidden" />
                 </label>
               </div>
               <div className="text-white">
                 <h2 className="text-2xl font-bold">{user.name}</h2>
-                <p className="text-emerald-100 flex items-center gap-2 mt-1">
+                <p className="text-[#4A3208] flex items-center gap-2 mt-1">
                   <Shield className="h-4 w-4" />
                   {user.role.charAt(0).toUpperCase() + user.role.slice(1)}
                 </p>
@@ -1321,7 +1321,7 @@ function ProfileView({ user, setToast }: { user: any; setToast: (toast: { type: 
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                 required
-                className="w-full px-4 py-3 rounded-xl bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-200 border border-slate-300 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all"
+                className="w-full px-4 py-3 rounded-xl bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-200 border border-slate-300 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-[#E5B73A] focus:border-transparent transition-all"
                 placeholder="Enter your full name"
               />
             </div>
@@ -1335,7 +1335,7 @@ function ProfileView({ user, setToast }: { user: any; setToast: (toast: { type: 
                 type="url"
                 value={formData.avatar}
                 onChange={(e) => setFormData({ ...formData, avatar: e.target.value })}
-                className="w-full px-4 py-3 rounded-xl bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-200 border border-slate-300 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all"
+                className="w-full px-4 py-3 rounded-xl bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-200 border border-slate-300 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-[#E5B73A] focus:border-transparent transition-all"
                 placeholder="https://example.com/avatar.jpg"
               />
               <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
@@ -1348,7 +1348,7 @@ function ProfileView({ user, setToast }: { user: any; setToast: (toast: { type: 
               disabled={isSubmitting || !isDirty}
               className={`w-full font-semibold py-3.5 rounded-xl transition-all flex items-center justify-center gap-2 ${
                 isDirty && !isSubmitting
-                  ? 'bg-gradient-to-r from-emerald-500 to-teal-500 text-white hover:shadow-lg hover:shadow-emerald-500/30'
+                  ? 'bg-gradient-to-r from-[#F5C857] to-[#E9B83A] text-[#4A3208] hover:shadow-lg hover:shadow-[color:#EAD08A]'
                   : 'bg-slate-200 dark:bg-slate-700 text-slate-400 dark:text-slate-500 cursor-not-allowed'
               }`}
             >
@@ -1450,7 +1450,7 @@ function SettingsView({ role, setToast }: { role: 'client' | 'admin'; setToast: 
                 type={showCurrentPassword ? 'text' : 'password'}
                 value={currentPassword}
                 onChange={(e) => setCurrentPassword(e.target.value)}
-                className="w-full px-4 py-3 pr-12 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                className="w-full px-4 py-3 pr-12 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-[#E5B73A]"
                 required
               />
               <button
@@ -1470,7 +1470,7 @@ function SettingsView({ role, setToast }: { role: 'client' | 'admin'; setToast: 
                 type={showNewPassword ? 'text' : 'password'}
                 value={newPassword}
                 onChange={(e) => setNewPassword(e.target.value)}
-                className="w-full px-4 py-3 pr-12 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                className="w-full px-4 py-3 pr-12 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-[#E5B73A]"
                 minLength={6}
                 required
               />
@@ -1491,7 +1491,7 @@ function SettingsView({ role, setToast }: { role: 'client' | 'admin'; setToast: 
                 type={showConfirmPassword ? 'text' : 'password'}
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
-                className="w-full px-4 py-3 pr-12 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                className="w-full px-4 py-3 pr-12 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-[#E5B73A]"
                 minLength={6}
                 required
               />
@@ -1508,7 +1508,7 @@ function SettingsView({ role, setToast }: { role: 'client' | 'admin'; setToast: 
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full bg-gradient-to-r from-emerald-500 to-teal-500 text-white font-semibold py-3.5 rounded-xl hover:shadow-lg hover:shadow-emerald-500/30 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+            className="w-full bg-gradient-to-r from-[#F5C857] to-[#E9B83A] text-[#4A3208] font-semibold py-3.5 rounded-xl hover:shadow-lg hover:shadow-[color:#EAD08A] transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
           >
             {isSubmitting ? <DashboardLoader variant="inline" className="text-white" /> : <Lock className="h-5 w-5" />}
             {isSubmitting ? 'Updating Password...' : 'Update Password'}

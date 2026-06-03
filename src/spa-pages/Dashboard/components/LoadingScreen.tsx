@@ -115,7 +115,7 @@ export default function LoadingScreen({ durationMs = 400, onComplete, active }: 
                 <motion.div
                   className="h-full rounded-full"
                   style={{
-                    background: 'linear-gradient(to right, #10b981, #3b82f6)',
+                    background: 'linear-gradient(to right, #CC8F1A, #3b82f6)',
                     width: `${progress}%`,
                   }}
                   transition={{ duration: 0.05, ease: 'linear' }}

@@ -71,7 +71,7 @@ function PricingCardContent({
             textPrimary: isDark ? 'text-slate-100' : 'text-slate-900',
             textSecondary: isDark ? 'text-slate-300' : 'text-slate-600',
             textMuted: isDark ? 'text-slate-400' : 'text-slate-500',
-            checkColor: 'text-emerald-500',
+            checkColor: 'text-[#4A3208]',
             buttonBg: isDark ? 'bg-slate-800' : 'bg-white',
             buttonText: isDark ? 'text-slate-100' : 'text-slate-900',
             buttonBorder: isDark ? 'border-slate-600' : 'border-slate-300',
@@ -79,10 +79,10 @@ function PricingCardContent({
               ? 'hover:bg-slate-700 hover:border-slate-500'
               : 'hover:bg-slate-50 hover:border-slate-400',
             spotlightWrap: isDark
-              ? 'bg-emerald-500/10 border border-emerald-500/20'
-              : 'bg-emerald-50 border border-emerald-100',
-            spotlightTitle: isDark ? 'text-emerald-300' : 'text-emerald-700',
-            spotlightText: isDark ? 'text-emerald-100/90' : 'text-emerald-900/80',
+              ? 'bg-[#F5C857]/10 border border-[#EAD08A]'
+              : 'bg-[#F5C857] border border-[#EAD08A]',
+            spotlightTitle: isDark ? 'text-[#4A3208]' : 'text-[#4A3208]',
+            spotlightText: isDark ? 'text-[#4A3208]' : 'text-[#4A3208]',
           };
         case 'professional':
           return {
@@ -133,7 +133,7 @@ function PricingCardContent({
             textPrimary: isDark ? 'text-slate-100' : 'text-slate-900',
             textSecondary: isDark ? 'text-slate-300' : 'text-slate-600',
             textMuted: isDark ? 'text-slate-400' : 'text-slate-500',
-            checkColor: 'text-emerald-500',
+            checkColor: 'text-[#4A3208]',
             buttonBg: isDark ? 'bg-slate-800' : 'bg-white',
             buttonText: isDark ? 'text-slate-100' : 'text-slate-900',
             buttonBorder: isDark ? 'border-slate-600' : 'border-slate-300',
@@ -141,10 +141,10 @@ function PricingCardContent({
               ? 'hover:bg-slate-700 hover:border-slate-500'
               : 'hover:bg-slate-50 hover:border-slate-400',
             spotlightWrap: isDark
-              ? 'bg-emerald-500/10 border border-emerald-500/20'
-              : 'bg-emerald-50 border border-emerald-100',
-            spotlightTitle: isDark ? 'text-emerald-300' : 'text-emerald-700',
-            spotlightText: isDark ? 'text-emerald-100/90' : 'text-emerald-900/80',
+              ? 'bg-[#F5C857]/10 border border-[#EAD08A]'
+              : 'bg-[#F5C857] border border-[#EAD08A]',
+            spotlightTitle: isDark ? 'text-[#4A3208]' : 'text-[#4A3208]',
+            spotlightText: isDark ? 'text-[#4A3208]' : 'text-[#4A3208]',
           };
       }
     };
@@ -160,7 +160,7 @@ function PricingCardContent({
       className={`
         relative rounded-3xl p-8 border-2 transition-all duration-300
         ${styles.background} ${styles.border}
-        ${isActive ? 'ring-4 ring-emerald-500 ring-offset-2' : ''}
+        ${isActive ? 'ring-4 ring-[#E5B73A] ring-offset-2' : ''}
         ${disabled ? 'opacity-60 cursor-not-allowed' : 'cursor-pointer shadow-lg hover:shadow-2xl'}
       `}
       style={{ willChange: 'transform' }}
@@ -174,7 +174,7 @@ function PricingCardContent({
       )}
 
       {isActive && (
-        <div className="absolute top-4 right-4 bg-emerald-500 text-white px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1 shadow-md">
+        <div className="absolute top-4 right-4 bg-[#F5C857] text-[#4A3208] px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1 shadow-md">
           <Check className="h-3 w-3" /> {t('Current')}
         </div>
       )}

@@ -110,11 +110,11 @@ export default function AnalyticsDateFilter({
   const presetBtn = (preset: FilterPreset, label: string, color: 'emerald' | 'blue' = 'emerald') => {
     const isActive = activePreset === preset;
     const active = color === 'emerald'
-      ? 'bg-emerald-500 text-black border-emerald-500 shadow-lg shadow-emerald-500/20'
+      ? 'bg-[#F5C857] text-[#4A3208] border-[#EAD08A] shadow-lg shadow-[color:#EAD08A]'
       : 'bg-blue-500 text-white border-blue-500 shadow-lg shadow-blue-500/20';
     const inactive = isDark
-      ? 'bg-slate-900 border-slate-700 text-slate-300 hover:border-emerald-500/60'
-      : 'bg-white border-slate-200 text-slate-700 hover:border-emerald-500/60';
+      ? 'bg-slate-900 border-slate-700 text-slate-300 hover:border-[#E5B73A]'
+      : 'bg-white border-slate-200 text-slate-700 hover:border-[#E5B73A]';
     return (
       <button
         key={preset}
@@ -150,7 +150,7 @@ export default function AnalyticsDateFilter({
                 type="date"
                 value={customStart}
                 onChange={(e) => setCustomStart(e.target.value)}
-                className={`px-3 py-2 rounded-xl text-sm border focus:outline-none focus:ring-2 focus:ring-emerald-500/40 transition-all ${
+                className={`px-3 py-2 rounded-xl text-sm border focus:outline-none focus:ring-2 focus:ring-[#E5B73A] transition-all ${
                   isDark
                     ? 'bg-slate-900 border-slate-700 text-white'
                     : 'bg-slate-50 border-slate-200 text-slate-900'
@@ -166,7 +166,7 @@ export default function AnalyticsDateFilter({
                 type="date"
                 value={customEnd}
                 onChange={(e) => setCustomEnd(e.target.value)}
-                className={`px-3 py-2 rounded-xl text-sm border focus:outline-none focus:ring-2 focus:ring-emerald-500/40 transition-all ${
+                className={`px-3 py-2 rounded-xl text-sm border focus:outline-none focus:ring-2 focus:ring-[#E5B73A] transition-all ${
                   isDark
                     ? 'bg-slate-900 border-slate-700 text-white'
                     : 'bg-slate-50 border-slate-200 text-slate-900'
@@ -182,7 +182,7 @@ export default function AnalyticsDateFilter({
           disabled={!customStart || !customEnd || customStart > customEnd}
           className={`inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-bold border transition-all duration-200 ${
             customStart && customEnd && customStart <= customEnd
-              ? 'bg-emerald-500 text-black border-emerald-500 hover:bg-emerald-400 shadow-lg shadow-emerald-500/20 active:scale-95'
+              ? 'bg-[#F5C857] text-[#4A3208] border-[#EAD08A] hover:bg-[#E9B83A] shadow-lg shadow-[color:#EAD08A] active:scale-95'
               : isDark
                 ? 'bg-slate-900 border-slate-700 text-slate-500 cursor-not-allowed'
                 : 'bg-slate-100 border-slate-200 text-slate-400 cursor-not-allowed'
@@ -208,9 +208,9 @@ export default function AnalyticsDateFilter({
 
       {/* Active range indicator */}
       <div className={`mt-3 text-xs font-medium ${isDark ? 'text-slate-500' : 'text-slate-400'}`}>
-        Showing data from <span className={`font-bold ${isDark ? 'text-emerald-400' : 'text-emerald-600'}`}>{activeRange.startDate}</span>
+        Showing data from <span className={`font-bold ${isDark ? 'text-[#4A3208]' : 'text-[#4A3208]'}`}>{activeRange.startDate}</span>
         {' '}to{' '}
-        <span className={`font-bold ${isDark ? 'text-emerald-400' : 'text-emerald-600'}`}>{activeRange.endDate}</span>
+        <span className={`font-bold ${isDark ? 'text-[#4A3208]' : 'text-[#4A3208]'}`}>{activeRange.endDate}</span>
         {activePreset === 'custom' && customStart && customEnd && (
           <>
             {' '}— <span className={`font-bold ${isDark ? 'text-blue-400' : 'text-blue-600'}`}>{customStart}</span>

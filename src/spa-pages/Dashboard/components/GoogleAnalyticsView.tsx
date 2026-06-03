@@ -11,7 +11,7 @@ import {
 } from 'lucide-react';
 import DashboardLoader from './DashboardLoader';
 
-const COLORS = ['#10b981', '#3b82f6', '#f59e0b', '#ef4444', '#8b5cf6', '#ec4899'];
+const COLORS = ['#CC8F1A', '#3b82f6', '#f59e0b', '#ef4444', '#8b5cf6', '#ec4899'];
 
 interface GA4Row {
   date: string;
@@ -182,8 +182,8 @@ export default function GoogleAnalyticsView({ clinicId, isDark = false, isClient
   if (loading) {
     return (
       <div className={`rounded-2xl p-10 border text-center ${isDark ? 'bg-slate-800 border-slate-700' : 'bg-white border-slate-200'}`}>
-        <div className="h-14 w-14 rounded-2xl bg-emerald-50 dark:bg-emerald-900/30 flex items-center justify-center mx-auto mb-4">
-          <DashboardLoader variant="inline" className="text-emerald-500" />
+        <div className="h-14 w-14 rounded-2xl bg-[#F5C857] dark:bg-[#F5C857]/30 flex items-center justify-center mx-auto mb-4">
+          <DashboardLoader variant="inline" className="text-[#4A3208]" />
         </div>
         <p className={`text-sm font-semibold ${isDark ? 'text-slate-300' : 'text-slate-600'}`}>Fetching analytics data...</p>
         <p className={`text-xs mt-1.5 ${isDark ? 'text-slate-500' : 'text-slate-400'}`}>Pulling the latest data from Google — this may take a few seconds</p>
@@ -214,8 +214,8 @@ export default function GoogleAnalyticsView({ clinicId, isDark = false, isClient
   if (ga4Data.length === 0 && scData.length === 0 && gmbData.length === 0) {
     return (
       <div className={`rounded-2xl p-10 border text-center ${isDark ? 'bg-slate-800 border-slate-700' : 'bg-white border-slate-200'}`}>
-        <div className="h-16 w-16 rounded-2xl bg-gradient-to-br from-emerald-50 to-emerald-100 dark:from-emerald-900/30 dark:to-emerald-800/20 flex items-center justify-center mx-auto mb-5 shadow-sm">
-          <BarChart3 className="h-8 w-8 text-emerald-400" />
+        <div className="h-16 w-16 rounded-2xl bg-gradient-to-br from-[#F5C857] to-[#E9B83A] dark:from-[#F5C857] dark:to-[#E9B83A] flex items-center justify-center mx-auto mb-5 shadow-sm">
+          <BarChart3 className="h-8 w-8 text-[#4A3208]" />
         </div>
         <p className={`text-lg font-bold mb-2 ${isDark ? 'text-white' : 'text-slate-900'}`}>No Data Yet</p>
         <p className={`text-sm max-w-md mx-auto leading-relaxed mb-5 ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>
@@ -225,7 +225,7 @@ export default function GoogleAnalyticsView({ clinicId, isDark = false, isClient
           <button
             onClick={handleSync}
             disabled={syncing}
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-bold transition-all shadow-sm hover:shadow-md disabled:opacity-60"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#F5C857] hover:bg-[#E9B83A] text-[#4A3208] text-sm font-bold transition-all shadow-sm hover:shadow-md disabled:opacity-60"
           >
             {syncing ? (
               <><DashboardLoader variant="inline" className="text-white" /> Syncing...</>
@@ -351,7 +351,7 @@ export default function GoogleAnalyticsView({ clinicId, isDark = false, isClient
               className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-bold transition-all ${
                 syncing
                   ? 'bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 cursor-wait'
-                  : 'bg-emerald-600 hover:bg-emerald-700 text-white shadow-sm hover:shadow-md'
+                  : 'bg-[#F5C857] hover:bg-[#E9B83A] text-[#4A3208] shadow-sm hover:shadow-md'
               } disabled:opacity-70`}
             >
               {syncing ? (
@@ -371,12 +371,12 @@ export default function GoogleAnalyticsView({ clinicId, isDark = false, isClient
             exit={{ opacity: 0, y: -8 }}
             className={`flex items-center gap-2.5 px-4 py-3 rounded-xl text-sm font-medium ${
               syncStatus.type === 'success'
-                ? `bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-200 dark:border-emerald-800/40 ${isDark ? 'text-emerald-400' : 'text-emerald-700'}`
+                ? `bg-[#F5C857] dark:bg-[#F5C857]/20 border border-[#EAD08A] dark:border-[#EAD08A] ${isDark ? 'text-[#4A3208]' : 'text-[#4A3208]'}`
                 : `bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800/40 ${isDark ? 'text-red-400' : 'text-red-700'}`
             }`}
           >
             {syncStatus.type === 'success' ? (
-              <span className="h-5 w-5 rounded-full bg-emerald-500 text-white flex items-center justify-center text-xs shrink-0">✓</span>
+              <span className="h-5 w-5 rounded-full bg-[#F5C857] text-[#4A3208] flex items-center justify-center text-xs shrink-0">✓</span>
             ) : (
               <span className="h-5 w-5 rounded-full bg-red-500 text-white flex items-center justify-center text-xs shrink-0">!</span>
             )}
@@ -388,7 +388,7 @@ export default function GoogleAnalyticsView({ clinicId, isDark = false, isClient
         {syncing && (
           <div className="w-full h-1.5 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
             <motion.div
-              className="h-full bg-gradient-to-r from-blue-500 to-emerald-500 rounded-full"
+              className="h-full bg-gradient-to-r from-blue-500 to-[#E9B83A] rounded-full"
               initial={{ width: '0%' }}
               animate={{ width: '90%' }}
               transition={{ duration: 8, ease: 'easeOut' }}
@@ -399,7 +399,7 @@ export default function GoogleAnalyticsView({ clinicId, isDark = false, isClient
 
       {/* ═══ KPI Cards ═══ */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <KPICard icon={<Users className="h-8 w-8 text-emerald-500" />} label="Active Users" value={ga4Totals.activeUsers.toLocaleString()} accent="emerald" isDark={isDark} />
+        <KPICard icon={<Users className="h-8 w-8 text-[#4A3208]" />} label="Active Users" value={ga4Totals.activeUsers.toLocaleString()} accent="emerald" isDark={isDark} />
         <KPICard icon={<Eye className="h-8 w-8 text-blue-500" />} label="Page Views" value={ga4Totals.pageViews.toLocaleString()} accent="blue" isDark={isDark} />
         <KPICard icon={<MousePointerClick className="h-8 w-8 text-amber-500" />} label="SC Clicks" value={scTotals.clicks.toLocaleString()} accent="amber" isDark={isDark} />
         <KPICard icon={<Search className="h-8 w-8 text-purple-500" />} label="Avg Position" value={avgPosition.toFixed(1)} accent="purple" isDark={isDark} />
@@ -409,9 +409,9 @@ export default function GoogleAnalyticsView({ clinicId, isDark = false, isClient
       {gmbData.length > 0 && (
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           <KPICard icon={<MapPin className="h-8 w-8 text-rose-500" />} label="Profile Views" value={gmbTotals.views.toLocaleString()} accent="rose" isDark={isDark} />
-          <KPICard icon={<Phone className="h-8 w-8 text-teal-500" />} label="Phone Calls" value={gmbTotals.phoneCalls.toLocaleString()} accent="teal" isDark={isDark} />
+          <KPICard icon={<Phone className="h-8 w-8 text-[#4A3208]" />} label="Phone Calls" value={gmbTotals.phoneCalls.toLocaleString()} accent="teal" isDark={isDark} />
           <KPICard icon={<Navigation className="h-8 w-8 text-indigo-500" />} label="Direction Requests" value={gmbTotals.directionRequests.toLocaleString()} accent="indigo" isDark={isDark} />
-          <KPICard icon={<ExternalLink className="h-8 w-8 text-cyan-500" />} label="Website Clicks" value={gmbTotals.websiteClicks.toLocaleString()} accent="cyan" isDark={isDark} />
+          <KPICard icon={<ExternalLink className="h-8 w-8 text-[#4A3208]" />} label="Website Clicks" value={gmbTotals.websiteClicks.toLocaleString()} accent="cyan" isDark={isDark} />
         </div>
       )}
 
@@ -419,7 +419,7 @@ export default function GoogleAnalyticsView({ clinicId, isDark = false, isClient
       {ga4Data.length > 0 && (
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className={cardClass}>
           <h3 className={headingClass}>
-            <TrendingUp className="inline h-5 w-5 mr-2 text-emerald-500" />
+            <TrendingUp className="inline h-5 w-5 mr-2 text-[#4A3208]" />
             Users & Sessions (GA4)
           </h3>
           <ResponsiveContainer width="100%" height={300}>
@@ -429,7 +429,7 @@ export default function GoogleAnalyticsView({ clinicId, isDark = false, isClient
               <YAxis stroke={isDark ? '#94a3b8' : '#64748b'} />
               <Tooltip contentStyle={tooltipStyle} />
               <Legend />
-              <Line type="monotone" dataKey="activeUsers" name="Active Users" stroke="#10b981" strokeWidth={3} dot={{ fill: '#10b981', r: 4 }} />
+              <Line type="monotone" dataKey="activeUsers" name="Active Users" stroke="#CC8F1A" strokeWidth={3} dot={{ fill: '#CC8F1A', r: 4 }} />
               <Line type="monotone" dataKey="sessions" name="Sessions" stroke="#3b82f6" strokeWidth={3} dot={{ fill: '#3b82f6', r: 4 }} />
               <Line type="monotone" dataKey="newUsers" name="New Users" stroke="#f59e0b" strokeWidth={2} strokeDasharray="5 5" dot={false} />
             </LineChart>
@@ -451,7 +451,7 @@ export default function GoogleAnalyticsView({ clinicId, isDark = false, isClient
                 <XAxis dataKey="label" stroke={isDark ? '#94a3b8' : '#64748b'} fontSize={12} />
                 <YAxis stroke={isDark ? '#94a3b8' : '#64748b'} />
                 <Tooltip contentStyle={tooltipStyle} />
-                <Area type="monotone" dataKey="engagementRate" name="Engagement" fill="#10b98133" stroke="#10b981" strokeWidth={2} />
+                <Area type="monotone" dataKey="engagementRate" name="Engagement" fill="#CC8F1A33" stroke="#CC8F1A" strokeWidth={2} />
               </AreaChart>
             </ResponsiveContainer>
             <p className={`text-center text-sm mt-2 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
@@ -509,7 +509,7 @@ export default function GoogleAnalyticsView({ clinicId, isDark = false, isClient
               <YAxis yAxisId="right" orientation="right" stroke={isDark ? '#94a3b8' : '#64748b'} />
               <Tooltip contentStyle={tooltipStyle} />
               <Legend />
-              <Bar yAxisId="left" dataKey="clicks" name="Clicks" fill="#10b981" radius={[6, 6, 0, 0]} />
+              <Bar yAxisId="left" dataKey="clicks" name="Clicks" fill="#CC8F1A" radius={[6, 6, 0, 0]} />
               <Bar yAxisId="left" dataKey="impressions" name="Impressions" fill="#3b82f6" radius={[6, 6, 0, 0]} />
               <Line yAxisId="right" type="monotone" dataKey="avgPosition" name="Avg Position" stroke="#ef4444" strokeWidth={2} />
             </BarChart>
@@ -550,7 +550,7 @@ export default function GoogleAnalyticsView({ clinicId, isDark = false, isClient
       {topBlogs.length > 0 && (
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.35 }} className={cardClass}>
           <h3 className={headingClass}>
-            <FileText className="inline h-5 w-5 mr-2 text-emerald-500" />
+            <FileText className="inline h-5 w-5 mr-2 text-[#4A3208]" />
             Top Blogs Visited
           </h3>
           <div className="overflow-x-auto">
@@ -578,7 +578,7 @@ export default function GoogleAnalyticsView({ clinicId, isDark = false, isClient
                     <tr key={i} className={`${isDark ? 'border-b border-slate-700/50 hover:bg-slate-700/30' : 'border-b border-slate-100 hover:bg-slate-50'} transition`}>
                       <td className={`py-2 px-2 font-mono ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>{i + 1}</td>
                       <td className={`py-2 px-2 font-medium truncate max-w-xs ${isDark ? 'text-white' : 'text-slate-900'}`} title={rawPage}>{blogTitle}</td>
-                      <td className="py-2 px-2 text-right text-emerald-500 font-semibold">{p.clicks?.toLocaleString()}</td>
+                      <td className="py-2 px-2 text-right text-[#4A3208] font-semibold">{p.clicks?.toLocaleString()}</td>
                       <td className={`py-2 px-2 text-right ${isDark ? 'text-slate-300' : 'text-slate-600'}`}>{p.impressions?.toLocaleString()}</td>
                     </tr>
                   );
@@ -605,7 +605,7 @@ export default function GoogleAnalyticsView({ clinicId, isDark = false, isClient
             <button
               onClick={handleSync}
               disabled={syncing}
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white text-sm font-bold disabled:opacity-50 transition-colors"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#F5C857] hover:bg-[#E9B83A] text-[#4A3208] text-sm font-bold disabled:opacity-50 transition-colors"
             >
               {syncing ? <><DashboardLoader variant="inline" className="text-white" /> Syncing...</> : <><RefreshCw className="h-4 w-4" /> Sync Now</>}
             </button>
