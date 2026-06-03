@@ -29,14 +29,16 @@ const Commitments = () => {
           </div>
         </div>
 
-        <div className="grid sm:grid-cols-3 gap-[1px] bg-heading">
+        <div className="grid sm:grid-cols-3 gap-[1px] bg-heading rounded-[18px] overflow-hidden border border-heading">
           {items.map((c, i) => (
             <div key={c.metric} className="bg-bg p-8 flex flex-col gap-5">
               <div className="flex items-baseline justify-between">
                 <span className="font-mono text-[11px] text-line tracking-[0.2em]">0{i + 1}</span>
-                <span className="font-mono text-[11px] text-muted tracking-[0.16em]">{c.by}</span>
+                <span className="font-mono text-[11px] text-muted tracking-[0.14em] uppercase">
+                  {c.by}
+                </span>
               </div>
-              <div className="text-cta font-extrabold text-[64px] leading-none tracking-[-0.04em] tabular-nums">
+              <div className="text-cta font-extrabold text-[clamp(38px,4vw,56px)] leading-none tracking-[-0.03em] tabular-nums">
                 {c.delta}
               </div>
               <h3 className="text-heading text-[18px] font-bold leading-[1.2] tracking-[-0.012em]">

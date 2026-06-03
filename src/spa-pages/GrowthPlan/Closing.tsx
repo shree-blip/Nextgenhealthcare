@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { ArrowIcon } from '@/components/icons';
 import closingImg from '@/assets/nextgen-image/Freegrowthauditimg.png';
 
 const Closing = () => {
@@ -34,11 +35,12 @@ const Closing = () => {
               {t('pages:growthPlan.closing.body')}
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-6">
-              <Link to="/contact" className="btn-primary">
+              <Link to="/free-growth-audit" className="btn-primary">
                 {t('pages:growthPlan.closing.ctaPrimary')}
+                <ArrowIcon size={16} />
               </Link>
               <Link
-                to="/case-studies"
+                to="/contact"
                 className="text-heading/80 text-[14px] font-medium underline-offset-4 hover:underline"
               >
                 {t('pages:growthPlan.closing.ctaSecondary')}

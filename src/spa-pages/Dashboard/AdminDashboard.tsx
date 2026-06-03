@@ -4175,6 +4175,7 @@ function ContentForSection(props: {
                           <th className="py-2 pr-4 font-semibold">Email</th>
                           <th className="py-2 pr-4 font-semibold">Requested Date</th>
                           <th className="py-2 pr-4 font-semibold">Time</th>
+                          <th className="py-2 pr-4 font-semibold">Status</th>
                           <th className="py-2 pr-4 font-semibold whitespace-nowrap">Submitted</th>
                         </tr>
                       </thead>
@@ -4187,6 +4188,9 @@ function ContentForSection(props: {
                             </td>
                             <td className="py-2.5 pr-4 text-slate-700 dark:text-slate-300 whitespace-nowrap">{b.date}</td>
                             <td className="py-2.5 pr-4 text-slate-700 dark:text-slate-300 whitespace-nowrap">{b.time}{b.timezone ? ` · ${b.timezone}` : ''}</td>
+                            <td className="py-2.5 pr-4">
+                              <span className={`inline-block px-2 py-0.5 rounded-full text-[11px] font-semibold capitalize ${b.status === 'rescheduled' ? 'bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-300' : 'bg-[#F5C857]/30 text-[#4A3208]'}`}>{b.status || 'new'}</span>
+                            </td>
                             <td className="py-2.5 pr-4 text-slate-500 whitespace-nowrap">{new Date(b.createdAt).toLocaleString()}</td>
                           </tr>
                         ))}

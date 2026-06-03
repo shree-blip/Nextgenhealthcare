@@ -1,9 +1,12 @@
 import { useTranslation } from 'react-i18next';
 import Hero from './Hero';
-import Chart from './Chart';
-import Phases from './Phases';
-import Quarters from './Quarters';
+import Problem from './Problem';
+import System from './System';
+import Trajectory from './Trajectory';
+import Deliverables from './Deliverables';
+import Principles from './Principles';
 import Commitments from './Commitments';
+import Faq from './Faq';
 import Closing from './Closing';
 import Seo from '@/components/Seo';
 import { buildBreadcrumbList } from '@/lib/schema';
@@ -39,10 +42,13 @@ const GrowthPlan = () => {
       />
 
       <Hero />
-      <Chart />
-      <Phases />
-      <Quarters />
+      <Problem />
+      <System />
+      <Trajectory />
+      <Deliverables />
+      <Principles />
       <Commitments />
+      <Faq />
       <Closing />
     </>
   );

@@ -4,7 +4,7 @@ import { ArrowIcon } from '@/components/icons';
 import imgClosing from '../../assets/nextgen-image/Clinicalimg1.png';
 
 /* ---------- CLOSING ---------- */
-const Closing = () => {
+const Closing = ({ onBook }: { onBook?: () => void }) => {
   const { t } = useTranslation('pages');
   const bullets = t('pages:healthcareGrowthEngine.closing.bullets', {
     returnObjects: true,
@@ -75,10 +75,10 @@ const Closing = () => {
               ))}
             </ul>
             <div className="mt-9 flex flex-wrap items-center gap-5">
-              <Link to="/free-growth-audit" className="btn-primary">
+              <button type="button" onClick={onBook} className="btn-primary">
                 {t('pages:healthcareGrowthEngine.closing.ctaPrimary')}
                 <ArrowIcon />
-              </Link>
+              </button>
               <Link
                 to="/contact"
                 className="text-heading/85 text-[14px] font-semibold underline-offset-4 hover:underline"

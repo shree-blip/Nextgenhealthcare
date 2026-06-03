@@ -26,6 +26,7 @@ const BookingModal = ({ open, onClose }: BookingModalProps) => {
   const [submitting, setSubmitting] = useState(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [confirmed, setConfirmed] = useState(false);
+  const [bookingId, setBookingId] = useState<number | null>(null);
 
   const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
 
@@ -52,6 +53,7 @@ const BookingModal = ({ open, onClose }: BookingModalProps) => {
       setEmail('');
       setErrorMsg(null);
       setSubmitting(false);
+      setBookingId(null);
     }
   }, [open]);
 
@@ -75,15 +77,18 @@ const BookingModal = ({ open, onClose }: BookingModalProps) => {
       })
     : '';
 
+  const isRescheduling = bookingId !== null;
+
   const handleConfirm = async () => {
     if (!selectedDate || !selectedTime || !emailValid || submitting) return;
     setSubmitting(true);
     setErrorMsg(null);
     try {
       const res = await fetch('/api/bookings', {
-        method: 'POST',
+        method: isRescheduling ? 'PATCH' : 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
+          ...(isRescheduling ? { id: bookingId } : {}),
           email: email.trim(),
           date: formattedDate,
           time: selectedTime,
@@ -95,12 +100,22 @@ const BookingModal = ({ open, onClose }: BookingModalProps) => {
         const data = (await res.json().catch(() => ({}))) as { error?: string };
         throw new Error(data?.error || 'request failed');
       }
+      const data = (await res.json().catch(() => ({}))) as { booking?: { id?: number } };
+      if (!isRescheduling && data?.booking?.id) setBookingId(data.booking.id);
       setConfirmed(true);
     } catch {
       setErrorMsg(t('booking.submitError'));
     } finally {
       setSubmitting(false);
     }
+  };
+
+  // Return to the calendar to pick a new slot for the booking just made,
+  // keeping the email + booking id so confirming updates the same record.
+  const handleReschedule = () => {
+    setConfirmed(false);
+    setSelectedTime(null);
+    setErrorMsg(null);
   };
 
   const confirmLabel = selectedDate
@@ -200,6 +215,44 @@ const BookingModal = ({ open, onClose }: BookingModalProps) => {
               </li>
             ))}
           </ul>
+          {confirmed && (
+            <button
+              type="button"
+              onClick={handleReschedule}
+              style={{
+                marginTop: 4,
+                marginBottom: 4,
+                alignSelf: 'flex-start',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: 8,
+                padding: '10px 18px',
+                borderRadius: 999,
+                border: '1px solid rgba(87,109,181,0.35)',
+                background: '#fff',
+                color: '#576DB5',
+                fontSize: 13,
+                fontWeight: 700,
+                cursor: 'pointer',
+              }}
+            >
+              <svg
+                width={14}
+                height={14}
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth={2.4}
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
+                <polyline points="23 4 23 10 17 10" />
+                <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10" />
+              </svg>
+              {t('booking.reschedule')}
+            </button>
+          )}
           <div className="modal-foot">
             {confirmed ? t('booking.footConfirmed') : t('booking.footBeforeBook')}
           </div>

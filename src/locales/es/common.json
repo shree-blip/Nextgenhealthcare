@@ -214,6 +214,7 @@
     "emailPlaceholder": "tu@clinica.com",
     "submitting": "Reservando...",
     "submitError": "No se pudo enviar tu reserva. Verifica tu correo e inténtalo de nuevo.",
+    "reschedule": "Reprogramar llamada",
     "confirmSelectDateTime": "Selecciona fecha y hora",
     "confirmPickTime": "Elige un horario",
     "confirmFormat": "Confirmar: {{date}} a las {{time}}",

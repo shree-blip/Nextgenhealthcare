@@ -214,6 +214,7 @@
     "emailPlaceholder": "you@clinic.com",
     "submitting": "Booking...",
     "submitError": "Could not submit your booking. Please check your email and try again.",
+    "reschedule": "Reschedule call",
     "confirmSelectDateTime": "Select a date & time",
     "confirmPickTime": "Pick a time",
     "confirmFormat": "Confirm: {{date}} at {{time}}",

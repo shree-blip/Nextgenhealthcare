@@ -47,6 +47,54 @@ export async function POST(req: NextRequest) {
 }
 
 /**
+ * PATCH /api/bookings  (public reschedule)
+ *
+ * Reschedules an existing booking to a new date/time. Guarded by requiring the
+ * caller to pass the same email the booking was created with (the booking id +
+ * email are both held client-side from the original confirmation).
+ */
+export async function PATCH(req: NextRequest) {
+  try {
+    const { id, email, date, time, timezone } =
+      (await req.json().catch(() => ({}))) as Record<string, unknown>;
+
+    if (!id || Number.isNaN(Number(id))) {
+      return NextResponse.json({ error: 'Booking id is required' }, { status: 400 });
+    }
+    if (typeof email !== 'string' || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
+      return NextResponse.json({ error: 'Valid email is required' }, { status: 400 });
+    }
+    if (typeof date !== 'string' || !date.trim() || typeof time !== 'string' || !time.trim()) {
+      return NextResponse.json({ error: 'Date and time are required' }, { status: 400 });
+    }
+
+    const existing = await prisma.booking.findUnique({ where: { id: Number(id) } });
+    if (!existing) {
+      return NextResponse.json({ error: 'Booking not found' }, { status: 404 });
+    }
+    if (existing.email !== email.trim().toLowerCase()) {
+      return NextResponse.json({ error: 'Email does not match this booking' }, { status: 403 });
+    }
+
+    const booking = await prisma.booking.update({
+      where: { id: Number(id) },
+      data: {
+        date: date.trim().slice(0, 60),
+        time: time.trim().slice(0, 40),
+        timezone:
+          typeof timezone === 'string' && timezone.trim() ? timezone.trim().slice(0, 80) : existing.timezone,
+        status: 'rescheduled',
+      },
+    });
+
+    return NextResponse.json({ message: 'Booking rescheduled', booking });
+  } catch (err) {
+    console.error('Bookings PATCH error:', err);
+    return NextResponse.json({ error: 'Failed to reschedule booking' }, { status: 500 });
+  }
+}
+
+/**
  * GET /api/bookings  (admin only)
  */
 export async function GET() {

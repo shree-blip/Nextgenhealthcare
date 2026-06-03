@@ -1399,34 +1399,95 @@
   },
   "growthPlan": {
     "seo": {
-      "title": "Plan de crecimiento en salud a 12 meses — Cuatro fases, un solo gráfico",
-      "description": "Un plan de crecimiento que se lee de un vistazo — cuatro fases, doce meses, una sola trayectoria comparada con tu línea de salida. Diseñado para prácticas de salud."
+      "title": "El plan de crecimiento en salud a 12 meses — Un sistema, no un retainer",
+      "description": "Un plan de crecimiento a 12 meses diseñado para acumular: cuatro fases secuenciadas, los artefactos que conservas y tres números que reportamos cada mes. Hecho para prácticas de salud, compatible con HIPAA, mes a mes — sin amarre."
     },
     "breadcrumb": {
       "current": "Plan de crecimiento"
     },
     "hero": {
-      "eyebrow": "El plan de crecimiento en salud a 12 meses",
-      "titleLine1": "Un gráfico.",
-      "titleAccent": "Doce meses",
-      "titleSuffix": ". Sin sorpresas.",
-      "lede": "Un plan de crecimiento que se lee de un vistazo. Cuatro fases, doce meses, una sola trayectoria comparada con tu línea de salida - diseñado para prácticas de salud y respaldado por SEO, pagados y canales de lifecycle trabajando juntos."
+      "eyebrow": "El plan de crecimiento a 12 meses",
+      "titleLine1": "Tus próximos doce meses,",
+      "titleAccent": "diseñados para acumular",
+      "titleSuffix": ".",
+      "lede": "La mayoría de las prácticas compra marketing una táctica a la vez y se pregunta por qué nunca suma. Esta es la alternativa — un solo plan secuenciado que convierte SEO, pagados y lifecycle en una sola trayectoria, indexada a tu propia baseline y reportada en números que puedes defender ante un consejo.",
+      "ctaPrimary": "Empieza con la auditoría",
+      "ctaSecondary": "Mira cómo funciona el plan",
+      "reassure": [
+        "Diagnóstico de dos semanas",
+        "Tarifa fija — acreditada si continúas",
+        "Mes a mes, sin amarre"
+      ]
     },
-    "chart": {
+    "problem": {
+      "eyebrow": "Por qué se estanca el marketing de la mayoría de las prácticas",
+      "title": "Las tácticas no acumulan. Los sistemas sí.",
+      "lede": "Tres fallas mantienen a las prácticas ocupadas y planas. Un plan solo funciona si cierra las tres a la vez.",
+      "items": [
+        {
+          "n": "01",
+          "title": "Tácticas desconectadas",
+          "body": "Un proveedor de SEO, uno de anuncios y un freelance web que nunca se hablan. Cada canal se optimiza para sí mismo, así que el gasto sube mientras las visitas agendadas no."
+        },
+        {
+          "n": "02",
+          "title": "Sin una baseline honesta",
+          "body": "Sin una línea de salida medida, todo reporte es un cuento. No puedes separar el crecimiento de la estacionalidad, ni tu trabajo del mercado."
+        },
+        {
+          "n": "03",
+          "title": "Sin criterios de salida",
+          "body": "Las campañas corren para siempre porque nada define 'esto falló — reemplázalo.' El presupuesto queda atrapado en tácticas que dejaron de funcionar hace meses."
+        }
+      ],
+      "bridge": "El plan de abajo elimina las tres: una baseline, una trayectoria y un criterio de salida declarado en cada prueba."
+    },
+    "system": {
+      "eyebrow": "El sistema",
+      "title": "Cuatro fases. Una trayectoria.",
+      "lede": "Doce meses, secuenciados para que cada fase gane la siguiente. Cada fase tiene una ventana, un entregable y una medición — y nada se envía sin una hipótesis declarada y un criterio de salida.",
+      "deliverablesLabel": "Qué se envía",
+      "measureLabel": "Lo reconocerás por",
+      "phases": {
+        "diagnose": {
+          "window": "Meses 01–02",
+          "name": "Diagnosticar",
+          "summary": "Auditar el stack de adquisición, instrumentar cada paso y fijar la baseline contra la que medimos durante un año.",
+          "deliverables": ["Auditoría forense de canales", "Blueprint de tracking", "Scorecard de baseline"],
+          "measure": "Baseline cerrada"
+        },
+        "build": {
+          "window": "Meses 02–05",
+          "name": "Construir",
+          "summary": "Una construcción silenciosa. Enviamos la infraestructura — sistema de landings, espina de contenido, pipeline de conversión — antes de que salga una sola campaña.",
+          "deliverables": ["Sistema de landings", "Espina editorial", "Pipeline de conversión"],
+          "measure": "Infraestructura en vivo"
+        },
+        "launch": {
+          "window": "Meses 05–08",
+          "name": "Lanzar",
+          "summary": "Un release escalonado en pagados, orgánico y directo. Cada canal sale contra una hipótesis escrita y un número que tiene que alcanzar.",
+          "deliverables": ["Pagados por tier de intención", "Empuje GBP + local", "Flujos de recall por email"],
+          "measure": "La curva de visitas agendadas se dobla"
+        },
+        "optimize": {
+          "window": "Meses 08–12",
+          "name": "Optimizar",
+          "summary": "Un retrospectivo semanal y un forecast móvil a cuatro semanas. Los ganadores reciben más presupuesto; lo estancado se reemplaza, dejándolo por escrito.",
+          "deliverables": ["Bitácora de decisiones", "Cola A/B", "Revisión trimestral del consejo"],
+          "measure": "Acumulando"
+        }
+      }
+    },
+    "trajectory": {
       "eyebrow": "La trayectoria",
-      "titleLine1": "Dónde está la práctica cada mes, indexado a su",
+      "titleLine1": "Dónde estás cada mes, indexado a tu",
       "titleAccent": "propia baseline",
       "titleSuffix": ".",
-      "ariaLabel": "Gráfico de trayectoria de crecimiento a 12 meses",
+      "ariaLabel": "Trayectoria de crecimiento a 12 meses, desde la baseline hasta aproximadamente 3.8 veces",
       "legend": {
-        "area": "Área de curva",
-        "baseline": "Baseline"
-      },
-      "trajectoryLabels": {
-        "baseline": "Baseline",
-        "firstUplift": "Primer lift agendado",
-        "rankingCrossover": "Cruce de posicionamiento",
-        "compoundZone": "Zona de acumulación"
+        "area": "Curva de crecimiento",
+        "baseline": "Tu línea de salida"
       },
       "phaseLabels": {
         "diagnose": "DIAGNOSTICAR",
@@ -1434,95 +1495,133 @@
         "launch": "LANZAR",
         "optimize": "OPTIMIZAR"
       },
-      "footer": "Curva multiplicadora indexada al costo de adquisición de pacientes y baselines de visitas agendadas del mes 0. Los rangos reflejan la mediana entre engagements activos. Los resultados individuales varían con la posición inicial y la vertical clínica."
+      "milestonesTitle": "Cuatro momentos que importan",
+      "milestones": [
+        { "m": "M00", "label": "Baseline cerrada", "detail": "La línea de salida contra la que se mide cada número posterior." },
+        { "m": "M04", "label": "Primer lift agendado", "detail": "La infraestructura empieza a convertir; las visitas agendadas se adelantan a la baseline." },
+        { "m": "M07", "label": "Cruce de posicionamiento", "detail": "El orgánico empieza a bajar el costo de adquisición mientras pagados se estabiliza." },
+        { "m": "M12", "label": "Zona de acumulación", "detail": "Los canales se refuerzan entre sí; el crecimiento deja de depender de un solo gasto." }
+      ],
+      "footer": "Trayectoria ilustrativa indexada a una baseline del mes 0 — la forma de un engagement saludable, no un pronóstico. El ritmo real depende de tu posición inicial, tu mercado y tu vertical clínica. Los números que ponemos por escrito están abajo."
     },
-    "phases": {
-      "eyebrow": "Las cuatro fases",
-      "title": "Lee a lo largo del gráfico, de arriba abajo.",
-      "lede": "Cada fase tiene una ventana, un entregable y una medición. Nada se envía sin una hipótesis declarada y un criterio de salida.",
-      "items": {
-        "diagnose": {
-          "name": "Diagnosticar",
-          "summary": "Auditar el stack de adquisición. Construir el tablero. Establecer la baseline.",
-          "deliverables": ["Auditoría forense de canales", "Blueprint de tracking", "Scorecard de baseline"]
-        },
-        "build": {
-          "name": "Construir",
-          "summary": "Construcción silenciosa. Enviamos infraestructura antes de enviar campañas.",
-          "deliverables": ["Sistema de landings", "Espina editorial", "Pipeline de conversión"]
-        },
-        "launch": {
-          "name": "Lanzar",
-          "summary": "Un release escalonado en pagados, orgánico y directo. Cada uno sale contra una hipótesis declarada.",
-          "deliverables": ["Pagados por tier de intención", "Empuje GBP + local", "Flujos de recall por email"]
-        },
-        "optimize": {
-          "name": "Optimizar",
-          "summary": "Un retrospectivo semanal y un forecast móvil a 4 semanas. Lo estancado se reemplaza.",
-          "deliverables": ["Bitácora de decisiones", "Cola A/B", "Revisión trimestral"]
-        }
-      }
-    },
-    "quarters": {
-      "eyebrow": "Qué se envía, por trimestre",
-      "titleLine1": "El plan, en",
-      "titleAccent": "una página",
-      "titleSuffix": ".",
-      "kicker": "Cuatro trimestres. Un arco — de Fundación a Compounding. Cada etapa entrega a la siguiente.",
-      "ctaPrimary": "Empieza tu plan",
+    "deliverables": {
+      "eyebrow": "Lo que realmente recibes",
+      "title": "Artefactos, no reportes de actividad.",
+      "lede": "Cada fase produce algo que conservas — útil ya sea que te quedes un mes o una década.",
       "items": [
         {
-          "q": "T1",
-          "months": "M01 – M03",
-          "focus": "Fundación",
-          "ships": "Auditoría, tracking, infraestructura de marca y contenido",
-          "read": "Baseline cerrada"
+          "title": "Auditoría forense de crecimiento",
+          "body": "Un diagnóstico de dos semanas de tu funnel, canales y tracking — con el plan adjunto."
         },
         {
-          "q": "T2",
-          "months": "M04 – M06",
-          "focus": "Adquisición",
-          "ships": "Lanzamiento de pagados, optimización de GBP, CRO en el sitio",
-          "read": "Curva de bookings"
+          "title": "Dashboard de KPI en vivo",
+          "body": "La misma vista desde la que trabajamos. Costo de adquisición, visitas agendadas y orgánico — actualizado continuamente."
         },
         {
-          "q": "T3",
-          "months": "M07 – M09",
-          "focus": "Compounding",
-          "ships": "Cruce orgánico, profundidad de contenido, email de lifecycle",
-          "read": "Cambio de posición"
+          "title": "Sistema de sitio listo para convertir",
+          "body": "Landing pages y formularios diseñados para convertir en citas agendadas el tráfico que enviamos."
         },
         {
-          "q": "T4",
-          "months": "M10 – M12",
-          "focus": "Optimización",
-          "ships": "Rebalanceo de canales, motor de retención, revisión del consejo",
-          "read": "Zona de acumulación"
+          "title": "Motor de contenido y SEO",
+          "body": "Una espina editorial y un programa de Schema que acumulan alcance orgánico mes a mes."
+        },
+        {
+          "title": "Bitácora de decisiones semanal",
+          "body": "Cada prueba, hipótesis y decisión — por escrito. Siempre sabes por qué se movió un dólar."
+        },
+        {
+          "title": "Revisión trimestral del consejo",
+          "body": "Un reporte en lenguaje claro de la trayectoria contra la baseline, listo para reenviar a tus socios."
+        }
+      ]
+    },
+    "principles": {
+      "eyebrow": "Por qué este plan, y por qué nosotros",
+      "title": "Cómo operamos cuando el contrato es mes a mes.",
+      "lede": "Sin amarre significa que tenemos que ganarnos el próximo mes, cada mes. Eso cambia cómo se corre el trabajo.",
+      "items": [
+        {
+          "title": "Hecho para salud",
+          "body": "Compatible con HIPAA en formularios, hosting, anuncios y analítica — cada proveedor del stack está cubierto por BAA."
+        },
+        {
+          "title": "Solo equipo senior",
+          "body": "Las personas que diseñan tu plan son las que lo corren. Sin juniors de cuenta aprendiendo con tu presupuesto."
+        },
+        {
+          "title": "Un número — tu baseline",
+          "body": "Indexamos a tu línea de salida, no a promedios de la industria. Sin métricas de vanidad, sin victorias prestadas."
+        },
+        {
+          "title": "Hipótesis y salida en cada prueba",
+          "body": "Nada corre para siempre por defecto. Cada jugada declara qué espera y cuándo la mataríamos."
+        },
+        {
+          "title": "Ves lo que vemos",
+          "body": "Un dashboard en vivo compartido — no un PDF mensual curado que esconde las líneas incómodas."
+        },
+        {
+          "title": "Ganado, mes a mes",
+          "body": "Sin amarre anual. Si la trayectoria deja de ganarse su lugar, te vas — y conservas los artefactos."
         }
       ]
     },
     "commitments": {
-      "eyebrow": "Con qué nos comprometemos",
-      "title": "Tres números. Medidos mensualmente. Reportados en tu tablero.",
-      "lede": "Los objetivos son net-new contra la baseline medida en los 30 días previos al kickoff. No reportamos contra mejoras impulsadas por estacionalidad o campañas ya en vuelo al firmar.",
+      "eyebrow": "Cómo llevamos la cuenta",
+      "title": "Tres números. En el acuerdo. Reportados cada mes.",
+      "lede": "Estos son los rangos objetivo que ponemos por escrito — no resultados que afirmamos en tu nombre. Cada uno se mide net-new contra la baseline cerrada en los 30 días previos al kickoff, sin crédito por estacionalidad ni campañas ya en vuelo al firmar.",
       "items": [
         {
           "metric": "Costo de adquisición de pacientes",
-          "delta": "−42%",
-          "by": "al mes 6",
-          "detail": "Reducción mediana en el libro activo una vez que pagados se reestructura por tier de intención."
+          "delta": "−30 a −45%",
+          "by": "objetivo al mes 6",
+          "detail": "Reestructuramos pagados por tier de intención y dejamos que el orgánico cargue la demanda barata — la línea de costo es lo primero que movemos."
         },
         {
           "metric": "Visitas agendadas",
-          "delta": "+78%",
-          "by": "al mes 9",
-          "detail": "Contadas como net-new contra los 30 días previos al kickoff. Sin crédito por estacionalidad."
+          "delta": "+50 a +80%",
+          "by": "objetivo al mes 9",
+          "detail": "Contadas como net-new contra los 30 días previos al kickoff. El dashboard liga cada booking de vuelta al canal que lo ganó."
         },
         {
           "metric": "Tráfico orgánico no-brand",
-          "delta": "3.8×",
-          "by": "al mes 12",
-          "detail": "Sobre el programa de Schema y contenido que auditamos en la fase de diagnóstico."
+          "delta": "2 a 4×",
+          "by": "objetivo al mes 12",
+          "detail": "El programa de Schema y contenido que diseñamos durante Diagnosticar es lo que acumula la baja del costo de adquisición en la segunda mitad."
+        }
+      ]
+    },
+    "faq": {
+      "eyebrow": "Antes de que preguntes",
+      "title": "Las preguntas que toda práctica hace primero.",
+      "items": [
+        {
+          "q": "¿Qué tan rápido veremos resultados?",
+          "a": "La auditoría llega en dos semanas. La infraestructura entra en vivo a lo largo de los meses dos a cinco, y la curva de visitas agendadas suele empezar a doblarse una vez que Lanzar está en marcha — no el primer día. Cualquiera que prometa resultados en la primera semana está vendiendo un pico, no un sistema."
+        },
+        {
+          "q": "¿Garantizan los números?",
+          "a": "Garantizamos el trabajo, la cadencia y la transparencia — y ponemos rangos objetivo en el acuerdo. No garantizamos un resultado específico, porque el marketing honesto en salud depende de tu mercado y posición inicial. Lo que sí garantizamos es que siempre sabrás exactamente dónde está la trayectoria contra la baseline."
+        },
+        {
+          "q": "¿Cuánto tiempo de mi equipo toma esto?",
+          "a": "Más pesado durante Diagnosticar — unas pocas horas de acceso y contexto. Después de eso, un check-in semanal de 30 minutos y una revisión trimestral. Nosotros corremos el plan; tú tomas las decisiones que requieren a un clínico o dueño."
+        },
+        {
+          "q": "¿Hay contrato o amarre?",
+          "a": "Sin amarre anual. Trabajamos mes a mes después de la auditoría. Si la trayectoria deja de ganarse su lugar, puedes irte — y conservas cada artefacto que construimos."
+        },
+        {
+          "q": "¿Cuánto cuesta?",
+          "a": "La auditoría es una tarifa fija, cotizada antes de que te comprometas, y se acredita contra el mes uno si continúas. El plan continuo se dimensiona a tus objetivos y canales — la auditoría es lo que nos permite cotizarlo con honestidad en lugar de adivinar."
+        },
+        {
+          "q": "¿Es compatible con HIPAA?",
+          "a": "Sí. Formularios, hosting, plataformas publicitarias y analítica corren sobre un toolchain cubierto por BAA, revisado anualmente. El cumplimiento se dimensiona dentro del plan, no se agrega después."
+        },
+        {
+          "q": "¿Qué pasa justo después de la auditoría?",
+          "a": "Recibes el plan forense y los números — tuyos para conservar, sigas con nosotros o no. Si avanzas, el costo de la auditoría se acredita contra el mes uno y empezamos Diagnosticar de inmediato."
         }
       ]
     },
@@ -1530,9 +1629,9 @@
       "imgAlt": "Diagnóstico de auditoría de crecimiento de dos semanas — entregable de plan forense.",
       "eyebrow": "Paso cero",
       "title": "Empieza con la auditoría. Decide después.",
-      "body": "Un diagnóstico de dos semanas con tarifa fija que devuelve un plan forense, sigas con nosotros o no. Si avanzamos, el costo de la auditoría se acredita al mes uno.",
-      "ctaPrimary": "Empezar la auditoría →",
-      "ctaSecondary": "Leer el casebook"
+      "body": "Un diagnóstico de dos semanas con tarifa fija que devuelve un plan forense — sigas con nosotros o no. Si avanzamos, el costo de la auditoría se acredita contra el mes uno. Sin amarre, sin presión: solo la lectura más clara que has tenido de tu propio funnel.",
+      "ctaPrimary": "Empezar la auditoría",
+      "ctaSecondary": "Hablar con el equipo"
     }
   },
   "hipaaCompliance": {
@@ -1713,7 +1812,7 @@
       "titleLine1": "Crecimiento de pacientes,",
       "titleAccent": "diseñado como motor",
       "lede": "Un sistema integrado de SEO, medios pagados y automatización — instrumentado de punta a punta, revisado cada semana y afinado a la economía de una clínica. Construido para operadores que quieren un número, no una presentación.",
-      "ctaPrimary": "Solicita la auditoría gratuita",
+      "ctaPrimary": "Reservar una llamada gratis",
       "ctaSecondary": "Ver los canales",
       "pricingPrefix": "Desde",
       "pricingPrice": "$2,500/mes",

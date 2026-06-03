@@ -1399,34 +1399,95 @@
   },
   "growthPlan": {
     "seo": {
-      "title": "The 12-Month Healthcare Growth Plan — Four Phases, One Chart",
-      "description": "A growth plan you can read at a glance — four phases, twelve months, one trajectory benchmarked against your starting line. Engineered for healthcare practices."
+      "title": "The 12-Month Healthcare Growth Plan — A System, Not a Retainer",
+      "description": "A 12-month growth plan engineered to compound: four sequenced phases, the artifacts you keep, and three numbers we report every month. Built for healthcare practices, HIPAA-aware, month-to-month — no lock-in."
     },
     "breadcrumb": {
       "current": "Growth Plan"
     },
     "hero": {
-      "eyebrow": "The 12-Month Healthcare Growth Plan",
-      "titleLine1": "One chart.",
-      "titleAccent": "Twelve months",
-      "titleSuffix": ". No surprises.",
-      "lede": "A growth plan you can read at a glance. Four phases, twelve months, a single trajectory benchmarked against your starting line - engineered for healthcare practices and underwritten by SEO, paid, and lifecycle channels working together."
+      "eyebrow": "The 12-Month Growth Plan",
+      "titleLine1": "Your next twelve months,",
+      "titleAccent": "engineered to compound",
+      "titleSuffix": ".",
+      "lede": "Most practices buy marketing one tactic at a time and wonder why it never adds up. This is the alternative — a single, sequenced plan that turns SEO, paid, and lifecycle into one trajectory, indexed to your own baseline and reported in numbers you can defend to a board.",
+      "ctaPrimary": "Start with the audit",
+      "ctaSecondary": "See how the plan works",
+      "reassure": [
+        "Two-week diagnostic",
+        "Fixed fee — credited if you continue",
+        "Month-to-month, no lock-in"
+      ]
     },
-    "chart": {
+    "problem": {
+      "eyebrow": "Why most practice marketing stalls",
+      "title": "Tactics don't compound. Systems do.",
+      "lede": "Three failures keep practices busy and flat. A plan only works if it closes all three at once.",
+      "items": [
+        {
+          "n": "01",
+          "title": "Disconnected tactics",
+          "body": "An SEO vendor, an ads vendor, and a web freelancer who never speak. Each channel optimises for itself, so spend climbs while booked visits don't."
+        },
+        {
+          "n": "02",
+          "title": "No honest baseline",
+          "body": "Without a measured starting line, every report is a story. You can't separate growth from seasonality, or your work from the market's."
+        },
+        {
+          "n": "03",
+          "title": "No exit criteria",
+          "body": "Campaigns run forever because nothing defines 'this failed — replace it.' Budget stays trapped in tactics that stopped working months ago."
+        }
+      ],
+      "bridge": "The plan below removes all three: one baseline, one trajectory, and a stated exit criterion on every test."
+    },
+    "system": {
+      "eyebrow": "The System",
+      "title": "Four phases. One trajectory.",
+      "lede": "Twelve months, sequenced so each phase earns the next. Every phase has a window, a deliverable, and a measurement — and nothing ships without a stated hypothesis and an exit criterion.",
+      "deliverablesLabel": "What ships",
+      "measureLabel": "You'll know it by",
+      "phases": {
+        "diagnose": {
+          "window": "Months 01–02",
+          "name": "Diagnose",
+          "summary": "Audit the acquisition stack, instrument every step, and lock the baseline we measure against for a year.",
+          "deliverables": ["Forensic channel audit", "Tracking blueprint", "Baseline scorecard"],
+          "measure": "Baseline locked"
+        },
+        "build": {
+          "window": "Months 02–05",
+          "name": "Build",
+          "summary": "A quiet build. We ship the infrastructure — landing system, content spine, conversion pipeline — before a single campaign goes live.",
+          "deliverables": ["Landing system", "Editorial spine", "Conversion pipeline"],
+          "measure": "Infrastructure live"
+        },
+        "launch": {
+          "window": "Months 05–08",
+          "name": "Launch",
+          "summary": "A staged release across paid, organic, and direct. Each channel ships against a written hypothesis and a number it has to hit.",
+          "deliverables": ["Paid by intent tier", "GBP + local push", "Email recall flows"],
+          "measure": "Bookings curve bends"
+        },
+        "optimize": {
+          "window": "Months 08–12",
+          "name": "Optimize",
+          "summary": "A weekly retrospective and a rolling four-week forecast. Winners get more budget; anything stalled is replaced, on the record.",
+          "deliverables": ["Decision log", "A/B queue", "Quarterly board review"],
+          "measure": "Compounding"
+        }
+      }
+    },
+    "trajectory": {
       "eyebrow": "The Trajectory",
-      "titleLine1": "Where the practice is at each month, indexed to its",
+      "titleLine1": "Where you stand each month, indexed to your",
       "titleAccent": "own baseline",
       "titleSuffix": ".",
-      "ariaLabel": "12-month growth trajectory chart",
+      "ariaLabel": "12-month growth trajectory, from baseline to roughly 3.8 times",
       "legend": {
-        "area": "Curve area",
-        "baseline": "Baseline"
-      },
-      "trajectoryLabels": {
-        "baseline": "Baseline",
-        "firstUplift": "First booked uplift",
-        "rankingCrossover": "Ranking crossover",
-        "compoundZone": "Compound zone"
+        "area": "Growth curve",
+        "baseline": "Your starting line"
       },
       "phaseLabels": {
         "diagnose": "DIAGNOSE",
@@ -1434,105 +1495,143 @@
         "launch": "LAUNCH",
         "optimize": "OPTIMIZE"
       },
-      "footer": "Multiplier curve indexed to month-0 patient acquisition cost and booked-visit baselines. Ranges reflect the median across active engagements. Individual outcomes vary with starting position and clinical vertical."
+      "milestonesTitle": "Four moments that matter",
+      "milestones": [
+        { "m": "M00", "label": "Baseline locked", "detail": "The starting line every later number is measured against." },
+        { "m": "M04", "label": "First booked uplift", "detail": "Infrastructure starts converting; booked visits move ahead of baseline." },
+        { "m": "M07", "label": "Ranking crossover", "detail": "Organic begins carrying acquisition cost down as paid stabilises." },
+        { "m": "M12", "label": "Compound zone", "detail": "Channels reinforce each other; growth stops depending on any single spend." }
+      ],
+      "footer": "Illustrative trajectory indexed to a month-0 baseline — the shape of a healthy engagement, not a forecast. Actual pace depends on your starting position, market, and clinical vertical. The numbers we put in writing are below."
     },
-    "phases": {
-      "eyebrow": "The Four Phases",
-      "title": "Read across the chart, top to bottom.",
-      "lede": "Each phase has a window, a deliverable, and a measurement. Nothing ships without a stated hypothesis and an exit criterion.",
-      "items": {
-        "diagnose": {
-          "name": "Diagnose",
-          "summary": "Audit the acquisition stack. Build the dashboard. Establish the baseline.",
-          "deliverables": ["Forensic channel audit", "Tracking blueprint", "Baseline scorecard"]
-        },
-        "build": {
-          "name": "Build",
-          "summary": "Quiet build. We ship infrastructure before we ship campaigns.",
-          "deliverables": ["Landing system", "Editorial spine", "Conversion pipeline"]
-        },
-        "launch": {
-          "name": "Launch",
-          "summary": "A staged release across paid, organic, and direct. Each ships against a stated hypothesis.",
-          "deliverables": ["Paid by intent tier", "GBP + local push", "Email recall flows"]
-        },
-        "optimize": {
-          "name": "Optimize",
-          "summary": "A weekly retrospective and rolling 4-week forecast. Anything stalled is replaced.",
-          "deliverables": ["Decision log", "A/B queue", "Quarterly review"]
-        }
-      }
-    },
-    "quarters": {
-      "eyebrow": "What ships, by quarter",
-      "titleLine1": "The plan, on",
-      "titleAccent": "one page",
-      "titleSuffix": ".",
-      "kicker": "Four quarters. One arc — Foundation to Compound. Each stage hands off to the next.",
-      "ctaPrimary": "Start your plan",
+    "deliverables": {
+      "eyebrow": "What you actually get",
+      "title": "Artifacts, not activity reports.",
+      "lede": "Every phase produces something you keep — useful whether you stay a month or a decade.",
       "items": [
         {
-          "q": "Q1",
-          "months": "M01 – M03",
-          "focus": "Foundation",
-          "ships": "Audit, tracking, brand & content infrastructure",
-          "read": "Baseline locked"
+          "title": "Forensic growth audit",
+          "body": "A two-week diagnostic of your funnel, channels, and tracking — with the plan attached."
         },
         {
-          "q": "Q2",
-          "months": "M04 – M06",
-          "focus": "Acquisition",
-          "ships": "Paid launch, GBP optimisation, on-site CRO",
-          "read": "Bookings curve"
+          "title": "Live KPI dashboard",
+          "body": "The same view we work from. Acquisition cost, booked visits, and organic — updated continuously."
         },
         {
-          "q": "Q3",
-          "months": "M07 – M09",
-          "focus": "Compounding",
-          "ships": "Organic crossover, content depth, lifecycle email",
-          "read": "Ranking flip"
+          "title": "Conversion-ready site system",
+          "body": "Landing pages and forms engineered to turn the traffic we send into booked appointments."
         },
         {
-          "q": "Q4",
-          "months": "M10 – M12",
-          "focus": "Optimising",
-          "ships": "Channel rebalance, retention engine, board review",
-          "read": "Compound zone"
+          "title": "Content & SEO engine",
+          "body": "An editorial spine and schema programme that compounds organic reach month over month."
+        },
+        {
+          "title": "Weekly decision log",
+          "body": "Every test, hypothesis, and call — written down. You always know why a dollar moved."
+        },
+        {
+          "title": "Quarterly board review",
+          "body": "A plain-English readout of trajectory versus baseline, ready to forward to your partners."
+        }
+      ]
+    },
+    "principles": {
+      "eyebrow": "Why this plan, and why us",
+      "title": "How we operate when the contract is month-to-month.",
+      "lede": "No lock-in means we have to earn next month, every month. That changes how the work is run.",
+      "items": [
+        {
+          "title": "Built for healthcare",
+          "body": "HIPAA-aware across forms, hosting, ads, and analytics — every vendor in the stack is BAA-covered."
+        },
+        {
+          "title": "Senior team only",
+          "body": "The people who scope your plan run it. No account juniors learning on your budget."
+        },
+        {
+          "title": "One number — your baseline",
+          "body": "We index to your starting line, not industry averages. No vanity metrics, no borrowed wins."
+        },
+        {
+          "title": "Hypothesis and exit on every test",
+          "body": "Nothing runs forever by default. Each play states what it expects and when we'd kill it."
+        },
+        {
+          "title": "You see what we see",
+          "body": "A shared live dashboard — not a curated monthly PDF that hides the inconvenient lines."
+        },
+        {
+          "title": "Earned, month to month",
+          "body": "No annual lock-in. If the trajectory stops earning its keep, you leave — and keep the artifacts."
         }
       ]
     },
     "commitments": {
-      "eyebrow": "What we commit to",
-      "title": "Three numbers. Measured monthly. Reported in your dashboard.",
-      "lede": "Targets are net-new versus baseline measured in the 30 days preceding kickoff. We do not report against improvements driven by seasonality or campaigns already in flight at signing.",
+      "eyebrow": "How we keep score",
+      "title": "Three numbers. In the agreement. Reported every month.",
+      "lede": "These are the target ranges we put in writing — not results we're claiming on your behalf. Each is measured net-new against the baseline locked in the 30 days before kickoff, with no credit for seasonality or campaigns already in flight at signing.",
       "items": [
         {
           "metric": "Patient acquisition cost",
-          "delta": "−42%",
-          "by": "by month 6",
-          "detail": "Median reduction across the active book once paid is restructured by intent tier."
+          "delta": "−30 to −45%",
+          "by": "target by month 6",
+          "detail": "We restructure paid by intent tier and let organic carry the cheap demand — the cost line is the first thing we move."
         },
         {
           "metric": "Booked visits",
-          "delta": "+78%",
-          "by": "by month 9",
-          "detail": "Counted as net-new versus the 30 days preceding kickoff. No seasonality credit."
+          "delta": "+50 to +80%",
+          "by": "target by month 9",
+          "detail": "Counted as net-new versus the 30 days before kickoff. The dashboard ties every booking back to the channel that earned it."
         },
         {
           "metric": "Organic non-brand traffic",
-          "delta": "3.8×",
-          "by": "by month 12",
-          "detail": "On the schema-and-content programme we audit during the diagnose phase."
+          "delta": "2 to 4×",
+          "by": "target by month 12",
+          "detail": "The schema-and-content programme we scope during Diagnose is what compounds acquisition cost down in the back half."
+        }
+      ]
+    },
+    "faq": {
+      "eyebrow": "Before you ask",
+      "title": "The questions every practice asks first.",
+      "items": [
+        {
+          "q": "How fast will we see results?",
+          "a": "The audit lands in two weeks. Infrastructure goes live through months two to five, and the booked-visit curve usually starts bending once Launch is underway — not on day one. Anyone promising week-one results is selling a spike, not a system."
+        },
+        {
+          "q": "Do you guarantee the numbers?",
+          "a": "We guarantee the work, the cadence, and the transparency — and we put target ranges in the agreement. We don't guarantee a specific outcome, because honest healthcare marketing depends on your market and starting position. What we do guarantee is that you'll always know exactly where the trajectory stands against baseline."
+        },
+        {
+          "q": "How much of my team's time does this take?",
+          "a": "Heaviest during Diagnose — a few hours of access and context. After that, a 30-minute weekly check-in and a quarterly review. We run the plan; you make the calls that need a clinician or owner."
+        },
+        {
+          "q": "Is there a contract or lock-in?",
+          "a": "No annual lock-in. We work month-to-month after the audit. If the trajectory stops earning its keep, you can leave — and you keep every artifact we built."
+        },
+        {
+          "q": "What does it cost?",
+          "a": "The audit is a fixed fee, quoted before you commit, and it credits against month one if you continue. The ongoing plan is scoped to your goals and channels — the audit is what lets us quote it honestly instead of guessing."
+        },
+        {
+          "q": "Is it HIPAA-compliant?",
+          "a": "Yes. Forms, hosting, ad platforms, and analytics run on a BAA-covered toolchain, reviewed annually. Compliance is scoped into the plan, not bolted on afterward."
+        },
+        {
+          "q": "What happens right after the audit?",
+          "a": "You get the forensic plan and the numbers — yours to keep, whether you continue with us or not. If you move forward, the audit fee credits against month one and we start Diagnose immediately."
         }
       ]
     },
     "closing": {
-      "imgAlt": "Two-week growth audit diagnostic — forensic plan deliverable.",
+      "imgAlt": "Two-week growth audit diagnostic — the forensic plan deliverable.",
       "eyebrow": "Step Zero",
       "title": "Begin with the audit. Decide later.",
-      "body": "A two-week, fixed-fee diagnostic that returns a forensic plan whether you continue with us or not. If we move forward, the audit fee credits against month one.",
-      "ctaPrimary": "Start the audit →",
-      "ctaSecondary": "Read the casebook"
+      "body": "A two-week, fixed-fee diagnostic that returns a forensic plan — whether you continue with us or not. If we move forward, the audit fee credits against month one. No lock-in, no pressure: just the clearest read you've had on your own funnel.",
+      "ctaPrimary": "Start the audit",
+      "ctaSecondary": "Talk to the team"
     }
   },
   "hipaaCompliance": {
@@ -1713,7 +1812,7 @@
       "titleLine1": "Patient growth,",
       "titleAccent": "engineered",
       "lede": "One integrated system across SEO, paid media, and automation — instrumented end-to-end, reviewed weekly, tuned for the economics of a clinic. Built for operators who want a number, not a deck.",
-      "ctaPrimary": "Request the free audit",
+      "ctaPrimary": "Book a free call",
       "ctaSecondary": "See the channels",
       "pricingPrefix": "From",
       "pricingPrice": "$2,500/mo",

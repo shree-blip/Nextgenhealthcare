@@ -6,7 +6,7 @@ import imgHero from '@/assets/nextgen-image/Patientgrowthimg.png';
 import { HEAD_META_KEYS, HERO_PULSE } from './data';
 
 /* ---------- HERO ---------- */
-const Hero = () => {
+const Hero = ({ onBook }: { onBook?: () => void }) => {
   const { t } = useTranslation('pages');
   return (
     <section className="ph-page-head">
@@ -41,10 +41,10 @@ const Hero = () => {
             </p>
 
             <div className="mt-9 flex flex-wrap items-center gap-4">
-              <Link to="/free-growth-audit" className="btn-primary">
+              <button type="button" onClick={onBook} className="btn-primary">
                 {t('pages:healthcareGrowthEngine.hero.ctaPrimary')}
                 <ArrowIcon />
-              </Link>
+              </button>
               <Link
                 to="/services"
                 className="inline-flex items-center gap-2 px-5 py-3 rounded-[10px] border border-line-faint text-heading text-sm font-semibold hover:border-line hover:-translate-y-px transition"

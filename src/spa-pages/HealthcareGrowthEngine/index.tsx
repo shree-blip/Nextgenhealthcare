@@ -1,4 +1,6 @@
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import BookingModal from '@/components/BookingModal';
 import Hero from './Hero';
 import TrustStrip from './TrustStrip';
 import TheGap from './TheGap';
@@ -24,6 +26,7 @@ import { SCHEMA } from './data';
 
 const HealthcareGrowthEngine = () => {
   const { t } = useTranslation('pages');
+  const [bookingOpen, setBookingOpen] = useState(false);
   const breadcrumbSchema = buildBreadcrumbList([
     { name: 'Home', path: '/' },
     { name: t('pages:healthcareGrowthEngine.breadcrumb.current') },
@@ -38,7 +41,7 @@ const HealthcareGrowthEngine = () => {
         schema={[SCHEMA, breadcrumbSchema]}
       />
 
-      <Hero />
+      <Hero onBook={() => setBookingOpen(true)} />
       <TrustStrip />
       <TheGap />
       <Channels />
@@ -48,7 +51,9 @@ const HealthcareGrowthEngine = () => {
       <Package />
       <Voice />
       <Faq />
-      <Closing />
+      <Closing onBook={() => setBookingOpen(true)} />
+
+      <BookingModal open={bookingOpen} onClose={() => setBookingOpen(false)} />
     </>
   );
 };
