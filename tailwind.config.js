@@ -1,5 +1,10 @@
 /** @type {import('tailwindcss').Config} */
 export default {
+  // Dashboard dark styles must only apply when a `.dark` class is present —
+  // NOT based on the visitor's OS theme. Without this, Tailwind defaults to
+  // `media`, so `dark:` utilities auto-trigger on any device set to dark mode,
+  // making the dashboard render black on some devices and white on others.
+  darkMode: 'class',
   content: [
     "./app/**/*.{js,jsx,ts,tsx}",
     "./src/**/*.{js,jsx,ts,tsx}",

@@ -27,24 +27,14 @@ export function AdminPreferencesProvider({ children }: { children: ReactNode }) 
     setMounted(true);
   }, []);
 
-  // Update theme based on preference
+  // Dark mode is disabled — the dashboard always renders in light mode on every
+  // device, regardless of the saved preference or the visitor's OS theme. We
+  // never add the `.dark` class, so all `dark:` Tailwind utilities stay off.
   useEffect(() => {
     if (!mounted) return;
 
-    let theme = preferences.theme;
-    if (theme === 'auto') {
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      theme = prefersDark ? 'dark' : 'light';
-    }
-
-    setIsDarkMode(theme === 'dark');
-
-    // Update document element
-    if (theme === 'dark') {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
+    setIsDarkMode(false);
+    document.documentElement.classList.remove('dark');
   }, [preferences.theme, mounted]);
 
   const setTheme = (theme: AdminTheme) => {
