@@ -22,7 +22,12 @@ const BookingModal = ({ open, onClose }: BookingModalProps) => {
   const [view, setView] = useState(() => new Date(today.getFullYear(), today.getMonth(), 1));
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
+  const [email, setEmail] = useState('');
+  const [submitting, setSubmitting] = useState(false);
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [confirmed, setConfirmed] = useState(false);
+
+  const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
 
   useEffect(() => {
     if (!open) return;
@@ -44,6 +49,9 @@ const BookingModal = ({ open, onClose }: BookingModalProps) => {
       setConfirmed(false);
       setSelectedDate(null);
       setSelectedTime(null);
+      setEmail('');
+      setErrorMsg(null);
+      setSubmitting(false);
     }
   }, [open]);
 
@@ -58,11 +66,6 @@ const BookingModal = ({ open, onClose }: BookingModalProps) => {
     setSelectedTime(null);
   };
 
-  const handleConfirm = () => {
-    if (!selectedDate || !selectedTime) return;
-    setConfirmed(true);
-  };
-
   const formattedDate = selectedDate
     ? selectedDate.toLocaleDateString(locale, {
         weekday: 'long',
@@ -71,6 +74,34 @@ const BookingModal = ({ open, onClose }: BookingModalProps) => {
         year: 'numeric',
       })
     : '';
+
+  const handleConfirm = async () => {
+    if (!selectedDate || !selectedTime || !emailValid || submitting) return;
+    setSubmitting(true);
+    setErrorMsg(null);
+    try {
+      const res = await fetch('/api/bookings', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: email.trim(),
+          date: formattedDate,
+          time: selectedTime,
+          timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+          source: 'booking-modal',
+        }),
+      });
+      if (!res.ok) {
+        const data = (await res.json().catch(() => ({}))) as { error?: string };
+        throw new Error(data?.error || 'request failed');
+      }
+      setConfirmed(true);
+    } catch {
+      setErrorMsg(t('booking.submitError'));
+    } finally {
+      setSubmitting(false);
+    }
+  };
 
   const confirmLabel = selectedDate
     ? selectedTime
@@ -423,13 +454,58 @@ const BookingModal = ({ open, onClose }: BookingModalProps) => {
                 )}
               </div>
 
+              {selectedTime && (
+                <div style={{ marginTop: 14, marginBottom: 4 }}>
+                  <label
+                    htmlFor="booking-email"
+                    style={{
+                      display: 'block',
+                      fontSize: 11,
+                      fontWeight: 700,
+                      letterSpacing: '0.16em',
+                      textTransform: 'uppercase',
+                      color: '#718096',
+                      marginBottom: 6,
+                    }}
+                  >
+                    {t('booking.emailLabel')}
+                  </label>
+                  <input
+                    id="booking-email"
+                    type="email"
+                    required
+                    autoComplete="email"
+                    value={email}
+                    onChange={(e) => {
+                      setEmail(e.target.value);
+                      if (errorMsg) setErrorMsg(null);
+                    }}
+                    placeholder={t('booking.emailPlaceholder')}
+                    aria-invalid={!!errorMsg}
+                    style={{
+                      width: '100%',
+                      padding: '12px 14px',
+                      borderRadius: 12,
+                      border: `1px solid ${errorMsg ? '#C0392B' : 'rgba(45,55,72,0.18)'}`,
+                      fontSize: 14,
+                      color: '#2D3748',
+                      outline: 'none',
+                      background: '#fff',
+                    }}
+                  />
+                  {errorMsg && (
+                    <div style={{ color: '#C0392B', fontSize: 12, marginTop: 6 }}>{errorMsg}</div>
+                  )}
+                </div>
+              )}
+
               <button
                 type="button"
                 className="cal-confirm"
-                disabled={!selectedDate || !selectedTime}
+                disabled={!selectedDate || !selectedTime || !emailValid || submitting}
                 onClick={handleConfirm}
               >
-                <span>{confirmLabel}</span>
+                <span>{submitting ? t('booking.submitting') : confirmLabel}</span>
                 <span className="ico" aria-hidden="true">
                   <ArrowIcon size={14} />
                 </span>

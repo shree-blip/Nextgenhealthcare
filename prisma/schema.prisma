@@ -163,6 +163,22 @@ model ContactLead {
   @@index([status])
 }
 
+model Booking {
+  id        Int      @id @default(autoincrement())
+  email     String
+  name      String?
+  date      String
+  time      String
+  timezone  String?
+  status    String   @default("new")
+  source    String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([createdAt])
+  @@index([status])
+}
+
 model User {
   id                   String         @id @default(cuid())
   email                String         @unique

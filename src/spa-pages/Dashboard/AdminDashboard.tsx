@@ -4095,6 +4095,7 @@ function ContentForSection(props: {
                   { label: 'Blog Posts', value: platformHealth.counts?.posts, color: 'text-purple-500' },
                   { label: 'News Articles', value: platformHealth.counts?.news, color: 'text-rose-500' },
                   { label: 'Leads', value: platformHealth.counts?.leads, color: 'text-amber-500' },
+                  { label: 'Bookings', value: platformHealth.counts?.bookings, color: 'text-[#4A3208]' },
                   { label: 'Subscribers', value: platformHealth.counts?.subscribers, color: 'text-[#4A3208]' },
                   { label: 'Chat Sessions', value: platformHealth.counts?.chatSessions, color: 'text-indigo-500' },
                   { label: 'Chat Messages', value: platformHealth.counts?.chatMessages, color: 'text-pink-500' },
@@ -4151,6 +4152,48 @@ function ContentForSection(props: {
                     </div>
                   </div>
                 </div>
+              </div>
+
+              {/* Consultation bookings — who requested a call, with their email */}
+              <div className="glass rounded-2xl p-6 border border-slate-200 dark:border-slate-700 mt-6">
+                <div className="flex items-center justify-between mb-4">
+                  <div>
+                    <h3 className="text-lg font-bold">Consultation Bookings</h3>
+                    <p className="text-xs text-slate-500 dark:text-slate-400">Free-call requests from the website booking popup</p>
+                  </div>
+                  <span className="text-xs text-slate-500 dark:text-slate-400 whitespace-nowrap">
+                    {(platformHealth.counts?.bookings ?? 0).toLocaleString()} total · {platformHealth.recent?.bookings7d ?? 0} this week
+                  </span>
+                </div>
+                {!platformHealth.bookings || platformHealth.bookings.length === 0 ? (
+                  <p className="text-sm text-slate-500 dark:text-slate-400 py-6 text-center">No bookings yet.</p>
+                ) : (
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-sm">
+                      <thead>
+                        <tr className="text-left text-[11px] uppercase tracking-wider text-slate-500 border-b border-slate-200 dark:border-slate-700">
+                          <th className="py-2 pr-4 font-semibold">Email</th>
+                          <th className="py-2 pr-4 font-semibold">Requested Date</th>
+                          <th className="py-2 pr-4 font-semibold">Time</th>
+                          <th className="py-2 pr-4 font-semibold whitespace-nowrap">Submitted</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {platformHealth.bookings.map((b: any) => (
+                          <tr key={b.id} className="border-b border-slate-100 dark:border-slate-800 last:border-0">
+                            <td className="py-2.5 pr-4">
+                              <a href={`mailto:${b.email}`} className="font-medium text-[#4A3208] hover:underline">{b.email}</a>
+                              {b.name && <span className="block text-xs text-slate-400">{b.name}</span>}
+                            </td>
+                            <td className="py-2.5 pr-4 text-slate-700 dark:text-slate-300 whitespace-nowrap">{b.date}</td>
+                            <td className="py-2.5 pr-4 text-slate-700 dark:text-slate-300 whitespace-nowrap">{b.time}{b.timezone ? ` · ${b.timezone}` : ''}</td>
+                            <td className="py-2.5 pr-4 text-slate-500 whitespace-nowrap">{new Date(b.createdAt).toLocaleString()}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                )}
               </div>
             </>
           )}

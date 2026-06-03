@@ -38,6 +38,9 @@ export async function GET() {
       contactedLeads,
       qualifiedLeads,
       closedLeads,
+      totalBookings,
+      recentBookings7d,
+      recentBookingsFeed,
     ] = await Promise.all([
       prisma.user.count(),
       prisma.clinic.count(),
@@ -97,6 +100,22 @@ export async function GET() {
       prisma.contactLead.count({ where: { status: 'contacted' } }),
       prisma.contactLead.count({ where: { status: 'qualified' } }),
       prisma.contactLead.count({ where: { status: 'closed' } }),
+      prisma.booking.count(),
+      prisma.booking.count({ where: { createdAt: { gte: sevenDaysAgo } } }),
+      prisma.booking.findMany({
+        orderBy: { createdAt: 'desc' },
+        take: 10,
+        select: {
+          id: true,
+          email: true,
+          name: true,
+          date: true,
+          time: true,
+          timezone: true,
+          status: true,
+          createdAt: true,
+        },
+      }),
     ]);
 
     const activityFeed = [
@@ -148,6 +167,14 @@ export async function GET() {
         status: 'active',
         timestamp: s.subscribedAt,
       })),
+      ...recentBookingsFeed.map((b) => ({
+        type: 'booking' as const,
+        icon: 'calendar',
+        title: `Call booked: ${b.email}`,
+        detail: `${b.date} · ${b.time}`,
+        status: b.status,
+        timestamp: b.createdAt,
+      })),
     ]
       .sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime())
       .slice(0, 20);
@@ -163,13 +190,16 @@ export async function GET() {
         chatSessions: totalChatSessions,
         chatMessages: totalChatMessages,
         connectedClinics,
+        bookings: totalBookings,
       },
       recent: {
         leads24h: recentLeads24h,
         users7d: recentUsers7d,
         posts7d: recentPosts7d,
         sessions7d: activeSessions7d,
+        bookings7d: recentBookings7d,
       },
+      bookings: recentBookingsFeed,
       content: { publishedPosts, draftPosts, publishedNews },
       leadPipeline: {
         new: newLeads,
