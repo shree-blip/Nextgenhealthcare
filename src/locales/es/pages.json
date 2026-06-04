@@ -1405,6 +1405,12 @@
     "breadcrumb": {
       "current": "Plan de crecimiento"
     },
+    "cta": {
+      "book": "Agenda una consulta gratis",
+      "contact": "Contáctanos",
+      "bookHint": "Llamada de 30 minutos · sin compromiso",
+      "label": "Dos formas de empezar"
+    },
     "hero": {
       "eyebrow": "El plan de crecimiento a 12 meses",
       "titleLine1": "Tus próximos doce meses,",

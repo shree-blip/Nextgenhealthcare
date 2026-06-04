@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { PHASES, TRAJECTORY } from './data';
+import { Eyebrow, GradientText } from './parts';
 
 /* ────────────────────────────────────────────────────────────────────
    THE TRAJECTORY — a single compounding curve, phase-banded and indexed
@@ -183,39 +184,37 @@ const Trajectory = () => {
 
   return (
     <section className="border-t border-line-faint bg-bg-alt">
-      <div className="container-shell py-[clamp(48px,7vw,96px)]">
-        <div className="flex items-baseline justify-between mb-8 flex-wrap gap-y-3">
+      <div className="container-shell py-[clamp(64px,9vw,128px)]">
+        <div className="mb-8 flex flex-wrap items-end justify-between gap-y-4">
           <div>
-            <div className="text-line font-mono text-[12px] tracking-[0.24em] uppercase">
-              {t('pages:growthPlan.trajectory.eyebrow')}
-            </div>
-            <h2 className="mt-3 text-heading text-[clamp(22px,2.2vw,30px)] font-bold tracking-[-0.02em] max-w-[28ch]">
+            <Eyebrow color="#8FBC8F">{t('pages:growthPlan.trajectory.eyebrow')}</Eyebrow>
+            <h2 className="mt-5 max-w-[28ch] text-[clamp(24px,2.6vw,34px)] font-bold leading-[1.1] tracking-[-0.02em] text-heading">
               {t('pages:growthPlan.trajectory.titleLine1')}{' '}
-              <span
-                className="bg-clip-text text-transparent"
-                style={{
-                  backgroundImage: 'linear-gradient(90deg, #B38B6D 0%, #8FBC8F 50%, #576DB5 100%)',
-                }}
-              >
-                {t('pages:growthPlan.trajectory.titleAccent')}
-              </span>
+              <GradientText>{t('pages:growthPlan.trajectory.titleAccent')}</GradientText>
               {t('pages:growthPlan.trajectory.titleSuffix')}
             </h2>
           </div>
           <div className="flex items-baseline gap-6 text-[12px] text-muted">
             <span className="flex items-center gap-2">
-              <span className="inline-block w-3 h-3 bg-cta/20" />{' '}
+              <span className="inline-block h-3 w-3 rounded-sm bg-cta/20" />{' '}
               {t('pages:growthPlan.trajectory.legend.area')}
             </span>
             <span className="flex items-center gap-2">
-              <span className="inline-block w-3 h-px bg-heading/40" />{' '}
+              <span className="inline-block h-px w-3 bg-heading/40" />{' '}
               {t('pages:growthPlan.trajectory.legend.baseline')}
             </span>
           </div>
         </div>
 
-        <div className="bg-white border border-line-faint rounded-[16px] p-4 sm:p-8">
-          <TrajectoryChart ariaLabel={t('pages:growthPlan.trajectory.ariaLabel')} />
+        <div className="overflow-hidden rounded-[20px] border border-line-faint bg-white shadow-card">
+          <div className="border-b border-line-faint bg-bg-alt/60 px-5 py-3.5 sm:px-8">
+            <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-muted">
+              {t('pages:growthPlan.trajectory.ariaLabel')}
+            </span>
+          </div>
+          <div className="p-4 sm:p-8">
+            <TrajectoryChart ariaLabel={t('pages:growthPlan.trajectory.ariaLabel')} />
+          </div>
         </div>
 
         {/* Milestone cards */}

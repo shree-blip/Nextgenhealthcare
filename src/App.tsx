@@ -27,6 +27,8 @@ import NewsDetail from './spa-pages/HealthcareNews/NewsDetail';
 import HealthcareContent from './spa-pages/HealthcareContent';
 import HealthcareGrowthEngine from './spa-pages/HealthcareGrowthEngine';
 import GrowthPlan from './spa-pages/GrowthPlan';
+import PatientFlow from './spa-pages/PatientFlow';
+import PracticeMetrics from './spa-pages/PracticeMetrics';
 import MetaAds from './spa-pages/MetaAds';
 import HipaaCompliance from './spa-pages/HipaaCompliance';
 import ReviewsReputation from './spa-pages/ReviewsReputation';
@@ -154,6 +156,8 @@ const App = () => {
           <Route path="/healthcare-news/:slug" element={<NewsDetail />} />
           <Route path="/healthcare-content" element={<HealthcareContent />} />
           <Route path="/growth-plan" element={<GrowthPlan />} />
+          <Route path="/patient-flow" element={<PatientFlow />} />
+          <Route path="/practice-metrics" element={<PracticeMetrics />} />
           <Route path="/meta-ads" element={<MetaAds />} />
           <Route path="/hipaa-compliance" element={<HipaaCompliance />} />
           <Route path="/healthcare-growth-engine" element={<HealthcareGrowthEngine />} />

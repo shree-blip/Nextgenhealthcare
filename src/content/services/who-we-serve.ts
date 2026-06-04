@@ -29,11 +29,12 @@ interface CardConfig {
 
 const CARD_CONFIG: CardConfig[] = [
   {
-    ariaId: 'serve-1',
-    image: clinicsImg,
-    accent: '#7AA1E8',
-    to: '/industries/clinics',
-    key: 'clinics',
+    ariaId: 'serve-3',
+    image: emergencyImg,
+    imgPosition: 'left center',
+    accent: '#A8D5A8',
+    to: '/industries/specialty-emergency',
+    key: 'specialty',
   },
   {
     ariaId: 'serve-2',
@@ -43,12 +44,11 @@ const CARD_CONFIG: CardConfig[] = [
     key: 'medspas',
   },
   {
-    ariaId: 'serve-3',
-    image: emergencyImg,
-    imgPosition: 'left center',
-    accent: '#A8D5A8',
-    to: '/industries/specialty-emergency',
-    key: 'specialty',
+    ariaId: 'serve-1',
+    image: clinicsImg,
+    accent: '#7AA1E8',
+    to: '/industries/clinics',
+    key: 'clinics',
   },
 ];
 

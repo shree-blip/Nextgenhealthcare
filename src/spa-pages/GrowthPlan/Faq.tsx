@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ChevronDownIcon } from '@/components/icons';
+import { Eyebrow } from './parts';
 
 interface FaqItem {
   q: string;
@@ -25,38 +26,41 @@ const Faq = () => {
   return (
     <section className="border-t border-line-faint">
       <div className="container-shell py-[clamp(64px,9vw,128px)]">
-        <div className="grid lg:grid-cols-12 gap-x-16 gap-y-10">
+        <div className="grid gap-x-16 gap-y-10 lg:grid-cols-12">
           <div className="lg:col-span-4">
-            <div className="text-line font-mono text-[12px] tracking-[0.24em] uppercase">
-              {t('pages:growthPlan.faq.eyebrow')}
-            </div>
-            <h2 className="mt-4 text-heading text-[clamp(28px,3vw,42px)] font-bold tracking-[-0.024em] leading-[1.1] max-w-[14ch]">
+            <Eyebrow color="#B38B6D">{t('pages:growthPlan.faq.eyebrow')}</Eyebrow>
+            <h2 className="mt-5 max-w-[14ch] text-[clamp(28px,3vw,42px)] font-bold leading-[1.1] tracking-[-0.024em] text-heading">
               {t('pages:growthPlan.faq.title')}
             </h2>
           </div>
 
           <div className="lg:col-span-8">
-            <div className="border-t border-line-faint">
+            <div className="flex flex-col gap-3">
               {items.map((qa, i) => {
                 const isOpen = open === i;
                 return (
-                  <div key={qa.q} className="border-b border-line-faint">
+                  <div
+                    key={qa.q}
+                    className={`overflow-hidden rounded-[16px] border bg-white transition-colors ${
+                      isOpen ? 'border-cta/30' : 'border-line-faint'
+                    }`}
+                  >
                     <button
                       type="button"
                       onClick={() => setOpen(isOpen ? null : i)}
                       aria-expanded={isOpen}
-                      className="w-full flex items-center justify-between gap-6 py-5 text-left"
+                      className="flex w-full items-center justify-between gap-6 px-6 py-5 text-left"
                     >
-                      <span className="text-heading text-[16px] sm:text-[17px] font-semibold tracking-[-0.012em] leading-[1.35]">
+                      <span className="text-[16px] font-semibold leading-[1.35] tracking-[-0.012em] text-heading sm:text-[17px]">
                         {qa.q}
                       </span>
                       <span
-                        className={`shrink-0 text-cta transition-transform duration-300 ${
-                          isOpen ? 'rotate-180' : ''
+                        className={`grid h-8 w-8 shrink-0 place-items-center rounded-full transition-transform duration-300 ${
+                          isOpen ? 'rotate-180 bg-cta text-white' : 'bg-bg-soft text-cta'
                         }`}
                         aria-hidden="true"
                       >
-                        <ChevronDownIcon size={20} />
+                        <ChevronDownIcon size={18} />
                       </span>
                     </button>
                     <div
@@ -64,7 +68,7 @@ const Faq = () => {
                       style={{ gridTemplateRows: isOpen ? '1fr' : '0fr' }}
                     >
                       <div className="overflow-hidden">
-                        <p className="pb-6 pr-10 text-body text-[14.5px] leading-[1.7] max-w-[64ch]">
+                        <p className="max-w-[64ch] px-6 pb-6 pr-10 text-[14.5px] leading-[1.7] text-body">
                           {qa.a}
                         </p>
                       </div>

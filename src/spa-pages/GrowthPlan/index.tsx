@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import Hero from './Hero';
 import Problem from './Problem';
@@ -8,6 +9,7 @@ import Principles from './Principles';
 import Commitments from './Commitments';
 import Faq from './Faq';
 import Closing from './Closing';
+import BookingModal from '@/components/BookingModal';
 import Seo from '@/components/Seo';
 import { buildBreadcrumbList } from '@/lib/schema';
 import { SITE } from '@/content/site';
@@ -27,6 +29,10 @@ const SERVICE_SCHEMA = {
 
 const GrowthPlan = () => {
   const { t } = useTranslation('pages');
+  const [bookingOpen, setBookingOpen] = useState(false);
+  const openBooking = () => setBookingOpen(true);
+  const closeBooking = () => setBookingOpen(false);
+
   const breadcrumbSchema = buildBreadcrumbList([
     { name: 'Home', path: '/' },
     { name: t('pages:growthPlan.breadcrumb.current') },
@@ -41,7 +47,7 @@ const GrowthPlan = () => {
         schema={[SERVICE_SCHEMA, breadcrumbSchema]}
       />
 
-      <Hero />
+      <Hero onBook={openBooking} />
       <Problem />
       <System />
       <Trajectory />
@@ -50,6 +56,8 @@ const GrowthPlan = () => {
       <Commitments />
       <Faq />
       <Closing />
+
+      <BookingModal open={bookingOpen} onClose={closeBooking} />
     </>
   );
 };

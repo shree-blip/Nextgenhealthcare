@@ -697,6 +697,7 @@ function AdminDashboardContent() {
     'Client Sites',
     'Activity Feed',
     'Platform Health',
+    'Consultation Booking',
     'Content Overview',
     'Lead Pipeline',
     'Analytics',
@@ -1147,7 +1148,7 @@ function AdminDashboardContent() {
 
   // Fetch platform health data for Activity Feed, Platform Health, Content Overview, Lead Pipeline tabs
   useEffect(() => {
-    const needsHealth = ['Activity Feed', 'Platform Health', 'Content Overview', 'Lead Pipeline'].includes(section);
+    const needsHealth = ['Activity Feed', 'Platform Health', 'Consultation Booking', 'Content Overview', 'Lead Pipeline'].includes(section);
     if (!needsHealth || !user) return;
 
     const fetchPlatformHealth = async () => {
@@ -2073,6 +2074,7 @@ function AdminDashboardContent() {
           <NavItem icon={Globe} label={t('Client Sites')} active={section==='Client Sites'} onClick={() => { navigateToSection('Client Sites'); setShowMobileMenu(false); }} dark={dark} />
           <NavItem icon={Activity} label={t('Activity Feed')} active={section==='Activity Feed'} onClick={() => { navigateToSection('Activity Feed'); setShowMobileMenu(false); }} dark={dark} />
           <NavItem icon={Zap} label={t('Platform Health')} active={section==='Platform Health'} onClick={() => { navigateToSection('Platform Health'); setShowMobileMenu(false); }} dark={dark} />
+          <NavItem icon={Calendar} label={t('Consultation Booking')} active={section==='Consultation Booking'} onClick={() => { navigateToSection('Consultation Booking'); setShowMobileMenu(false); }} dark={dark} />
           <NavItem icon={FileText} label={t('Content Overview')} active={section==='Content Overview'} onClick={() => { navigateToSection('Content Overview'); setShowMobileMenu(false); }} dark={dark} />
           <NavItem icon={Target} label={t('Lead Pipeline')} active={section==='Lead Pipeline'} onClick={() => { navigateToSection('Lead Pipeline'); setShowMobileMenu(false); }} dark={dark} />
           <NavItem icon={User} label={t('My Profile')} active={section==='My Profile'} onClick={() => { navigateToSection('My Profile'); setShowMobileMenu(false); }} dark={dark} />
@@ -4153,53 +4155,69 @@ function ContentForSection(props: {
                   </div>
                 </div>
               </div>
-
-              {/* Consultation bookings — who requested a call, with their email */}
-              <div className="glass rounded-2xl p-6 border border-slate-200 dark:border-slate-700 mt-6">
-                <div className="flex items-center justify-between mb-4">
-                  <div>
-                    <h3 className="text-lg font-bold">Consultation Bookings</h3>
-                    <p className="text-xs text-slate-500 dark:text-slate-400">Free-call requests from the website booking popup</p>
-                  </div>
-                  <span className="text-xs text-slate-500 dark:text-slate-400 whitespace-nowrap">
-                    {(platformHealth.counts?.bookings ?? 0).toLocaleString()} total · {platformHealth.recent?.bookings7d ?? 0} this week
-                  </span>
-                </div>
-                {!platformHealth.bookings || platformHealth.bookings.length === 0 ? (
-                  <p className="text-sm text-slate-500 dark:text-slate-400 py-6 text-center">No bookings yet.</p>
-                ) : (
-                  <div className="overflow-x-auto">
-                    <table className="w-full text-sm">
-                      <thead>
-                        <tr className="text-left text-[11px] uppercase tracking-wider text-slate-500 border-b border-slate-200 dark:border-slate-700">
-                          <th className="py-2 pr-4 font-semibold">Email</th>
-                          <th className="py-2 pr-4 font-semibold">Requested Date</th>
-                          <th className="py-2 pr-4 font-semibold">Time</th>
-                          <th className="py-2 pr-4 font-semibold">Status</th>
-                          <th className="py-2 pr-4 font-semibold whitespace-nowrap">Submitted</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {platformHealth.bookings.map((b: any) => (
-                          <tr key={b.id} className="border-b border-slate-100 dark:border-slate-800 last:border-0">
-                            <td className="py-2.5 pr-4">
-                              <a href={`mailto:${b.email}`} className="font-medium text-[#4A3208] hover:underline">{b.email}</a>
-                              {b.name && <span className="block text-xs text-slate-400">{b.name}</span>}
-                            </td>
-                            <td className="py-2.5 pr-4 text-slate-700 dark:text-slate-300 whitespace-nowrap">{b.date}</td>
-                            <td className="py-2.5 pr-4 text-slate-700 dark:text-slate-300 whitespace-nowrap">{b.time}{b.timezone ? ` · ${b.timezone}` : ''}</td>
-                            <td className="py-2.5 pr-4">
-                              <span className={`inline-block px-2 py-0.5 rounded-full text-[11px] font-semibold capitalize ${b.status === 'rescheduled' ? 'bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-300' : 'bg-[#F5C857]/30 text-[#4A3208]'}`}>{b.status || 'new'}</span>
-                            </td>
-                            <td className="py-2.5 pr-4 text-slate-500 whitespace-nowrap">{new Date(b.createdAt).toLocaleString()}</td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
-                )}
-              </div>
             </>
+          )}
+        </div>
+      );
+
+    case 'Consultation Booking':
+      return (
+        <div>
+          <div className="flex items-center justify-between mb-6">
+            <div>
+              <h2 className="text-2xl font-bold mb-1">Consultation Bookings</h2>
+              <p className="text-slate-600 dark:text-slate-400 text-sm">Free-call requests from the website booking popup</p>
+            </div>
+            {platformHealthLoading && <DashboardLoader variant="inline" />}
+          </div>
+
+          {!platformHealth ? (
+            <DashboardLoader variant="card" label="Loading bookings..." />
+          ) : (
+            <div className="glass rounded-2xl p-6 border border-slate-200 dark:border-slate-700">
+              <div className="flex items-center justify-between mb-4">
+                <div>
+                  <h3 className="text-lg font-bold">Consultation Bookings</h3>
+                  <p className="text-xs text-slate-500 dark:text-slate-400">Free-call requests from the website booking popup</p>
+                </div>
+                <span className="text-xs text-slate-500 dark:text-slate-400 whitespace-nowrap">
+                  {(platformHealth.counts?.bookings ?? 0).toLocaleString()} total · {platformHealth.recent?.bookings7d ?? 0} this week
+                </span>
+              </div>
+              {!platformHealth.bookings || platformHealth.bookings.length === 0 ? (
+                <p className="text-sm text-slate-500 dark:text-slate-400 py-6 text-center">No bookings yet.</p>
+              ) : (
+                <div className="overflow-x-auto">
+                  <table className="w-full text-sm">
+                    <thead>
+                      <tr className="text-left text-[11px] uppercase tracking-wider text-slate-500 border-b border-slate-200 dark:border-slate-700">
+                        <th className="py-2 pr-4 font-semibold">Email</th>
+                        <th className="py-2 pr-4 font-semibold">Requested Date</th>
+                        <th className="py-2 pr-4 font-semibold">Time</th>
+                        <th className="py-2 pr-4 font-semibold">Status</th>
+                        <th className="py-2 pr-4 font-semibold whitespace-nowrap">Submitted</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {platformHealth.bookings.map((b: any) => (
+                        <tr key={b.id} className="border-b border-slate-100 dark:border-slate-800 last:border-0">
+                          <td className="py-2.5 pr-4">
+                            <a href={`mailto:${b.email}`} className="font-medium text-[#4A3208] hover:underline">{b.email}</a>
+                            {b.name && <span className="block text-xs text-slate-400">{b.name}</span>}
+                          </td>
+                          <td className="py-2.5 pr-4 text-slate-700 dark:text-slate-300 whitespace-nowrap">{b.date}</td>
+                          <td className="py-2.5 pr-4 text-slate-700 dark:text-slate-300 whitespace-nowrap">{b.time}{b.timezone ? ` · ${b.timezone}` : ''}</td>
+                          <td className="py-2.5 pr-4">
+                            <span className={`inline-block px-2 py-0.5 rounded-full text-[11px] font-semibold capitalize ${b.status === 'rescheduled' ? 'bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-300' : 'bg-[#F5C857]/30 text-[#4A3208]'}`}>{b.status || 'new'}</span>
+                          </td>
+                          <td className="py-2.5 pr-4 text-slate-500 whitespace-nowrap">{new Date(b.createdAt).toLocaleString()}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
+            </div>
           )}
         </div>
       );

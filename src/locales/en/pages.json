@@ -1405,6 +1405,12 @@
     "breadcrumb": {
       "current": "Growth Plan"
     },
+    "cta": {
+      "book": "Book a free consultation",
+      "contact": "Contact us",
+      "bookHint": "30-minute call · no obligation",
+      "label": "Two ways to start"
+    },
     "hero": {
       "eyebrow": "The 12-Month Growth Plan",
       "titleLine1": "Your next twelve months,",
@@ -1632,6 +1638,156 @@
       "body": "A two-week, fixed-fee diagnostic that returns a forensic plan — whether you continue with us or not. If we move forward, the audit fee credits against month one. No lock-in, no pressure: just the clearest read you've had on your own funnel.",
       "ctaPrimary": "Start the audit",
       "ctaSecondary": "Talk to the team"
+    }
+  },
+  "patientFlow": {
+    "seo": {
+      "title": "Patient Flow — Automated Intake from Form to EHR | TheNextGen",
+      "description": "Turn every form submission into an EHR record and a patient confirmation in under three seconds. HIPAA-aware intake automation with zero front-desk lift."
+    },
+    "breadcrumb": {
+      "current": "Patient Flow"
+    },
+    "cta": {
+      "book": "Book a free consultation",
+      "bookHint": "30-minute call · no obligation",
+      "cross": "See the metrics tool"
+    },
+    "hero": {
+      "eyebrow": "Patient Flow",
+      "titleLine1": "From first click to confirmed visit,",
+      "titleAccent": "automatically",
+      "titleSuffix": ".",
+      "lede": "Every inquiry your marketing earns should land in your EHR and reach the patient before the browser tab closes. Patient Flow is the intake layer that makes that happen — no copy-paste, no missed leads, and no protected health information sitting in someone's inbox."
+    },
+    "stats": [
+      { "value": "< 3s", "label": "Form to confirmation" },
+      { "value": "0", "label": "Extra front-desk hours" },
+      { "value": "100%", "label": "BAA-covered toolchain" },
+      { "value": "24/7", "label": "Capture, after hours included" }
+    ],
+    "steps": {
+      "eyebrow": "How the flow works",
+      "title": "Four steps, start to finish — and your team touches none of them.",
+      "lede": "One pipeline behind every channel a patient can reach you through.",
+      "items": [
+        {
+          "n": "01",
+          "title": "Capture",
+          "body": "A patient submits a form, books a slot, or messages your chatbot. Web, phone, and ads all feed the same intake pipeline."
+        },
+        {
+          "n": "02",
+          "title": "Validate",
+          "body": "We de-duplicate, verify contact details, and tag the source — so nothing lands twice and nothing gets lost."
+        },
+        {
+          "n": "03",
+          "title": "Sync",
+          "body": "The record writes straight into your EHR or CRM with the right fields mapped. No manual entry, no transcription errors."
+        },
+        {
+          "n": "04",
+          "title": "Confirm",
+          "body": "The patient gets an instant SMS and email confirmation, and your team gets a quiet heads-up — all within seconds."
+        }
+      ]
+    },
+    "features": {
+      "eyebrow": "What it handles",
+      "title": "Everything between the inquiry and the appointment.",
+      "lede": "The handoffs that usually fall to a busy front desk — handled the moment they happen.",
+      "items": [
+        { "title": "Online intake forms", "body": "Smart, mobile-first forms that collect exactly what the visit needs and nothing that creates risk." },
+        { "title": "Appointment booking", "body": "Real-time slots synced to your calendar, so patients self-schedule without the phone tag." },
+        { "title": "EHR & CRM sync", "body": "Two-way field mapping into the systems you already run — Athena, Jane, HubSpot, and more." },
+        { "title": "Instant confirmations", "body": "Branded SMS and email go out in seconds, cutting no-shows before they start." },
+        { "title": "Reminders & recovery", "body": "Automated reminder cadences and a no-show win-back flow that re-books quietly in the background." },
+        { "title": "PHI-safe by design", "body": "Encrypted in transit and at rest, BAA-covered end to end, with no patient data routed through personal inboxes." }
+      ]
+    },
+    "compliance": {
+      "eyebrow": "Built for clinics",
+      "title": "Automation that respects the rules patients are protected by.",
+      "body": "Patient Flow was designed inside healthcare, not retrofitted for it. Every connector, message, and storage point runs on a BAA-covered toolchain that's reviewed annually — so the speed never comes at the cost of compliance.",
+      "points": [
+        "No front-desk lift — the work happens before anyone picks up the phone.",
+        "Nothing slips through — every lead is captured, tagged, and accounted for.",
+        "Compliant end to end — HIPAA-aware from the first field to the final confirmation."
+      ]
+    },
+    "closing": {
+      "eyebrow": "See it on your stack",
+      "title": "Watch a real inquiry flow into your EHR in seconds.",
+      "body": "Bring one of your intake forms to a 30-minute call and we'll map the exact pipeline for your practice — what connects, what it costs, and what your front desk stops doing."
+    }
+  },
+  "practiceMetrics": {
+    "seo": {
+      "title": "Practice Metrics — One Live Dashboard for Clinic Growth | TheNextGen",
+      "description": "CPA, ROAS, no-show rate, and patient lifetime value on a single live screen — refreshed every fifteen minutes from your ad accounts, EHR, and analytics."
+    },
+    "breadcrumb": {
+      "current": "Practice Metrics"
+    },
+    "cta": {
+      "book": "Book a free consultation",
+      "bookHint": "30-minute call · no obligation",
+      "cross": "See patient flow"
+    },
+    "hero": {
+      "eyebrow": "Practice Metrics",
+      "titleLine1": "Every number that matters, on",
+      "titleAccent": "one live screen",
+      "titleSuffix": ".",
+      "lede": "Stop stitching together ad dashboards, EHR exports, and spreadsheets at month-end. Practice Metrics pulls acquisition cost, return on ad spend, no-show rate, and patient lifetime value into a single view that updates itself — so you make decisions on today's numbers, not last month's."
+    },
+    "stats": [
+      { "value": "15 min", "label": "Refresh cadence" },
+      { "value": "1", "label": "Screen, every channel" },
+      { "value": "4+", "label": "Data sources unified" },
+      { "value": "0", "label": "Spreadsheets to maintain" }
+    ],
+    "metrics": {
+      "eyebrow": "What you'll see",
+      "title": "The metrics that actually decide whether growth is working.",
+      "lede": "No vanity charts. Just the numbers a practice owner needs to defend a budget.",
+      "items": [
+        { "tag": "Acquisition", "title": "Cost per acquisition", "body": "What it truly costs to book a new patient, blended across every channel and updated continuously." },
+        { "tag": "Efficiency", "title": "Return on ad spend", "body": "Revenue earned for every dollar spent, tied back to the campaigns that produced it." },
+        { "tag": "Operations", "title": "No-show rate", "body": "How many booked visits actually arrive — the leak that quietly drains a marketing budget." },
+        { "tag": "Value", "title": "Patient lifetime value", "body": "What a patient is worth over the full relationship, so you can spend to acquire with confidence." },
+        { "tag": "Volume", "title": "Booked visits", "body": "Net-new appointments by week and by source, measured against your own baseline." },
+        { "tag": "Attribution", "title": "Channel attribution", "body": "Which channel earned each booking — so budget moves toward what works, not what's loudest." }
+      ]
+    },
+    "sources": {
+      "eyebrow": "Where the data comes from",
+      "title": "Connected once. Reconciled every fifteen minutes.",
+      "lede": "We pull from the systems you already run and tie them to a single source of truth.",
+      "items": [
+        { "title": "Ad accounts", "body": "Google Ads and Meta spend, clicks, and conversions — normalized so the numbers actually compare." },
+        { "title": "EHR & practice management", "body": "Booked, completed, and no-show visits flow in so revenue ties back to real appointments." },
+        { "title": "Web & analytics", "body": "Site behavior, form submissions, and call tracking stitched to the patient journey end to end." }
+      ]
+    },
+    "score": {
+      "eyebrow": "The one number",
+      "title": "A single Practice Health score, so you know at a glance.",
+      "body": "Behind every detailed metric sits one rolled-up score that tells you whether your practice is performing above or below benchmark — the headline your team can read in two seconds, with the full breakdown one click away.",
+      "scoreValue": "90%",
+      "scoreLabel": "Practice Health",
+      "scoreCaption": "Performing above benchmark",
+      "points": [
+        "Benchmarked against practices of your size and specialty.",
+        "Drill into any metric to see what moved the score.",
+        "Shareable readout, ready to forward to your partners."
+      ]
+    },
+    "closing": {
+      "eyebrow": "See your own numbers",
+      "title": "Get your real metrics on one screen.",
+      "body": "Book a 30-minute call and we'll connect a read-only view of your channels, then walk you through the dashboard with your own data in it — not a demo account."
     }
   },
   "hipaaCompliance": {

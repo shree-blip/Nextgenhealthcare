@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { ArrowIcon } from '@/components/icons';
 
@@ -41,7 +42,7 @@ const WhyUs = () => {
           </div>
 
           {/* TR: Text card */}
-          <a className="fp-card fp-card-text" href="#feature-1">
+          <Link className="fp-card fp-card-text" to="/patient-flow">
             <span className="fp-tag">{t('faq.whyUs.patientFlow.tag')}</span>
             <h3 className="fp-card-title">{t('faq.whyUs.patientFlow.title')}</h3>
             <p className="fp-card-desc">{t('faq.whyUs.patientFlow.desc')}</p>
@@ -49,10 +50,10 @@ const WhyUs = () => {
               {t('faq.whyUs.patientFlow.cta')}
               <ArrowIcon />
             </span>
-          </a>
+          </Link>
 
           {/* BL: Text card */}
-          <a className="fp-card fp-card-text" href="#feature-2">
+          <Link className="fp-card fp-card-text" to="/practice-metrics">
             <span className="fp-tag">{t('faq.whyUs.metrics.tag')}</span>
             <h3 className="fp-card-title">{t('faq.whyUs.metrics.title')}</h3>
             <p className="fp-card-desc">{t('faq.whyUs.metrics.desc')}</p>
@@ -60,7 +61,7 @@ const WhyUs = () => {
               {t('faq.whyUs.metrics.cta')}
               <ArrowIcon />
             </span>
-          </a>
+          </Link>
 
           {/* BR: Image card - finance health mockup */}
           <div className="fp-card fp-card-img">

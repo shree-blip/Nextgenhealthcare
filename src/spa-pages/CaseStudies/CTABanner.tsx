@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { ArrowIcon } from '@/components/icons';
 
-const CTABanner = () => {
+const CTABanner = ({ onBook }: { onBook: () => void }) => {
   const { t } = useTranslation('pages');
   return (
     <section className="cs-cta-banner">
@@ -11,10 +11,10 @@ const CTABanner = () => {
             <h2 className="ctab-title">{t('caseStudies.ctaBanner.title')}</h2>
             <p className="ctab-desc">{t('caseStudies.ctaBanner.desc')}</p>
           </div>
-          <a href="#book" className="ctab-btn">
+          <button type="button" onClick={onBook} className="ctab-btn">
             {t('caseStudies.ctaBanner.button')}
             <ArrowIcon />
-          </a>
+          </button>
         </div>
       </div>
     </section>

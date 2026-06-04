@@ -8,6 +8,7 @@ import { ROUTES } from '../lib/routes';
 import { ChevronDownIcon } from './icons';
 import { SUPPORTED_LANGUAGES, LANGUAGE_LABELS, type SupportedLanguage } from '../i18n';
 import { useAuth } from '../lib/AuthContext';
+import { getLenis } from '../lib/motion';
 
 const Navbar = () => {
   const { t, i18n } = useTranslation(['navigation', 'common']);
@@ -34,6 +35,24 @@ const Navbar = () => {
   const resourcesRef = useRef<HTMLDivElement>(null);
   const langRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
+
+  // When a nav link points at the page we're already on, react-router fires no
+  // navigation, so ScrollToTop never runs. Pin to the top manually in that case
+  // so re-tapping the current page behaves like a fresh load.
+  const handleNavClick = (to: string) => () => {
+    const [path] = to.split('#');
+    if (path === location.pathname) {
+      // Same-path tap doesn't change the route, so the close-on-route-change
+      // effect won't fire — collapse the mobile drawer here too.
+      setMobileOpen(false);
+      const lenis = getLenis();
+      if (lenis) {
+        lenis.scrollTo(0, { immediate: true, force: true });
+      } else {
+        window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+      }
+    }
+  };
 
   const currentLang: SupportedLanguage = (
     SUPPORTED_LANGUAGES as readonly string[]
@@ -151,6 +170,7 @@ const Navbar = () => {
               to="/"
               className="flex items-center"
               aria-label={t('navigation:aria.homeLogo', { name: SITE.name })}
+              onClick={handleNavClick('/')}
             >
               <img
                 src={logoSrc}
@@ -163,7 +183,13 @@ const Navbar = () => {
             {/* Center menu (hidden below 1024px) */}
             <div className="hidden lg:flex items-center justify-center gap-1.5" role="menubar">
               {NAV_PRIMARY.map((link) => (
-                <Link key={link.to} to={link.to} className="nav-link" role="menuitem">
+                <Link
+                  key={link.to}
+                  to={link.to}
+                  className="nav-link"
+                  role="menuitem"
+                  onClick={handleNavClick(link.to)}
+                >
                   {link.label}
                 </Link>
               ))}
@@ -190,7 +216,10 @@ const Navbar = () => {
                         to={item.to}
                         className="nav-dropdown-item"
                         role="menuitem"
-                        onClick={() => setResourcesOpen(false)}
+                        onClick={() => {
+                          setResourcesOpen(false);
+                          handleNavClick(item.to)();
+                        }}
                       >
                         <span className="nav-dropdown-label">{item.label}</span>
                         <span className="nav-dropdown-desc">{item.desc}</span>
@@ -420,6 +449,7 @@ const Navbar = () => {
                           <Link
                             to={ROUTES.services.index}
                             className="block py-3 border-b border-line-faint text-cta text-[15px] font-bold tracking-[-0.01em] hover:opacity-80 transition-opacity"
+                            onClick={handleNavClick(ROUTES.services.index)}
                           >
                             {t('navigation:primary.allServices')}
                           </Link>
@@ -429,6 +459,7 @@ const Navbar = () => {
                             <Link
                               to={s.to}
                               className="block py-3 border-b border-line-faint last:border-b-0 text-heading text-[15px] font-semibold tracking-[-0.01em] hover:text-cta transition-colors"
+                              onClick={handleNavClick(s.to)}
                             >
                               {s.label}
                             </Link>
@@ -442,6 +473,7 @@ const Navbar = () => {
                   <Link
                     to={link.to}
                     className="flex items-center justify-between py-4 text-heading text-[18px] font-bold tracking-[-0.015em] border-b border-line-faint hover:text-cta transition-colors"
+                    onClick={handleNavClick(link.to)}
                   >
                     {link.label}
                     <svg
@@ -493,6 +525,7 @@ const Navbar = () => {
                       <Link
                         to={r.to}
                         className="flex flex-col gap-0.5 py-3 border-b border-line-faint last:border-b-0 hover:bg-bg-soft transition-colors"
+                        onClick={handleNavClick(r.to)}
                       >
                         <span className="text-heading text-[15px] font-semibold tracking-[-0.01em]">
                           {r.label}

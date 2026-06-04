@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import CaseStudiesHead from './CaseStudiesHead';
 import FeaturedCase from './FeaturedCase';
@@ -7,6 +8,7 @@ import StatsStrip from './StatsStrip';
 import CaseStudySpotlight from './CaseStudySpotlight';
 import EngagementProcess from './EngagementProcess';
 import CTABanner from './CTABanner';
+import BookingModal from '@/components/BookingModal';
 import Seo from '@/components/Seo';
 import { buildBreadcrumbList } from '@/lib/schema';
 import { SITE } from '@/content/site';
@@ -41,6 +43,7 @@ const BREADCRUMB_SCHEMA = buildBreadcrumbList([
 
 const CaseStudies = () => {
   const { t } = useTranslation('pages');
+  const [bookingOpen, setBookingOpen] = useState(false);
 
   return (
     <>
@@ -58,7 +61,9 @@ const CaseStudies = () => {
       <StatsStrip />
       <CaseStudySpotlight />
       <EngagementProcess />
-      <CTABanner />
+      <CTABanner onBook={() => setBookingOpen(true)} />
+
+      <BookingModal open={bookingOpen} onClose={() => setBookingOpen(false)} />
     </>
   );
 };
