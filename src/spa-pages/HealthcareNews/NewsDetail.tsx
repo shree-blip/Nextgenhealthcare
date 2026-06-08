@@ -3,6 +3,7 @@ import { useParams, Navigate, Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import Breadcrumb from '@/components/Breadcrumb';
 import Seo from '@/components/Seo';
+import { renderArticleHtml } from '@/lib/article-body';
 import { buildBreadcrumbList } from '@/lib/schema';
 import { SITE } from '@/content/site';
 import { NEWS_ARTICLES, newsBySlug, CATEGORY_TONES, type NewsArticle } from './news.data';
@@ -59,21 +60,26 @@ const DbNewsArticleView = ({ slug }: { slug: string }) => {
   }, [slug, lang]);
 
   if (state === 'loading') {
+    const rows: (number | null)[] = [96, 100, 88, 64, null, 92, 100, 90, 72, null, 98, 84];
     return (
-      <section style={{ padding: '120px 0', textAlign: 'center' }}>
-        <div
-          aria-hidden="true"
-          style={{
-            margin: '0 auto',
-            width: 32,
-            height: 32,
-            border: '3px solid rgba(15,23,42,0.1)',
-            borderTopColor: '#0a9968',
-            borderRadius: '50%',
-            animation: 'spin 0.8s linear infinite',
-          }}
-        />
-        <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
+      <section className="ph-page-head" role="status" aria-label="Loading article">
+        <div className="container-shell" style={{ maxWidth: 760 }}>
+          <div className="bpx-skel" style={{ width: 130, height: 13, marginTop: 32, marginBottom: 24 }} />
+          <div className="bpx-skel" style={{ width: '85%', height: 44, marginBottom: 14 }} />
+          <div className="bpx-skel" style={{ width: '100%', height: 18, marginBottom: 8 }} />
+          <div className="bpx-skel" style={{ width: '70%', height: 18 }} />
+          <div
+            className="bpx-skel"
+            style={{ width: '100%', height: 260, borderRadius: 18, margin: '40px 0' }}
+          />
+          {rows.map((w, i) =>
+            w === null ? (
+              <div key={i} style={{ height: 22 }} />
+            ) : (
+              <div key={i} className="bpx-skel" style={{ width: `${w}%`, marginTop: i === 0 ? 0 : 14 }} />
+            ),
+          )}
+        </div>
       </section>
     );
   }
@@ -171,14 +177,9 @@ const DbNewsArticleView = ({ slug }: { slug: string }) => {
       <section style={{ padding: 'clamp(40px, 5vw, 80px) 0' }}>
         <div className="container-shell">
           <article
-            style={{
-              maxWidth: 760,
-              margin: '0 auto',
-              fontSize: 17,
-              lineHeight: 1.75,
-              color: '#2D3748',
-            }}
-            dangerouslySetInnerHTML={{ __html: article.content || '' }}
+            className="bpx-content"
+            style={{ maxWidth: 760, margin: '0 auto' }}
+            dangerouslySetInnerHTML={{ __html: renderArticleHtml(article.content) }}
           />
           {article.sourceUrl && (
             <p
