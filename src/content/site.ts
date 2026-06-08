@@ -34,9 +34,9 @@ export const SITE = {
     mapsUrl: 'https://www.google.com/maps/place/3001+Skyway+Cir+N,+Irving,+TX+75038',
   },
   social: {
-    instagram: 'https://instagram.com/thenextgenhealth',
-    facebook: 'https://facebook.com/thenextgenhealth',
-    linkedin: 'https://linkedin.com/company/thenextgenhealth',
+    facebook: 'https://www.facebook.com/profile.php?id=61590652352276',
+    x: 'https://x.com/NextGenHealth20',
+    linkedin: 'https://www.linkedin.com/company/thenextgen-health/',
   },
   copyrightYear: 2026,
 } as const;

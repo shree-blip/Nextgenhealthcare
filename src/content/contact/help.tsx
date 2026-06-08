@@ -96,24 +96,6 @@ const FACEBOOK_ICON = (
   </svg>
 );
 
-const INSTAGRAM_ICON = (
-  <svg
-    width={16}
-    height={16}
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth={1.8}
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    aria-hidden="true"
-  >
-    <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
-    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
-    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
-  </svg>
-);
-
 const LINKEDIN_ICON = (
   <svg width={16} height={16} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
     <path d="M20.4 20.4h-3.5v-5.5c0-1.3 0-3-1.8-3s-2.1 1.4-2.1 2.9v5.6H9.5V9h3.4v1.6c.5-.9 1.6-1.8 3.4-1.8c3.6 0 4.3 2.4 4.3 5.5v6.1zM5.6 7.4a2 2 0 1 1 0-4.1a2 2 0 0 1 0 4.1zM7.3 20.4H3.8V9h3.5v11.4zM22.2 0H1.8C.8 0 0 .8 0 1.7v20.5c0 1 .8 1.7 1.8 1.7h20.4c1 0 1.8-.8 1.8-1.7V1.7C24 .8 23.2 0 22.2 0z" />
@@ -132,9 +114,8 @@ export function useSocials(): readonly SocialLink[] {
   return useMemo(
     () => [
       { href: SITE.social.facebook, label: t('help.socials.facebook'), icon: FACEBOOK_ICON },
-      { href: SITE.social.instagram, label: t('help.socials.instagram'), icon: INSTAGRAM_ICON },
+      { href: SITE.social.x, label: t('help.socials.twitter'), icon: TWITTER_ICON },
       { href: SITE.social.linkedin, label: t('help.socials.linkedin'), icon: LINKEDIN_ICON },
-      { href: 'https://twitter.com/thenextgenhealth', label: t('help.socials.twitter'), icon: TWITTER_ICON },
     ],
     [t]
   );
