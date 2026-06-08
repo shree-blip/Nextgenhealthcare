@@ -27,6 +27,7 @@ interface RichTextEditorProps {
   onChange: (value: string) => void;
   placeholder?: string;
   minHeight?: string;
+  maxHeight?: string;
   onImageUpload?: () => void;
   blogTitle?: string; // For auto-generating ALT text
 }
@@ -36,6 +37,7 @@ export default function RichTextEditor({
   onChange,
   placeholder = 'Start writing...',
   minHeight = '400px',
+  maxHeight = '520px',
   blogTitle = ''
 }: RichTextEditorProps) {
   const editorRef = useRef<HTMLDivElement>(null);
@@ -48,6 +50,7 @@ export default function RichTextEditor({
   const [imageAlt, setImageAlt] = useState('');
   const [imageUrl, setImageUrl] = useState('');
   const [uploadingImage, setUploadingImage] = useState(false);
+  const [uploadError, setUploadError] = useState<string | null>(null);
   const [linkUrl, setLinkUrl] = useState('');
   const [linkText, setLinkText] = useState('');
   const [linkTarget, setLinkTarget] = useState<'_self' | '_blank'>('_blank');
@@ -76,8 +79,29 @@ export default function RichTextEditor({
     execCommand(format, value);
   };
 
+  // Returns the block-level tag the current selection sits in (lower-case), or ''
+  const currentBlockTag = (): string => {
+    const sel = window.getSelection();
+    if (!sel || sel.rangeCount === 0) return '';
+    let node: Node | null = sel.getRangeAt(0).startContainer;
+    const root = editorRef.current;
+    while (node && node !== root) {
+      if (node.nodeType === 1) {
+        const tag = (node as HTMLElement).tagName.toLowerCase();
+        if (['p', 'h1', 'h2', 'h3', 'h4', 'blockquote', 'pre', 'div'].includes(tag)) return tag;
+      }
+      node = node.parentNode;
+    }
+    return '';
+  };
+
   const handleHeading = (level: string) => {
-    execCommand('formatBlock', level);
+    // execCommand('formatBlock') only works reliably when the tag is passed in
+    // angle-bracket form (e.g. '<h1>'); the bare 'h1' form no-ops in several
+    // browsers, which is why the H1/H2/H3 buttons appeared to do nothing.
+    // Clicking the same heading again toggles the block back to a paragraph.
+    const target = currentBlockTag() === level ? 'p' : level;
+    execCommand('formatBlock', `<${target}>`);
   };
 
   const handleFontSize = (size: string) => {
@@ -150,6 +174,7 @@ export default function RichTextEditor({
     setShowImageModal(true);
     setImageFile(null);
     setImageUrl('');
+    setUploadError(null);
     // Auto-generate ALT text from blog title
     const autoAlt = blogTitle ? `${blogTitle.substring(0, 60)} - Image` : 'Blog image';
     setImageAlt(autoAlt);
@@ -167,6 +192,7 @@ export default function RichTextEditor({
     if (!imageFile && !imageUrl) return;
 
     setUploadingImage(true);
+    setUploadError(null);
 
     try {
       let finalUrl = imageUrl;
@@ -182,9 +208,9 @@ export default function RichTextEditor({
           body: formData,
         });
 
-        if (!response.ok) throw new Error('Upload failed');
+        const data = await response.json().catch(() => ({}));
+        if (!response.ok) throw new Error(data.error || `Upload failed (${response.status})`);
 
-        const data = await response.json();
         finalUrl = data.url;
       }
 
@@ -200,7 +226,7 @@ export default function RichTextEditor({
       setImageAlt('');
     } catch (error) {
       console.error('Image upload failed:', error);
-      alert('Failed to upload image. Please try again.');
+      setUploadError(error instanceof Error ? error.message : 'Failed to upload image. Please try again.');
     } finally {
       setUploadingImage(false);
     }
@@ -226,6 +252,13 @@ export default function RichTextEditor({
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
+    // Insert Link: Ctrl+K / Cmd+K — opens the link popup with any selected
+    // text pre-filled, instead of having to reach for the toolbar button.
+    if ((e.ctrlKey || e.metaKey) && (e.key === 'k' || e.key === 'K')) {
+      e.preventDefault();
+      handleLink();
+      return;
+    }
     // Undo: Ctrl+Z / Cmd+Z
     if ((e.ctrlKey || e.metaKey) && e.key === 'z' && !e.shiftKey) {
       e.preventDefault();
@@ -272,9 +305,10 @@ export default function RichTextEditor({
   );
 
   return (
-    <div className="border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden bg-white dark:bg-slate-900">
-      {/* Toolbar */}
-      <div className="flex flex-wrap items-center gap-1 p-2 border-b border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-800/80">
+    <div className="border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-900">
+      {/* Toolbar — sticky so it stays visible while scrolling long posts.
+          Note: the wrapper must NOT be overflow-hidden or sticky would be clipped. */}
+      <div className="sticky top-0 z-20 flex flex-wrap items-center gap-1 p-2 border-b border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-800/80 rounded-t-xl">
         {/* Undo/Redo */}
         <ToolbarButton onClick={() => execCommand('undo')} title="Undo">
           <Undo className="h-4 w-4" />
@@ -392,13 +426,13 @@ export default function RichTextEditor({
         suppressContentEditableWarning
         onInput={handleInput}
         onKeyDown={handleKeyDown}
-        className="editor-shell p-4 focus:outline-none prose dark:prose-invert max-w-none"
-        style={{ minHeight }}
+        className="editor-shell p-4 focus:outline-none prose dark:prose-invert max-w-none overflow-y-auto"
+        style={{ minHeight, maxHeight }}
         data-placeholder={placeholder}
       />
 
       {/* Image/Link Helper Area */}
-      <div className="border-t border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/80 p-4">
+      <div className="border-t border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/80 p-4 rounded-b-xl">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="flex items-start gap-3">
             <div className="p-3 bg-white dark:bg-slate-900 rounded-lg border-2 border-dashed border-[#EAD08A] dark:border-[#EAD08A] flex-1">
@@ -614,6 +648,12 @@ export default function RichTextEditor({
                   Auto-generated from blog title. Edit if needed for better SEO & accessibility.
                 </p>
               </div>
+
+              {uploadError && (
+                <p role="alert" className="text-sm text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-900 rounded-lg px-3 py-2">
+                  {uploadError}
+                </p>
+              )}
 
               <div className="flex gap-3 pt-2">
                 <button

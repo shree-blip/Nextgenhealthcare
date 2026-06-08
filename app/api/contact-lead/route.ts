@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@server/prisma';
 import { requireAdmin } from '@server/auth';
+import { notifyLead } from '@server/notifications';
 
 export async function POST(req: NextRequest) {
   try {
@@ -33,6 +34,10 @@ export async function POST(req: NextRequest) {
         status: 'new',
       },
     });
+
+    // Notify the team + confirm to the lead. Never blocks/breaks the response.
+    await notifyLead(lead);
+
     return NextResponse.json({ message: 'Lead submitted successfully', lead }, { status: 201 });
   } catch (err) {
     console.error('Contact-lead POST error:', err);

@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@server/prisma';
 import { requireAdmin } from '@server/auth';
+import { notifyBooking } from '@server/notifications';
 
 /**
  * POST /api/bookings  (public)
@@ -38,6 +39,9 @@ export async function POST(req: NextRequest) {
         status: 'new',
       },
     });
+
+    // Notify the team + confirm to the booker. sendMail never throws.
+    await notifyBooking(booking);
 
     return NextResponse.json({ message: 'Booking submitted successfully', booking }, { status: 201 });
   } catch (err) {
@@ -86,6 +90,9 @@ export async function PATCH(req: NextRequest) {
         status: 'rescheduled',
       },
     });
+
+    // Notify the team + confirm the new slot to the booker.
+    await notifyBooking(booking, { rescheduled: true });
 
     return NextResponse.json({ message: 'Booking rescheduled', booking });
   } catch (err) {
