@@ -37,6 +37,8 @@ export const SITE = {
     facebook: 'https://www.facebook.com/profile.php?id=61590652352276',
     x: 'https://x.com/NextGenHealth20',
     linkedin: 'https://www.linkedin.com/company/thenextgen-health/',
+    instagram:
+      'https://www.instagram.com/nextgenhealth.mkt?igsh=MThiZWh0amNobDhjcg%3D%3D&utm_source=qr',
   },
   copyrightYear: 2026,
 } as const;

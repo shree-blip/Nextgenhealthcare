@@ -108,12 +108,31 @@ const TWITTER_ICON = (
   </svg>
 );
 
+const INSTAGRAM_ICON = (
+  <svg
+    width={16}
+    height={16}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth={1.8}
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    aria-hidden="true"
+  >
+    <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+  </svg>
+);
+
 /** React hook for the Contact social link list. */
 export function useSocials(): readonly SocialLink[] {
   const { t } = useTranslation('contact');
   return useMemo(
     () => [
       { href: SITE.social.facebook, label: t('help.socials.facebook'), icon: FACEBOOK_ICON },
+      { href: SITE.social.instagram, label: t('help.socials.instagram'), icon: INSTAGRAM_ICON },
       { href: SITE.social.x, label: t('help.socials.twitter'), icon: TWITTER_ICON },
       { href: SITE.social.linkedin, label: t('help.socials.linkedin'), icon: LINKEDIN_ICON },
     ],

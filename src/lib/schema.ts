@@ -68,7 +68,7 @@ export const buildOrganizationSchema = (): Record<string, unknown> => ({
       availableLanguage: ['en'],
     },
   ],
-  sameAs: [SITE.social.facebook, SITE.social.x, SITE.social.linkedin],
+  sameAs: [SITE.social.facebook, SITE.social.instagram, SITE.social.x, SITE.social.linkedin],
 });
 
 /**
@@ -133,7 +133,7 @@ export const buildProfessionalServiceSchema = (): Record<string, unknown> => ({
     { '@type': 'State', name: 'Texas' },
     { '@type': 'Country', name: 'United States' },
   ],
-  sameAs: [SITE.social.facebook, SITE.social.x, SITE.social.linkedin],
+  sameAs: [SITE.social.facebook, SITE.social.instagram, SITE.social.x, SITE.social.linkedin],
 });
 
 export interface BreadcrumbItem {
