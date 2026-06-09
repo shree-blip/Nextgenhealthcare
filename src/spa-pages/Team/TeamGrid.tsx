@@ -8,6 +8,7 @@ import sumitPhoto from '../../assets/team-thumbs/sumit-sharma.jpg';
 import rahulPhoto from '../../assets/team-thumbs/rahul-roy.jpg';
 import bidhitshaPhoto from '../../assets/team-thumbs/bidhitsha-khadka.jpg';
 import sagarPhoto from '../../assets/team-thumbs/sagar-timalsina.jpg';
+import richardPhoto from '../../assets/team-thumbs/richard-francis.png';
 
 interface Member {
   id: string;
@@ -87,7 +88,7 @@ const MEMBER_SPECS: readonly MemberSpec[] = [
     id: '10',
     name: 'Richard Francis',
     i18nKey: 'richard',
-    // No headshot supplied yet — TeamCard renders an initials placeholder.
+    photo: richardPhoto,
     linkedin: 'https://www.linkedin.com/in/richard-rodrigues-3b663221b/',
   },
 ];
