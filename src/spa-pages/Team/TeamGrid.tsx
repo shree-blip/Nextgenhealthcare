@@ -14,15 +14,15 @@ interface Member {
   name: string;
   role: string;
   craft: string;
-  photo: string;
+  photo?: string;
   linkedin: string;
 }
 
 interface MemberSpec {
   id: string;
   name: string;
-  i18nKey: 'shree' | 'bikash' | 'sonu' | 'bijesh' | 'sumit' | 'rahul' | 'bidhitsha' | 'sagar';
-  photo: string;
+  i18nKey: 'shree' | 'bikash' | 'sonu' | 'bijesh' | 'sumit' | 'rahul' | 'bidhitsha' | 'sagar' | 'richard';
+  photo?: string;
   linkedin: string;
 }
 
@@ -83,6 +83,13 @@ const MEMBER_SPECS: readonly MemberSpec[] = [
     photo: sagarPhoto,
     linkedin: 'https://www.linkedin.com/in/sagar-timalsina-916909321/',
   },
+  {
+    id: '10',
+    name: 'Richard Francis',
+    i18nKey: 'richard',
+    // No headshot supplied yet — TeamCard renders an initials placeholder.
+    linkedin: 'https://www.linkedin.com/in/richard-rodrigues-3b663221b/',
+  },
 ];
 
 const LinkedInGlyph = () => (
@@ -97,15 +104,40 @@ const LinkedInGlyph = () => (
 const TeamCard = memo(({ member, badge, linkedinAria }: { member: Member; badge: string; linkedinAria: string }) => (
   <article className="ngt-card">
     <div className="ngt-card-photo-wrap">
-      <img
-        src={member.photo}
-        alt={member.name}
-        className="ngt-card-photo"
-        width={400}
-        height={400}
-        loading="lazy"
-        decoding="async"
-      />
+      {member.photo ? (
+        <img
+          src={member.photo}
+          alt={member.name}
+          className="ngt-card-photo"
+          width={400}
+          height={400}
+          loading="lazy"
+          decoding="async"
+        />
+      ) : (
+        <div
+          className="ngt-card-photo"
+          role="img"
+          aria-label={member.name}
+          style={{
+            display: 'grid',
+            placeItems: 'center',
+            background: 'var(--ngt-gold, #B38B6D)',
+            color: '#FFFFFF',
+            fontFamily: "'Plus Jakarta Sans', sans-serif",
+            fontWeight: 800,
+            fontSize: 'clamp(40px, 7vw, 64px)',
+            letterSpacing: '0.04em',
+          }}
+        >
+          {member.name
+            .split(' ')
+            .map((w) => w[0])
+            .join('')
+            .slice(0, 2)
+            .toUpperCase()}
+        </div>
+      )}
       <span className="ngt-card-badge">{badge}</span>
     </div>
     <div className="ngt-card-body">

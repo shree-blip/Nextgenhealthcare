@@ -378,7 +378,7 @@
     "hero": {
       "barK": "00 / Índice",
       "barV": "Las personas · Primavera 2026",
-      "titleStart": "Un equipo de nueve personas,",
+      "titleStart": "Un equipo de diez personas,",
       "titleEm": "100% salud,",
       "titleEnd": "para crecimiento.",
       "lede": "Sin freelancers, sin pases a juniors, sin relays off-shore. Un oficio por practicante — SEO, paid media, contenido, diseño, código, automatización — moviéndose en sincronía en cada retainer.",
@@ -414,14 +414,14 @@
     "grid": {
       "markNum": "02",
       "markLabel": "El equipo",
-      "markMeta": "08 especialistas · 02 – 09",
-      "titleStart": "Ocho especialistas.",
+      "markMeta": "09 especialistas · 02 – 10",
+      "titleStart": "Nueve especialistas.",
       "titleEm": "Un oficio cada uno.",
       "lede": "Las personas que de verdad se loguean el lunes en la mañana — estrategia, paid media, orgánico, código, diseño, contenido, social y operación. El trabajo no sale del edificio.",
       "badge": "NEXTGEN HEALTHCARE",
       "linkedinAria": "{{name}} en LinkedIn",
       "footLeft": "NEXTGEN HEALTHCARE — EQUIPO IN-HOUSE",
-      "footRight": "08 / 08",
+      "footRight": "09 / 09",
       "members": {
         "shree": { "role": "Sr. Marketing Officer", "craft": "Estrategia" },
         "bikash": { "role": "Marketing / IT Project Manager", "craft": "Operación" },
@@ -430,7 +430,8 @@
         "sumit": { "role": "SEO Manager", "craft": "Orgánico" },
         "rahul": { "role": "Redactor de contenido", "craft": "Editorial" },
         "bidhitsha": { "role": "Diseñadora gráfica", "craft": "Diseño" },
-        "sagar": { "role": "Desarrollador de software", "craft": "Ingeniería" }
+        "sagar": { "role": "Desarrollador de software", "craft": "Ingeniería" },
+        "richard": { "role": "Agente de centro de llamadas", "craft": "Soporte" }
       }
     },
     "pillars": {

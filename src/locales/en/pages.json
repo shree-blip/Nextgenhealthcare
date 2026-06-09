@@ -378,7 +378,7 @@
     "hero": {
       "barK": "00 / Index",
       "barV": "The People · Spring 2026",
-      "titleStart": "A nine-person,",
+      "titleStart": "A ten-person,",
       "titleEm": "healthcare-only",
       "titleEnd": "growth team.",
       "lede": "No freelancers, no junior handoffs, no off-shore relay. One craft per practitioner — SEO, paid media, content, design, code, automation — moving in lock-step on every retainer.",
@@ -414,14 +414,14 @@
     "grid": {
       "markNum": "02",
       "markLabel": "The Team",
-      "markMeta": "08 specialists · 02 – 09",
-      "titleStart": "Eight specialists.",
+      "markMeta": "09 specialists · 02 – 10",
+      "titleStart": "Nine specialists.",
       "titleEm": "One craft each.",
       "lede": "The people who actually log in on Monday morning — strategy, paid media, organic, code, design, content, social and operations. The work doesn't leave the building.",
       "badge": "NEXTGEN HEALTHCARE",
       "linkedinAria": "{{name}} on LinkedIn",
       "footLeft": "NEXTGEN HEALTHCARE — IN-HOUSE TEAM",
-      "footRight": "08 / 08",
+      "footRight": "09 / 09",
       "members": {
         "shree": { "role": "Sr. Marketing Officer", "craft": "Strategy" },
         "bikash": { "role": "Marketing / IT Project Manager", "craft": "Operations" },
@@ -430,7 +430,8 @@
         "sumit": { "role": "SEO Manager", "craft": "Organic" },
         "rahul": { "role": "Content Writer", "craft": "Editorial" },
         "bidhitsha": { "role": "Graphics Designer", "craft": "Design" },
-        "sagar": { "role": "Software Developer", "craft": "Engineering" }
+        "sagar": { "role": "Software Developer", "craft": "Engineering" },
+        "richard": { "role": "Call center agent", "craft": "Support" }
       }
     },
     "pillars": {
