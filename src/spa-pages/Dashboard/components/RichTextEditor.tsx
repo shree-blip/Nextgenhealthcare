@@ -430,9 +430,11 @@ export default function RichTextEditor({
           onMouseDown={saveSelection}
           onChange={(e) => {
             const val = e.target.value;
-            if (!val) return;
             restoreSelection();
-            handleFormatSelect(val);
+            // Picking the "Format" placeholder reverts the block back to a
+            // plain paragraph — gives the user an explicit way to undo a
+            // heading/quote choice without keyboard shortcuts.
+            handleFormatSelect(val || 'p');
           }}
           className="px-2 py-1 text-sm bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 border border-slate-200 dark:border-slate-600 rounded-lg focus:outline-none focus:border-[#E5B73A]"
         >
