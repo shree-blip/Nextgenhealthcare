@@ -55,6 +55,46 @@ export default function RichTextEditor({
   const [linkText, setLinkText] = useState('');
   const [linkTarget, setLinkTarget] = useState<'_self' | '_blank'>('_blank');
 
+  // Controlled value for the Format dropdown. Always reset to '' after applying,
+  // so the user can pick the same option twice in a row (re-applying it) and the
+  // dropdown visually returns to "Format" instead of staying stuck on the last
+  // pick.
+  const [formatValue, setFormatValue] = useState('');
+  // Same idea for the font-size dropdown.
+  const [fontSizeValue, setFontSizeValue] = useState('');
+
+  // Save the current editor selection. Used by toolbar controls that take focus
+  // away from the contenteditable (notably <select>, which natively steals focus
+  // when its dropdown opens). Without this, execCommand fires with no selection
+  // and the formatting silently no-ops.
+  const saveSelection = useCallback(() => {
+    const sel = window.getSelection();
+    if (!sel || sel.rangeCount === 0) return;
+    const range = sel.getRangeAt(0);
+    if (editorRef.current?.contains(range.startContainer)) {
+      savedRangeRef.current = range.cloneRange();
+    }
+  }, []);
+
+  const restoreSelection = useCallback(() => {
+    if (!editorRef.current || !savedRangeRef.current) return;
+    editorRef.current.focus();
+    const sel = window.getSelection();
+    if (!sel) return;
+    try {
+      sel.removeAllRanges();
+      sel.addRange(savedRangeRef.current);
+    } catch {
+      // Range stale; place caret at end as a fallback so formatBlock still has
+      // something to operate on.
+      const range = document.createRange();
+      range.selectNodeContents(editorRef.current);
+      range.collapse(false);
+      sel.removeAllRanges();
+      sel.addRange(range);
+    }
+  }, []);
+
   // Sync editor content when value changes externally (e.g. loaded from DB)
   useEffect(() => {
     if (isInternalChange.current) {
@@ -67,6 +107,10 @@ export default function RichTextEditor({
   }, [value]);
 
   const execCommand = useCallback((command: string, value?: string) => {
+    // Some browsers (Chrome >= 117) require styleWithCSS=false for formatBlock
+    // to produce semantic <h1>/<h2> tags instead of inline <span style>.
+    // Setting it on every call is cheap and defensive.
+    try { document.execCommand('styleWithCSS', false, 'false'); } catch {}
     document.execCommand(command, false, value);
     if (editorRef.current) {
       isInternalChange.current = true;
@@ -75,7 +119,35 @@ export default function RichTextEditor({
     editorRef.current?.focus();
   }, [onChange]);
 
+  // Ensure the editor has an active selection before running a toolbar command.
+  // If the editor isn't focused (e.g. the user clicked elsewhere then a toolbar
+  // button), restore the saved range; if there is no saved range, place the
+  // caret at the end of the editor so formatBlock has somewhere to apply.
+  const ensureEditorFocus = useCallback(() => {
+    if (!editorRef.current) return;
+    const sel = window.getSelection();
+    const hasEditorSel =
+      sel && sel.rangeCount > 0 && editorRef.current.contains(sel.anchorNode);
+    if (hasEditorSel) return;
+    editorRef.current.focus();
+    const fresh = window.getSelection();
+    if (!fresh) return;
+    if (savedRangeRef.current) {
+      try {
+        fresh.removeAllRanges();
+        fresh.addRange(savedRangeRef.current);
+        return;
+      } catch {}
+    }
+    const range = document.createRange();
+    range.selectNodeContents(editorRef.current);
+    range.collapse(false);
+    fresh.removeAllRanges();
+    fresh.addRange(range);
+  }, []);
+
   const handleFormat = (format: string, value?: string) => {
+    ensureEditorFocus();
     execCommand(format, value);
   };
 
@@ -100,6 +172,7 @@ export default function RichTextEditor({
     // angle-bracket form (e.g. '<h1>'); the bare 'h1' form no-ops in several
     // browsers, which is why the H1/H2/H3 buttons appeared to do nothing.
     // Clicking the same heading again toggles the block back to a paragraph.
+    ensureEditorFocus();
     const target = currentBlockTag() === level ? 'p' : level;
     execCommand('formatBlock', `<${target}>`);
   };
@@ -319,13 +392,23 @@ export default function RichTextEditor({
 
         <ToolbarDivider />
 
-        {/* Font/Heading Dropdown */}
+        {/* Format Dropdown — controlled + always resets to '' after applying so
+            the user can re-pick the same option, and so the label visibly
+            returns to "Format". onMouseDown saves the selection because opening
+            a native <select> dropdown unfocuses the contenteditable. */}
         <select
-          onChange={(e) => handleHeading(e.target.value)}
+          value={formatValue}
+          onMouseDown={saveSelection}
+          onChange={(e) => {
+            const val = e.target.value;
+            setFormatValue('');
+            if (!val) return;
+            restoreSelection();
+            handleHeading(val);
+          }}
           className="px-2 py-1 text-sm bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 border border-slate-200 dark:border-slate-600 rounded-lg focus:outline-none focus:border-[#E5B73A]"
-          defaultValue=""
         >
-          <option value="" disabled>Format</option>
+          <option value="">Format</option>
           <option value="p">Paragraph</option>
           <option value="h1">Heading 1</option>
           <option value="h2">Heading 2</option>
@@ -335,12 +418,20 @@ export default function RichTextEditor({
           <option value="pre">Code Block</option>
         </select>
 
-        {/* Font Size */}
+        {/* Font Size — same controlled + reset pattern. */}
         <select
-          onChange={(e) => handleFontSize(e.target.value)}
+          value={fontSizeValue}
+          onMouseDown={saveSelection}
+          onChange={(e) => {
+            const val = e.target.value;
+            setFontSizeValue('');
+            if (!val) return;
+            restoreSelection();
+            handleFontSize(val);
+          }}
           className="px-2 py-1 text-sm bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 border border-slate-200 dark:border-slate-600 rounded-lg focus:outline-none focus:border-[#E5B73A]"
-          defaultValue="3"
         >
+          <option value="">Size</option>
           <option value="1">Small</option>
           <option value="2">Normal</option>
           <option value="3">Medium</option>
@@ -419,13 +510,17 @@ export default function RichTextEditor({
         </ToolbarButton>
       </div>
 
-      {/* Editor Area */}
+      {/* Editor Area — onKeyUp/onMouseUp save the caret position continuously so
+          a subsequent toolbar interaction (especially the <select> dropdowns
+          that steal focus) can restore exactly where the user was. */}
       <div
         ref={editorRef}
         contentEditable
         suppressContentEditableWarning
         onInput={handleInput}
         onKeyDown={handleKeyDown}
+        onKeyUp={saveSelection}
+        onMouseUp={saveSelection}
         className="editor-shell p-4 focus:outline-none prose dark:prose-invert max-w-none overflow-y-auto"
         style={{ minHeight, maxHeight }}
         data-placeholder={placeholder}
