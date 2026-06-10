@@ -105,6 +105,34 @@ export default function RichTextEditor({
     }
   }, [value]);
 
+  // Returns the block-level tag the current selection sits in (lower-case), or ''
+  const currentBlockTag = useCallback((): string => {
+    const sel = window.getSelection();
+    if (!sel || sel.rangeCount === 0) return '';
+    let node: Node | null = sel.getRangeAt(0).startContainer;
+    const root = editorRef.current;
+    while (node && node !== root) {
+      if (node.nodeType === 1) {
+        const tag = (node as HTMLElement).tagName.toLowerCase();
+        if (['p', 'h1', 'h2', 'h3', 'h4', 'blockquote', 'pre', 'div'].includes(tag)) return tag;
+      }
+      node = node.parentNode;
+    }
+    return '';
+  }, []);
+
+  // Sync activeBlock with the cursor. Called from every editor interaction so
+  // the toolbar UI stays in lockstep with where the user is typing.
+  // MUST be declared before execCommand because execCommand references it in
+  // its dependency array — order matters during component render or the
+  // bundled output hits a temporal-dead-zone ReferenceError.
+  const syncActiveBlock = useCallback(() => {
+    const tag = currentBlockTag();
+    // Normalise <div> wrappers (Chrome wraps fresh contenteditable text in <div>
+    // by default) to 'p' so the dropdown shows "Paragraph" rather than nothing.
+    setActiveBlock(tag === 'div' ? 'p' : tag);
+  }, [currentBlockTag]);
+
   const execCommand = useCallback((command: string, value?: string) => {
     // Some browsers (Chrome >= 117) require styleWithCSS=false for formatBlock
     // to produce semantic <h1>/<h2> tags instead of inline <span style>.
@@ -152,31 +180,6 @@ export default function RichTextEditor({
     ensureEditorFocus();
     execCommand(format, value);
   };
-
-  // Returns the block-level tag the current selection sits in (lower-case), or ''
-  const currentBlockTag = useCallback((): string => {
-    const sel = window.getSelection();
-    if (!sel || sel.rangeCount === 0) return '';
-    let node: Node | null = sel.getRangeAt(0).startContainer;
-    const root = editorRef.current;
-    while (node && node !== root) {
-      if (node.nodeType === 1) {
-        const tag = (node as HTMLElement).tagName.toLowerCase();
-        if (['p', 'h1', 'h2', 'h3', 'h4', 'blockquote', 'pre', 'div'].includes(tag)) return tag;
-      }
-      node = node.parentNode;
-    }
-    return '';
-  }, []);
-
-  // Sync activeBlock with the cursor. Called from every editor interaction so
-  // the toolbar UI stays in lockstep with where the user is typing.
-  const syncActiveBlock = useCallback(() => {
-    const tag = currentBlockTag();
-    // Normalise <div> wrappers (Chrome wraps fresh contenteditable text in <div>
-    // by default) to 'p' so the dropdown shows "Paragraph" rather than nothing.
-    setActiveBlock(tag === 'div' ? 'p' : tag);
-  }, [currentBlockTag]);
 
   // Buttons: clicking the same heading button toggles back to a paragraph
   // (a common pattern users expect from word processors).
