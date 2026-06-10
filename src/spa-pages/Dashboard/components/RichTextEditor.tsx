@@ -55,13 +55,12 @@ export default function RichTextEditor({
   const [linkText, setLinkText] = useState('');
   const [linkTarget, setLinkTarget] = useState<'_self' | '_blank'>('_blank');
 
-  // Controlled value for the Format dropdown. Always reset to '' after applying,
-  // so the user can pick the same option twice in a row (re-applying it) and the
-  // dropdown visually returns to "Format" instead of staying stuck on the last
-  // pick.
-  const [formatValue, setFormatValue] = useState('');
-  // Same idea for the font-size dropdown.
-  const [fontSizeValue, setFontSizeValue] = useState('');
+  // The block tag at the cursor (e.g. 'p', 'h1', 'h2', 'blockquote'). Drives
+  // BOTH the Format dropdown's selected option AND the H1/H2/H3 button active
+  // styling, so the toolbar is always a live mirror of the cursor's context.
+  // Empty string means the cursor isn't in a recognised block (e.g. editor is
+  // unfocused or empty).
+  const [activeBlock, setActiveBlock] = useState('');
 
   // Save the current editor selection. Used by toolbar controls that take focus
   // away from the contenteditable (notably <select>, which natively steals focus
@@ -117,7 +116,10 @@ export default function RichTextEditor({
       onChange(editorRef.current.innerHTML);
     }
     editorRef.current?.focus();
-  }, [onChange]);
+    // After the DOM mutates, re-read the block tag so the toolbar reflects
+    // the new state (button highlight, dropdown label).
+    syncActiveBlock();
+  }, [onChange, syncActiveBlock]);
 
   // Ensure the editor has an active selection before running a toolbar command.
   // If the editor isn't focused (e.g. the user clicked elsewhere then a toolbar
@@ -152,7 +154,7 @@ export default function RichTextEditor({
   };
 
   // Returns the block-level tag the current selection sits in (lower-case), or ''
-  const currentBlockTag = (): string => {
+  const currentBlockTag = useCallback((): string => {
     const sel = window.getSelection();
     if (!sel || sel.rangeCount === 0) return '';
     let node: Node | null = sel.getRangeAt(0).startContainer;
@@ -165,16 +167,32 @@ export default function RichTextEditor({
       node = node.parentNode;
     }
     return '';
-  };
+  }, []);
 
+  // Sync activeBlock with the cursor. Called from every editor interaction so
+  // the toolbar UI stays in lockstep with where the user is typing.
+  const syncActiveBlock = useCallback(() => {
+    const tag = currentBlockTag();
+    // Normalise <div> wrappers (Chrome wraps fresh contenteditable text in <div>
+    // by default) to 'p' so the dropdown shows "Paragraph" rather than nothing.
+    setActiveBlock(tag === 'div' ? 'p' : tag);
+  }, [currentBlockTag]);
+
+  // Buttons: clicking the same heading button toggles back to a paragraph
+  // (a common pattern users expect from word processors).
   const handleHeading = (level: string) => {
-    // execCommand('formatBlock') only works reliably when the tag is passed in
-    // angle-bracket form (e.g. '<h1>'); the bare 'h1' form no-ops in several
-    // browsers, which is why the H1/H2/H3 buttons appeared to do nothing.
-    // Clicking the same heading again toggles the block back to a paragraph.
     ensureEditorFocus();
     const target = currentBlockTag() === level ? 'p' : level;
     execCommand('formatBlock', `<${target}>`);
+  };
+
+  // Dropdown: always set to the picked value (no toggle). The dropdown is
+  // already a deliberate "choose this format" gesture; toggling back to p
+  // would be surprising.
+  const handleFormatSelect = (level: string) => {
+    if (!level) return;
+    ensureEditorFocus();
+    execCommand('formatBlock', `<${level}>`);
   };
 
   const handleFontSize = (size: string) => {
@@ -353,21 +371,29 @@ export default function RichTextEditor({
     }
   };
 
-  const ToolbarButton = ({ 
-    onClick, 
-    children, 
-    title 
-  }: { 
-    onClick: () => void; 
-    children: React.ReactNode; 
+  const ToolbarButton = ({
+    onClick,
+    children,
+    title,
+    active = false,
+  }: {
+    onClick: () => void;
+    children: React.ReactNode;
     title: string;
+    active?: boolean;
   }) => (
     <button
       type="button"
       onMouseDown={(e) => e.preventDefault()}
       onClick={onClick}
       title={title}
-      className="p-2 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg transition-colors text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
+      aria-pressed={active}
+      className={
+        'p-2 rounded-lg transition-colors ' +
+        (active
+          ? 'bg-[#F5C857] text-[#4A3208] dark:bg-[#F5C857] dark:text-[#4A3208] ring-1 ring-[#E5B73A]'
+          : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700 hover:text-slate-900 dark:hover:text-white')
+      }
     >
       {children}
     </button>
@@ -392,19 +418,18 @@ export default function RichTextEditor({
 
         <ToolbarDivider />
 
-        {/* Format Dropdown — controlled + always resets to '' after applying so
-            the user can re-pick the same option, and so the label visibly
-            returns to "Format". onMouseDown saves the selection because opening
-            a native <select> dropdown unfocuses the contenteditable. */}
+        {/* Format Dropdown — bound to activeBlock so it always reflects the
+            block at the cursor (e.g. cursor inside an <h2> → "Heading 2"
+            shown). onMouseDown saves the selection because opening a native
+            <select> dropdown unfocuses the contenteditable. */}
         <select
-          value={formatValue}
+          value={['p','h1','h2','h3','h4','blockquote','pre'].includes(activeBlock) ? activeBlock : ''}
           onMouseDown={saveSelection}
           onChange={(e) => {
             const val = e.target.value;
-            setFormatValue('');
             if (!val) return;
             restoreSelection();
-            handleHeading(val);
+            handleFormatSelect(val);
           }}
           className="px-2 py-1 text-sm bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 border border-slate-200 dark:border-slate-600 rounded-lg focus:outline-none focus:border-[#E5B73A]"
         >
@@ -418,17 +443,18 @@ export default function RichTextEditor({
           <option value="pre">Code Block</option>
         </select>
 
-        {/* Font Size — same controlled + reset pattern. */}
+        {/* Font Size — execCommand('fontSize') is global rather than per-block,
+            so we don't track its active state. Pick → apply → caret returns to
+            the editor; the dropdown keeps showing the last pick as a hint. */}
         <select
-          value={fontSizeValue}
           onMouseDown={saveSelection}
           onChange={(e) => {
             const val = e.target.value;
-            setFontSizeValue('');
             if (!val) return;
             restoreSelection();
             handleFontSize(val);
           }}
+          defaultValue=""
           className="px-2 py-1 text-sm bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 border border-slate-200 dark:border-slate-600 rounded-lg focus:outline-none focus:border-[#E5B73A]"
         >
           <option value="">Size</option>
@@ -455,14 +481,15 @@ export default function RichTextEditor({
 
         <ToolbarDivider />
 
-        {/* Headings Quick Access */}
-        <ToolbarButton onClick={() => handleHeading('h1')} title="Heading 1">
+        {/* Headings Quick Access — highlight when the cursor is inside a
+            matching block, so the user always knows what's active. */}
+        <ToolbarButton onClick={() => handleHeading('h1')} title="Heading 1" active={activeBlock === 'h1'}>
           <Heading1 className="h-4 w-4" />
         </ToolbarButton>
-        <ToolbarButton onClick={() => handleHeading('h2')} title="Heading 2">
+        <ToolbarButton onClick={() => handleHeading('h2')} title="Heading 2" active={activeBlock === 'h2'}>
           <Heading2 className="h-4 w-4" />
         </ToolbarButton>
-        <ToolbarButton onClick={() => handleHeading('h3')} title="Heading 3">
+        <ToolbarButton onClick={() => handleHeading('h3')} title="Heading 3" active={activeBlock === 'h3'}>
           <Heading3 className="h-4 w-4" />
         </ToolbarButton>
 
@@ -501,8 +528,8 @@ export default function RichTextEditor({
 
         <ToolbarDivider />
 
-        {/* Quote & Code */}
-        <ToolbarButton onClick={() => handleHeading('blockquote')} title="Block Quote">
+        {/* Quote & Code — Quote highlights when cursor is inside a blockquote. */}
+        <ToolbarButton onClick={() => handleHeading('blockquote')} title="Block Quote" active={activeBlock === 'blockquote'}>
           <Quote className="h-4 w-4" />
         </ToolbarButton>
         <ToolbarButton onClick={() => handleFormat('insertHTML', '<code></code>')} title="Inline Code">
@@ -510,17 +537,19 @@ export default function RichTextEditor({
         </ToolbarButton>
       </div>
 
-      {/* Editor Area — onKeyUp/onMouseUp save the caret position continuously so
-          a subsequent toolbar interaction (especially the <select> dropdowns
-          that steal focus) can restore exactly where the user was. */}
+      {/* Editor Area — onKeyUp/onMouseUp/onFocus do two things: save the caret
+          (so toolbar selects that steal focus can restore it) AND re-read the
+          current block tag (so the dropdown label and H1/H2/H3 button
+          highlights track the cursor live as it moves). */}
       <div
         ref={editorRef}
         contentEditable
         suppressContentEditableWarning
-        onInput={handleInput}
+        onInput={() => { handleInput(); syncActiveBlock(); }}
         onKeyDown={handleKeyDown}
-        onKeyUp={saveSelection}
-        onMouseUp={saveSelection}
+        onKeyUp={() => { saveSelection(); syncActiveBlock(); }}
+        onMouseUp={() => { saveSelection(); syncActiveBlock(); }}
+        onFocus={syncActiveBlock}
         className="editor-shell p-4 focus:outline-none prose dark:prose-invert max-w-none overflow-y-auto"
         style={{ minHeight, maxHeight }}
         data-placeholder={placeholder}
