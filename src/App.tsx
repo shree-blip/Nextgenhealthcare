@@ -88,6 +88,7 @@ import { AdminPreferencesProvider } from './spa-pages/Dashboard/components/Admin
 import { AuthProvider } from './lib/AuthContext';
 import { RequireAuth, RedirectIfAuthed } from './lib/RequireAuth';
 import ChatBot from './components/ChatBot';
+import CookieConsent from './components/CookieConsent';
 import { useLocation } from 'react-router-dom';
 
 const AdminGate = ({ children }: { children: React.ReactNode }) => (
@@ -103,6 +104,13 @@ const PublicChatBot = () => {
   const { pathname } = useLocation();
   if (pathname.startsWith('/dashboard') || pathname === '/login') return null;
   return <ChatBot />;
+};
+
+// Cookie consent banner — same visibility rule as the chatbot.
+const PublicCookieConsent = () => {
+  const { pathname } = useLocation();
+  if (pathname.startsWith('/dashboard') || pathname === '/login') return null;
+  return <CookieConsent />;
 };
 
 const App = () => {
@@ -260,6 +268,7 @@ const App = () => {
       </PageTransition>
       <Footer />
       <PublicChatBot />
+      <PublicCookieConsent />
     </div>
     </SitePreferencesProvider>
     </AuthProvider>
